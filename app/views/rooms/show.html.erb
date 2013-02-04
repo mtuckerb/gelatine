@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @room.name %>
+</p>
+
+<p>
+  <b>Ophoursstart:</b>
+  <%= @room.ophoursstart %>
+</p>
+
+<p>
+  <b>Ophoursstop:</b>
+  <%= @room.ophoursstop %>
+</p>
+
+<p>
+  <b>Opdaystart:</b>
+  <%= @room.opdaystart %>
+</p>
+
+<p>
+  <b>Opdaystop:</b>
+  <%= @room.opdaystop %>
+</p>
+
+<p>
+  <b>Capacity:</b>
+  <%= @room.capacity %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @room.notes %>
+</p>
+
+
+<%= link_to 'Edit', edit_room_path(@room) %> |
+<%= link_to 'Back', rooms_path %>
