@@ -1,4 +1,5 @@
 BookARoom::Application.routes.draw do
+  resources :reservations
   resources :rooms
 
 
