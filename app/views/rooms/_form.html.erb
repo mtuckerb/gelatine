@@ -17,23 +17,23 @@
   </div>
   <div class="field">
     <%= f.label :ophoursstart %><br />
-    <%= f.datetime_select :ophoursstart %>
+    <%= f.text_field :ophoursstart %> (Please use 24h time)
   </div>
   <div class="field">
     <%= f.label :ophoursstop %><br />
-    <%= f.datetime_select :ophoursstop %>
+    <%= f.text_field :ophoursstop %> (Please use 24h time)
   </div>
   <div class="field">
     <%= f.label :opdaystart %><br />
-    <%= f.datetime_select :opdaystart %>
+    <%= f.text_field :opdaystart %> (Please use Sun - Sat)
   </div>
   <div class="field">
     <%= f.label :opdaystop %><br />
-    <%= f.datetime_select :opdaystop %>
+    <%= f.text_field :opdaystop %> (Please use Sun - Sat)
   </div>
   <div class="field">
     <%= f.label :capacity %><br />
-    <%= f.number_field :capacity %>
+    <%= f.number_field :capacity %> 
   </div>
   <div class="field">
     <%= f.label :notes %><br />
