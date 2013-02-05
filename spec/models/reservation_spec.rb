@@ -25,14 +25,18 @@ describe Reservation do
       #response.status.should be(200)
     end
 
-    it "creates a relationship with Room " do
-      expect(reservation.room).to eq nil
-    end
     
     it "creates a relationship with Room" do
       reservation.room = Room.new(:name => "Test Room")
       expect(reservation.room.name).to eq "Test Room"
     end
-
+    
+    it "creates a relationship with User" do
+      pending
+    end
+    
+    it "reservation belongs to current user" do
+      pending
+    end
   end
 end
