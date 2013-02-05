@@ -7,6 +7,6 @@ FactoryGirl.define do
     f.ophoursstop "1700"
     f.operating_days 'Mon Tue Fri'
     f.capacity '2'
-    f.notes "just open 3 days a week"
+    f.notes Faker::Lorem.sentence
   end
 end
