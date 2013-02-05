@@ -14,8 +14,8 @@
 
 <% @reservations.each do |reservation| %>
   <tr>
-    <td><%= reservation.user_id %></td>
-    <td><%= reservation.room_id %></td>
+    <td><%= reservation.user.name %></td>
+    <td><%= reservation.room.name %></td>
     <td><%= reservation.start_time %></td>
     <td><%= reservation.stop_time %></td>
     <td><%= reservation.attendie_count %></td>
