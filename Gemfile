@@ -24,6 +24,10 @@ gem 'jquery-rails'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'capybara'
+  gem 'launchy'
   gem 'watchr'
   gem 'spork', '~> 0.9.0.rc'
   
