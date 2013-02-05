@@ -25,12 +25,11 @@ describe Reservation do
       #response.status.should be(200)
     end
 
-    
-    it "should not create a relationship with Room " do
+    it "creates a relationship with Room " do
       expect(reservation.room).to eq nil
     end
     
-    it "should create a relationship with Room" do
+    it "creates a relationship with Room" do
       reservation.room = Room.new(:name => "Test Room")
       expect(reservation.room.name).to eq "Test Room"
     end
