@@ -1,11 +1,13 @@
 require 'faker'
 
 FactoryGirl.define do
-  factory :reservation do |t|
-    t.user_id  Faker::Address.zip_code
-    t.room_id 1..9
-    t.start_time 0001..2400
-    t.stop_time 0001..2400
-    t.attendie_count 1..9
+  factory :reservation do
+    start_time "800"
+    stop_time "1500"
+    attendie_count 2
+    user
+    #room
   end
+
+
 end

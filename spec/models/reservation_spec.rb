@@ -18,13 +18,12 @@ describe Reservation do
     pending "…need test"
   end
   describe "GET /reservations" do
-    reservation = Reservation.new(:user_id => 1, :start_time => "1500", :stop_time => "1700", :attendie_count => 1)
+    reservation = Reservation.new(:user_id => 1, :start_time => "1500", :stop_time => "1700", :attendie_count => 1, :room_id => 1)
     it "works!" do
       # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
       #get reservations_path
       #response.status.should be(200)
     end
-
     
     it "creates a relationship with Room" do
       reservation.room = Room.new(:name => "Test Room")
@@ -35,8 +34,5 @@ describe Reservation do
       pending
     end
     
-    it "reservation belongs to current user" do
-      pending
-    end
   end
 end
