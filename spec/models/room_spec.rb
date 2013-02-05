@@ -6,6 +6,5 @@
 
 
 describe Room do
-
   
 end

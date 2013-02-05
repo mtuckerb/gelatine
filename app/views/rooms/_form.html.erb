@@ -16,21 +16,16 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :ophoursstart %><br />
+    <%= f.label "Hours of Operation (begin)" %><br />
     <%= f.text_field :ophoursstart %> (Please use 24h time)
   </div>
   <div class="field">
-    <%= f.label :ophoursstop %><br />
+    <%= f.label "Hours of Operation (end)" %><br />
     <%= f.text_field :ophoursstop %> (Please use 24h time)
   </div>
   <div class="field">
-    <%= f.label :opdaystart %><br />
-    <%= f.text_field :opdaystart %> (Please use Sun - Sat)
-  </div>
-  <div class="field">
-    <%= f.label :opdaystop %><br />
-    <%= f.text_field :opdaystop %> (Please use Sun - Sat)
-  </div>
+    <%= f.label "Days of Operation" %><br />
+    <%= f.text_field :operating_days %> (Please use Sun - Sat)
   <div class="field">
     <%= f.label :capacity %><br />
     <%= f.number_field :capacity %> 

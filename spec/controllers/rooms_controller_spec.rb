@@ -7,7 +7,7 @@ describe RoomsController do
   # Room. As you add validations to Room, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "Test Room", "ophoursstart" => "0900", "ophoursstop" => "1700", "opdaystart" => "Sun", "opdaystop" => "Saturday"}
+    { "name" => "Test Room", "ophoursstart" => "0900", "ophoursstop" => "1700"}
   end
   
  
