@@ -7,7 +7,15 @@ describe Room do
   end
   
   it "is invalid without a name" do
-    pending
+    FactoryGirl.build(:room, name: nil).should_not be_valid
   end
+  
+  it "has a unique name" do
+    room1 = FactoryGirl.create(:room)
+    room2 = FactoryGirl.build(:room)
+    room2.should_not be_valid
+    room2.should have(1).error_on(:name)
+  end
+  
   
 end
