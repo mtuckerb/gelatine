@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ReservationsController do
-
+  before { controller.stub(:authenticate_user!).and_return true }
   # This should return the minimal set of attributes required to create a valid
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
@@ -22,6 +22,15 @@ describe ReservationsController do
       get :index, {}, valid_session
       assigns(:reservations).should eq([reservation])
     end
+    
+    it "will only show reservations for current_user" do
+      current_user = FactoryGirl.create(:user)
+      reservations = FactoryGirl.create_list(:reservation, 25)
+      reservations.each do 
+        expect(reservation.user).to eq current_user
+      end
+    end 
+    
   end
 
   describe "GET show" do

@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'chronic'
 
 describe RoomsController do
-
+  before { controller.stub(:authenticate_user!).and_return true }
   # This should return the minimal set of attributes required to create a valid
   # Room. As you add validations to Room, be sure to
   # update the return value of this method accordingly.
