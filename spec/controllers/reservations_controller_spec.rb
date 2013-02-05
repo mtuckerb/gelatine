@@ -1,7 +1,13 @@
 require 'spec_helper'
 
 describe ReservationsController do
-  before { controller.stub(:authenticate_user!).and_return true }
+  include Devise::TestHelpers
+  before (:each) do
+    controller.stub(:authenticate_user!).and_return true
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    sign_in FactoryGirl.create(:user)
+  end
+  
   # This should return the minimal set of attributes required to create a valid
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
@@ -17,20 +23,22 @@ describe ReservationsController do
   end
 
   describe "GET index" do
-    it "assigns all reservations as @reservations" do
-      reservation = Reservation.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:reservations).should eq([reservation])
-    end
+
+    # it "assigns all reservations as @reservations" do
+    #               reservation = Reservation.create! valid_attributes
+    #               get :index, {}, valid_session
+    #               assigns(:reservations).should eq([reservation])
+    #             end
+    #         
     
     it "will only show reservations for current_user" do
       current_user = FactoryGirl.create(:user)
-      reservations = FactoryGirl.create_list(:reservation, 25)
-      reservations.each do 
-        expect(reservation.user).to eq current_user
+      get :index,  {} , valid_session
+      assigns(:reservations).each do |res|
+        expect(res.user).to eq current_user
       end
-    end 
-    
+    end
+ 
   end
 
   describe "GET show" do
