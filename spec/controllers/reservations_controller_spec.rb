@@ -57,7 +57,7 @@ describe ReservationsController do
     it "assigns all rooms to @rooms" do
       reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
-      expect(assigns(:room)).not_to be_nil
+      expect(assigns(:rooms)).not_to be_nil
     end
   end
 
@@ -70,7 +70,7 @@ describe ReservationsController do
     it "assigns all rooms to @rooms" do
       reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
-      expect(assigns(:room)).not_to be_nil
+      expect(assigns(:rooms)).not_to be_nil
     end
   end
 
