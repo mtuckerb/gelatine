@@ -6,33 +6,35 @@ require 'chronic'
 
 describe Reservation do
   before(:each) do
-    @reservation = Reservation.new()
+    @reservation = FactoryGirl.create(:reservation)
   end
-  
-  it "should be invlaid without a user id" do
+
+  it "is invlaid without a user id" do
+    @reservation = Reservation.new()
     @reservation.should have(1).error_on(:user_id)
     @reservation.should_not be_valid
   end
-  
-  context "room not available that day" do
+
+  context "is not available that day" do
     pending "…need test"
   end
-  describe "GET /reservations" do
-    reservation = Reservation.new(:user_id => 1, :start_time => "1500", :stop_time => "1700", :attendie_count => 1, :room_id => 1)
-    it "works!" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      #get reservations_path
-      #response.status.should be(200)
-    end
-    
-    it "creates a relationship with Room" do
-      reservation.room = Room.new(:name => "Test Room")
-      expect(reservation.room.name).to eq "Test Room"
-    end
-    
-    it "creates a relationship with User" do
-      pending
-    end
-    
+
+  it "is not already booked" do
+    @reservation2 = FactoryGirl.create(:reservation, )
   end
+
+
+  it "creates a relationship with Room" do
+    @reservation.room = Room.new(:name => "Test Room")
+    expect(@reservation.room.name).to eq "Test Room"
+  end
+
+  it "creates a relationship with User" do
+    expect(@reservation.user).not_to be_nil
+  end
+
+
+end
+describe "GET /reservations" do
+
 end
