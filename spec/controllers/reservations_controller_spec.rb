@@ -1,4 +1,6 @@
 require 'spec_helper'
+require 'chronic'
+
 
 describe ReservationsController do
   include Devise::TestHelpers
@@ -78,26 +80,29 @@ describe ReservationsController do
     describe "with valid params" do
       it "creates a new Reservation" do
         expect {
-          post :create, {:reservation => valid_attributes}, valid_session
+          post :create, FactoryGirl.attributes_for(:reservation)
         }.to change(Reservation, :count).by(1)
       end
 
       it "assigns a newly created reservation as @reservation" do
-        post :create, {:reservation => valid_attributes}, valid_session
+        post :create, FactoryGirl.attributes_for(:reservation)
+
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it "redirects to the created reservation" do
-        post :create, {:reservation => valid_attributes}, valid_session
+        post :create, FactoryGirl.attributes_for(:reservation)
+
         response.should redirect_to(Reservation.last)
       end
       
-      it "rejects dupicate reservations" do
+      it "rejects dupicate (overlapping) reservations" do
         reservation = FactoryGirl.attributes_for(:reservation)
         post :create, reservation: reservation
         expect(post :create, reservation: reservation).not_to be_success        
       end
+
     end
 
     describe "with invalid params" do
@@ -113,6 +118,14 @@ describe ReservationsController do
         Reservation.any_instance.stub(:save).and_return(false)
         post :create, {:reservation => { "user_id" => "invalid value" }}, valid_session
         response.should render_template("new")
+      end
+      
+      it "reject end_time if it is before start_time" do
+        expect(post :create, 
+          FactoryGirl.attributes_for(:reservation, 
+          start_time: Chronic.parse(:now), 
+          end_time: Chronic.parse(:yesterday)
+        )).to raise_error
       end
     end
   end
