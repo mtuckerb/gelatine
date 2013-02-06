@@ -24,7 +24,7 @@ class ReservationsController < ApplicationController
   # GET /reservations/new.json
   def new
     @reservation = Reservation.new
-
+    @rooms = Room.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reservation }
@@ -33,6 +33,7 @@ class ReservationsController < ApplicationController
 
   # GET /reservations/1/edit
   def edit
+    @rooms = Room.all
     @reservation = Reservation.find(params[:id])
   end
 
