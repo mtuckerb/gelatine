@@ -6,7 +6,7 @@ FactoryGirl.define do
     stop_time "1500"
     attendie_count 2
     user
-    #room
+    room
   end
 
 

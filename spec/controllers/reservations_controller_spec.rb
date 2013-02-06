@@ -7,7 +7,7 @@ describe ReservationsController do
     @request.env["devise.mapping"] = Devise.mappings[:user]
     sign_in FactoryGirl.create(:user)
   end
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Reservation. As you add validations to Reservation, be sure to
   # update the return value of this method accordingly.
@@ -29,8 +29,8 @@ describe ReservationsController do
     #               get :index, {}, valid_session
     #               assigns(:reservations).should eq([reservation])
     #             end
-    #         
-    
+    #
+
     it "will only show reservations for current_user" do
       current_user = FactoryGirl.create(:user)
       get :index,  {} , valid_session
@@ -38,7 +38,7 @@ describe ReservationsController do
         expect(res.user).to eq current_user
       end
     end
- 
+
   end
 
   describe "GET show" do
@@ -54,13 +54,23 @@ describe ReservationsController do
       get :new, {}, valid_session
       assigns(:reservation).should be_a_new(Reservation)
     end
+    it "assigns all rooms to @rooms" do
+      reservation = FactoryGirl.create(:reservation)
+      get :edit, {:id => reservation.to_param}, valid_session
+      expect(assigns(:room)).not_to be_nil
+    end
   end
 
   describe "GET edit" do
     it "assigns the requested reservation as @reservation" do
       reservation = Reservation.create! valid_attributes
       get :edit, {:id => reservation.to_param}, valid_session
-      assigns(:reservation).should eq(reservation)
+      expect(assigns(:reservation)).to eq(reservation)
+    end
+    it "assigns all rooms to @rooms" do
+      reservation = FactoryGirl.create(:reservation)
+      get :edit, {:id => reservation.to_param}, valid_session
+      expect(assigns(:room)).not_to be_nil
     end
   end
 
