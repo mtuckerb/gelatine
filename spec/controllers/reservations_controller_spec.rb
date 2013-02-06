@@ -92,6 +92,12 @@ describe ReservationsController do
         post :create, {:reservation => valid_attributes}, valid_session
         response.should redirect_to(Reservation.last)
       end
+      
+      it "rejects dupicate reservations" do
+        reservation = FactoryGirl.attributes_for(:reservation)
+        post :create, reservation: reservation
+        expect(post :create, reservation: reservation).not_to be_success        
+      end
     end
 
     describe "with invalid params" do

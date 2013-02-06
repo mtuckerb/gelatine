@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :room_id %><br />
-    <%= f.collection_select(:room_id, @rooms, :id, :name)%>
+    <%= f.collection_select(:room_id, Room.all, :id, :name)%>
   </div>
   <div class="field">
     <%= f.label :start_time %><br />

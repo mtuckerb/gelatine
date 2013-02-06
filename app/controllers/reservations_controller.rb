@@ -41,7 +41,7 @@ class ReservationsController < ApplicationController
   # POST /reservations.json
   def create
     @reservation = Reservation.new(params[:reservation])
-
+    @reservation.user = current_user
     respond_to do |format|
       if @reservation.save
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
@@ -57,7 +57,7 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1.json
   def update
     @reservation = Reservation.find(params[:id])
-
+    @reservation.user = current_user
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
