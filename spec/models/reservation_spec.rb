@@ -20,7 +20,11 @@ describe Reservation do
   end
 
   it "is not already booked" do
-    @reservation2 = FactoryGirl.create(:reservation, )
+    res = FactoryGirl.attributes_for(:reservation)
+    res1 = Reservation.new(res)
+    res1.save
+    res2 = Reservation.new(res)
+    expect(res2.save).to be_false
   end
 
 
