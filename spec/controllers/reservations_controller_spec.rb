@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'chronic'
 
 describe ReservationsController do
   include Devise::TestHelpers
@@ -130,6 +131,14 @@ describe ReservationsController do
         expect {
           post :create, reservation: FactoryGirl.attributes_for(:reservation, start_time: start, stop_time: stop)
           }.to change(Reservation, :count).by(0)
+      end
+      
+      it "rejects reservation if outside of operating hours" do
+          start_time = Chronic.parse("6pm on Saturday").to_datetime
+          stop_time = Chronic.parse("7pm on Saturday").to_datetime
+          expect {
+            post :create, reservation: FactoryGirl.attributes_for(:reservation, start_time: start_time, stop_time: stop_time)
+          }.to change(Reservation, :count).by(0)  
       end
     end
   end

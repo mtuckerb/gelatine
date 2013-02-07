@@ -1,0 +1,3 @@
+TODO: 
+make model/reservation_spec "already booked" test more robust (don't just duplicate the whole record"
+write custom validation for room_availability. Check Room.is_available
