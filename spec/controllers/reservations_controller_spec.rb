@@ -1,6 +1,4 @@
 require 'spec_helper'
-require 'chronic'
-
 
 describe ReservationsController do
   include Devise::TestHelpers
@@ -69,6 +67,7 @@ describe ReservationsController do
       get :edit, {:id => reservation.to_param}, valid_session
       expect(assigns(:reservation)).to eq(reservation)
     end
+
     it "assigns all rooms to @rooms" do
       reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
@@ -86,21 +85,19 @@ describe ReservationsController do
 
       it "assigns a newly created reservation as @reservation" do
         post :create, FactoryGirl.attributes_for(:reservation)
-
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it "redirects to the created reservation" do
         post :create, FactoryGirl.attributes_for(:reservation)
-
         response.should redirect_to(Reservation.last)
       end
-      
-      it "rejects dupicate (overlapping) reservations" do
-        reservation = FactoryGirl.attributes_for(:reservation)
-        post :create, reservation: reservation
-        expect(post :create, reservation: reservation).not_to be_success        
+
+      it "creates reservation with end time one hour after start" do
+        expect {
+          post :create, FactoryGirl.attributes_for(:reservation )
+        }.not_to raise_error()
       end
 
     end
@@ -119,16 +116,22 @@ describe ReservationsController do
         post :create, {:reservation => { "user_id" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
-      
+
+      it "reject dupicate (overlapping) reservations" do
+        reservation = FactoryGirl.attributes_for(:reservation)
+        post :create, reservation: reservation
+        expect(post :create, reservation: reservation).not_to be_success
+      end
+
       it "reject end_time if it is before start_time" do
-        expect(post :create, 
-          FactoryGirl.attributes_for(:reservation, 
-          start_time: Chronic.parse(:now), 
-          end_time: Chronic.parse(:yesterday)
-        )).to raise_error
+        time_now = Time.now
+        expect {
+          post :create, FactoryGirl.attributes_for(:reservation, start_time: (time_now + 3600), end_time: time_now)
+          }.to change(Reservation, :count).by(0)
       end
     end
   end
+
 
   describe "PUT update" do
     describe "with valid params" do

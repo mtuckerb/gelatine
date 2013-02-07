@@ -10,9 +10,9 @@ describe Reservation do
   end
 
   it "is invlaid without a user id" do
-    @reservation = Reservation.new()
-    @reservation.should have(1).error_on(:user_id)
-    @reservation.should_not be_valid
+    expect {
+      @reservation = FactoryGirl.create(:reservation, user_id: nil) 
+    }.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: User can't be blank/)
   end
 
   context "is not available that day" do
@@ -29,7 +29,8 @@ describe Reservation do
 
 
   it "creates a relationship with Room" do
-    @reservation.room = Room.new(:name => "Test Room")
+    @reservation.room = FactoryGirl.create(:room, name: "Test Room")
+    @reservation.save
     expect(@reservation.room.name).to eq "Test Room"
   end
 
