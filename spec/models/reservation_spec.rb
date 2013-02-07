@@ -37,8 +37,7 @@ describe Reservation do
   it "creates a relationship with User" do
     expect(@reservation.user).not_to be_nil
   end
-
-
+  
 end
 describe "GET /reservations" do
 
