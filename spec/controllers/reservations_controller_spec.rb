@@ -103,6 +103,7 @@ describe ReservationsController do
     end
 
     describe "with invalid params" do
+
       it "assigns a newly created but unsaved reservation as @reservation" do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
@@ -136,6 +137,12 @@ describe ReservationsController do
 
   describe "PUT update" do
     describe "with valid params" do
+      before :each do
+        start_time = DateTime.now
+        stop_time = DateTime.now+3600
+        @reservation = FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time)
+      end
+      
       it "updates the requested reservation" do
         reservation = FactoryGirl.create(:reservation)
         # Assuming there are no other reservations in the database, this
@@ -152,6 +159,13 @@ describe ReservationsController do
         assigns(:reservation).should eq(reservation)
       end
 
+      it "allows user to update reservation with new date" do
+        put :update, id: @reservation,
+          reservation: FactoryGirl.attributes_for(:reservation, attendie_count: 3)
+        expect(@reservation.reload).to be_valid 
+        
+      end
+      
       it "redirects to the reservation" do
         reservation = FactoryGirl.create(:reservation)
         put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
