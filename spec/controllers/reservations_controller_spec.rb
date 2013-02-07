@@ -25,7 +25,7 @@ describe ReservationsController do
   describe "GET index" do
 
     # it "assigns all reservations as @reservations" do
-    #               reservation = Reservation.create! valid_attributes
+    #               reservation = FactoryGirl.create(:reservation)
     #               get :index, {}, valid_session
     #               assigns(:reservations).should eq([reservation])
     #             end
@@ -43,7 +43,7 @@ describe ReservationsController do
 
   describe "GET show" do
     it "assigns the requested reservation as @reservation" do
-      reservation = Reservation.create! valid_attributes
+      reservation = FactoryGirl.create(:reservation)
       get :show, {:id => reservation.to_param}, valid_session
       assigns(:reservation).should eq(reservation)
     end
@@ -63,7 +63,7 @@ describe ReservationsController do
 
   describe "GET edit" do
     it "assigns the requested reservation as @reservation" do
-      reservation = Reservation.create! valid_attributes
+      reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
       expect(assigns(:reservation)).to eq(reservation)
     end
@@ -79,24 +79,24 @@ describe ReservationsController do
     describe "with valid params" do
       it "creates a new Reservation" do
         expect {
-          post :create, FactoryGirl.attributes_for(:reservation)
+          post :create, reservation: FactoryGirl.attributes_for(:reservation)
         }.to change(Reservation, :count).by(1)
       end
 
       it "assigns a newly created reservation as @reservation" do
-        post :create, FactoryGirl.attributes_for(:reservation)
+        post :create, reservation: FactoryGirl.attributes_for(:reservation)
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it "redirects to the created reservation" do
-        post :create, FactoryGirl.attributes_for(:reservation)
+        post :create, reservation: FactoryGirl.attributes_for(:reservation)
         response.should redirect_to(Reservation.last)
       end
 
       it "creates reservation with end time one hour after start" do
         expect {
-          post :create, FactoryGirl.attributes_for(:reservation )
+          post :create, reservation:  FactoryGirl.attributes_for(:reservation )
         }.not_to raise_error()
       end
 
@@ -124,9 +124,10 @@ describe ReservationsController do
       end
 
       it "reject end_time if it is before start_time" do
-        time_now = Time.now
+        stop = DateTime.now
+        start = DateTime.now + 3600
         expect {
-          post :create, FactoryGirl.attributes_for(:reservation, start_time: (time_now + 3600), end_time: time_now)
+          post :create, reservation: FactoryGirl.attributes_for(:reservation, start_time: start, stop_time: stop)
           }.to change(Reservation, :count).by(0)
       end
     end
@@ -136,7 +137,7 @@ describe ReservationsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested reservation" do
-        reservation = Reservation.create! valid_attributes
+        reservation = FactoryGirl.create(:reservation)
         # Assuming there are no other reservations in the database, this
         # specifies that the Reservation created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -146,13 +147,13 @@ describe ReservationsController do
       end
 
       it "assigns the requested reservation as @reservation" do
-        reservation = Reservation.create! valid_attributes
+        reservation = FactoryGirl.create(:reservation)
         put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
         assigns(:reservation).should eq(reservation)
       end
 
       it "redirects to the reservation" do
-        reservation = Reservation.create! valid_attributes
+        reservation = FactoryGirl.create(:reservation)
         put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
         response.should redirect_to(reservation)
       end
@@ -160,7 +161,7 @@ describe ReservationsController do
 
     describe "with invalid params" do
       it "assigns the reservation as @reservation" do
-        reservation = Reservation.create! valid_attributes
+        reservation = FactoryGirl.create(:reservation)
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
         put :update, {:id => reservation.to_param, :reservation => { "user_id" => "invalid value" }}, valid_session
@@ -168,7 +169,7 @@ describe ReservationsController do
       end
 
       it "re-renders the 'edit' template" do
-        reservation = Reservation.create! valid_attributes
+        reservation = FactoryGirl.create(:reservation)
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
         put :update, {:id => reservation.to_param, :reservation => { "user_id" => "invalid value" }}, valid_session
@@ -179,14 +180,14 @@ describe ReservationsController do
 
   describe "DELETE destroy" do
     it "destroys the requested reservation" do
-      reservation = Reservation.create! valid_attributes
+      reservation = FactoryGirl.create(:reservation)
       expect {
         delete :destroy, {:id => reservation.to_param}, valid_session
       }.to change(Reservation, :count).by(-1)
     end
 
     it "redirects to the reservations list" do
-      reservation = Reservation.create! valid_attributes
+      reservation = FactoryGirl.create(:reservation)
       delete :destroy, {:id => reservation.to_param}, valid_session
       response.should redirect_to(reservations_url)
     end
