@@ -6,6 +6,7 @@ class Reservation < ActiveRecord::Base
   serialize :operating_days
   validate :room_in_use
   validate :end_time_is_after_start_time
+  validate :booking_within_operating_hours
 
   private
 
@@ -16,5 +17,8 @@ class Reservation < ActiveRecord::Base
   def end_time_is_after_start_time
     errors.add(:alert, "Your end time is before your start time") if self.stop_time <  self.start_time
   end
-
+  
+  def booking_within_operating_hours
+    errors.add(:alert, "Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
   end
+end
