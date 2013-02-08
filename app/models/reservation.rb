@@ -11,7 +11,11 @@ class Reservation < ActiveRecord::Base
   private
 
   def room_in_use
-    errors.add(:alert, "This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ? and id != ?", self.stop_time, self.start_time, self.room_id, self.id]) != nil
+    if self.id 
+      errors.add(:alert, "This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ? and id != ?", self.stop_time, self.start_time, self.room_id, self.id]) != nil
+    else
+      errors.add(:alert, "This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ?", self.stop_time, self.start_time, self.room_id]) != nil
+    end
   end
 
   def end_time_is_after_start_time
@@ -19,6 +23,6 @@ class Reservation < ActiveRecord::Base
   end
   
   def booking_within_operating_hours
-    errors.add(:alert, "Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
+    errors.add(:alert, "Your reservation falls outside of booking hours") unless Room.find(self.room_id).is_available(self.start_time, self.stop_time)
   end
 end
