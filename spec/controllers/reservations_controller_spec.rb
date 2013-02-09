@@ -9,28 +9,26 @@ describe ReservationsController do
     sign_in FactoryGirl.create(:user)
   end
 
-  # This should return the minimal set of attributes required to create a valid
-  # Reservation. As you add validations to Reservation, be sure to
-  # update the return value of this method accordingly.
   def valid_attributes
-    { "user_id" => "1" }
+    { "user_id" => "1", "start_time" => Chronic.parse("Thursday at 2pm"), "stop_time" => Chronic.parse("Thursday at 3pm"), "room_id" => 1 }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ReservationsController. Be sure to keep this updated too.
   def valid_session
     {}
   end
 
   describe "GET index" do
+    before(:each) do
+      get 'index'
+    end
 
-    # it "assigns all reservations as @reservations" do
-    #               reservation = FactoryGirl.create(:reservation)
-    #               get :index, {}, valid_session
-    #               assigns(:reservations).should eq([reservation])
-    #             end
-    #
+    it "returns http success" do
+      response.should be_success
+    end
+
+    it "should render the index template" do
+      response.should render_template(:index)
+    end
 
     it "will only show reservations for current_user" do
       current_user = FactoryGirl.create(:user)
@@ -77,127 +75,122 @@ describe ReservationsController do
   end
 
   describe "POST create" do
+    let(:reservation) { mock_model(Reservation, valid_attributes ).as_null_object}
+    before  do
+      Reservation.stub(:new).and_return(reservation)
+    end
+
     describe "with valid params" do
       it "creates a new Reservation" do
-        expect {
-          post :create, reservation: FactoryGirl.attributes_for(:reservation)
-        }.to change(Reservation, :count).by(1)
+        Reservation.should_receive(:new).and_return(reservation)
+        post :create, reservation: :reservation
+
+      end
+
+      it "saves the reservation" do
+        reservation.should_received(:save)
+        post :create
       end
 
       it "assigns a newly created reservation as @reservation" do
-        post :create, reservation: FactoryGirl.attributes_for(:reservation)
+        post :create, reservation: FactoryGirl.build(:reservation, created_at: nil, updated_at: nil)
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it "redirects to the created reservation" do
-        post :create, reservation: FactoryGirl.attributes_for(:reservation)
-        response.should redirect_to(Reservation.last)
+        post :create
+        response.should redirect_to reservation_path(reservation)
       end
 
       it "creates reservation with end time one hour after start" do
         expect {
-          post :create, reservation:  FactoryGirl.attributes_for(:reservation )
+          post :create, reservation:  FactoryGirl.build(:reservation , created_at: nil, updated_at: nil)
         }.not_to raise_error()
       end
 
     end
-
-    describe "with invalid params" do
-
-      it "assigns a newly created but unsaved reservation as @reservation" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {:reservation => { "user_id" => "invalid value" }}, valid_session
-        assigns(:reservation).should be_a_new(Reservation)
+    context "when reservation saves successfully" do
+      before(:each) do
+        reservation.stub!(:save).and_return(true)
       end
 
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {:reservation => { "user_id" => "invalid value" }}, valid_session
-        response.should render_template("new")
+      it "sets a flash notice" do
+        post :create
+        flash[:notice].should be
       end
 
-      it "reject dupicate (overlapping) reservations" do
-        reservation = FactoryGirl.attributes_for(:reservation)
-        post :create, reservation: reservation
-        expect(post :create, reservation: reservation).not_to be_success
-      end
-
-      it "reject end_time if it is before start_time" do
-        stop = DateTime.now
-        start = DateTime.now + 3600
-        expect {
-          post :create, reservation: FactoryGirl.attributes_for(:reservation, start_time: start, stop_time: stop)
-          }.to change(Reservation, :count).by(0)
-      end
-      
-      it "rejects reservation if outside of operating hours" do
-          start_time = Chronic.parse("6pm on Saturday").to_datetime
-          stop_time = Chronic.parse("7pm on Saturday").to_datetime
-          expect {
-            post :create, reservation: FactoryGirl.attributes_for(:reservation, start_time: start_time, stop_time: stop_time)
-          }.to change(Reservation, :count).by(0)  
+      it "redirects to the new reservations's page" do
+        post :create
+        response.should redirect_to reservation_path(reservation)
       end
     end
+    context "when the reservation fails to save" do
+      before(:each) do
+        reservation.stub!(:save).and_return(false)
+      end
+
+      it "assigns @reservation" do
+        post :create
+        assigns(:reservation).should eql(reservation)
+      end
+      it "renders new template" do
+        post :create
+        response.should render_template(:new)
+      end
+
+    end
+
   end
 
 
   describe "PUT update" do
-    describe "with valid params" do
-      before :each do
-        start_time = DateTime.now
-        stop_time = DateTime.now+3600
-        @reservation = FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time)
-      end
-      
-      it "updates the requested reservation" do
-        reservation = FactoryGirl.create(:reservation)
-        # Assuming there are no other reservations in the database, this
-        # specifies that the Reservation created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Reservation.any_instance.should_receive(:update_attributes).with({ "user_id" => "1" })
-        put :update, {:id => reservation.to_param, :reservation => { "user_id" => "1" }}, valid_session
-      end
+    let(:reservation) { mock_model(Reservation).as_null_object }
 
-      it "assigns the requested reservation as @reservation" do
-        reservation = FactoryGirl.create(:reservation)
-        put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
-        assigns(:reservation).should eq(reservation)
-      end
-
-      it "allows user to update reservation with new date" do
-        put :update, id: @reservation,
-          reservation: FactoryGirl.attributes_for(:reservation, attendie_count: 3)
-        expect(@reservation.reload).to be_valid 
-        
-      end
-      
-      it "redirects to the reservation" do
-        reservation = FactoryGirl.create(:reservation)
-        put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
-        response.should redirect_to(reservation)
-      end
+    before do
+      Reservation.stub(:find).and_return(reservation)
     end
 
-    describe "with invalid params" do
-      it "assigns the reservation as @reservation" do
-        reservation = FactoryGirl.create(:reservation)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reservation.to_param, :reservation => { "user_id" => "invalid value" }}, valid_session
-        assigns(:reservation).should eq(reservation)
+    it "updates the reservation" do
+      reservation.should_receive(:update_attributes)
+      put :update, id: reservation.id, :reservation => { "attendie_count" => 3}
+    end
+    
+    it "assigns @reservation" do
+      put :update, id: reservation.id
+      assigns(:reservation).should eq(reservation)
+    
+    end
+
+    context "when the reservation updates successfully" do
+      before :each do
+        reservation.stub!(:update_attributes).and_return(true)
+        put "update", id: reservation.id
       end
 
-      it "re-renders the 'edit' template" do
-        reservation = FactoryGirl.create(:reservation)
-        # Trigger the behavior that occurs when invalid params are submitted
-        Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reservation.to_param, :reservation => { "user_id" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+      it "redirects to the reservation page" do
+        response.should redirect_to reservation_path(reservation)
       end
+
+      it "sets a flash notice" do
+        flash[:notice].should be
+      end
+
+    end
+    context "when the reservation fails to update" do
+      before(:each) do
+        reservation.stub!(:update_attributes).and_return(false)
+        put :update, id: reservation.id
+      end
+
+      it "renders edit template" do
+        response.should render_template(:edit)
+      end
+      
+      # it "sets a flash warning" do
+      #       flash[:error].should be
+      #     end
+      
     end
   end
 

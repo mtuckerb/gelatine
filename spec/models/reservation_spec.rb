@@ -19,6 +19,22 @@ describe Reservation do
     pending "…need test"
   end
 
+    it "reject end_time if it is before start_time" do
+      stop = DateTime.now
+      start = DateTime.now + 3600
+      expect {
+       FactoryGirl.create(:reservation, start_time: start, stop_time: stop, created_at: nil, updated_at: nil)
+      }.to raise_error
+    end
+
+    it "rejects reservation if outside of operating hours" do
+      start_time = Chronic.parse("6pm on Saturday").to_datetime
+      stop_time = Chronic.parse("7pm on Saturday").to_datetime
+      expect {
+        FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time, created_at: nil, updated_at: nil)
+      }.to  raise_error
+    end
+
   it "is not already booked" do
     res = FactoryGirl.create(:reservation)
     res2 = res.dup
