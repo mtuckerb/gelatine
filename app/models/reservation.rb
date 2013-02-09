@@ -23,6 +23,6 @@ class Reservation < ActiveRecord::Base
   end
   
   def booking_within_operating_hours
-    errors.add(:alert, "Your reservation falls outside of booking hours") unless Room.find(self.room_id).is_available(self.start_time, self.stop_time)
+    errors.add(:alert, "Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
   end
 end
