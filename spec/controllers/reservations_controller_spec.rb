@@ -61,14 +61,14 @@ describe ReservationsController do
   end
 
   describe "GET edit" do
+    let(:reservation) { FactoryGirl.create(:reservation)}
+    
     it "assigns the requested reservation as @reservation" do
-      reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
       expect(assigns(:reservation)).to eq(reservation)
     end
 
     it "assigns all rooms to @rooms" do
-      reservation = FactoryGirl.create(:reservation)
       get :edit, {:id => reservation.to_param}, valid_session
       expect(assigns(:rooms)).not_to be_nil
     end

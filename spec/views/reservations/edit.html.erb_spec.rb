@@ -14,8 +14,7 @@ describe "reservations/edit" do
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers
     assert_select "form", :action => reservations_path(@reservation), :method => "post" do
-      assert_select "input#reservation_user_id", :name => "reservation[user_id]"
-      assert_select "input#reservation_room_id", :name => "reservation[room_id]"
+      assert_select "select#reservation_room_id", :name => "reservation[room_id]"
       assert_select "input#reservation_attendie_count", :name => "reservation[attendie_count]"
     end
   end
