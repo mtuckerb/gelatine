@@ -13,20 +13,20 @@ class Reservation < ActiveRecord::Base
 
   def room_in_use
     if self.id 
-      errors.add(:alert, "This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ? and id != ?", self.stop_time, self.start_time, self.room_id, self.id]) != nil
+      errors.add(:base,"This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ? and id != ?", self.stop_time, self.start_time, self.room_id, self.id]) != nil
     else
-      errors.add(:alert, "This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ?", self.stop_time, self.start_time, self.room_id]) != nil
+      errors.add(:base,"This room is in use. Please reschedule") if Reservation.find(:first, :conditions => ["start_time < ? and stop_time > ? and room_id = ?", self.stop_time, self.start_time, self.room_id]) != nil
     end
   end
 
   def end_time_is_after_start_time
-    errors.add(:alert, "Your end time is before your start time") if self.stop_time <  self.start_time
+    errors.add(:base,"Your end time is before your start time") if self.stop_time <  self.start_time
   end
   
   def date_is_in_the_past
-    errors.add(:alert, "Your reservation seems to be in the past") if self.start_time.to_time < Time.now
+    errors.add(:base,"Your reservation seems to be in the past") if self.start_time.to_time < Time.now
   end
   def booking_within_operating_hours
-    errors.add(:alert, "Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
+    errors.add(:base,"Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
   end
 end
