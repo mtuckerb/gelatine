@@ -7,7 +7,8 @@ class Reservation < ActiveRecord::Base
   validate :room_in_use
   validate :end_time_is_after_start_time
   validate :booking_within_operating_hours
-
+  validate :date_is_in_the_past
+  
   private
 
   def room_in_use
@@ -22,6 +23,9 @@ class Reservation < ActiveRecord::Base
     errors.add(:alert, "Your end time is before your start time") if self.stop_time <  self.start_time
   end
   
+  def date_is_in_the_past
+    errors.add(:alert, "Your reservation seems to be in the past") if self.start_time.to_time < Time.now
+  end
   def booking_within_operating_hours
     errors.add(:alert, "Your reservation falls outside of booking hours") unless self.room.is_available(self.start_time, self.stop_time)
   end
