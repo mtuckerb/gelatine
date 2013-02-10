@@ -16,12 +16,12 @@
     <%= f.collection_select(:room_id, Room.all, :id, :name)%>
   </div>
   <div class="field">
-    <%= f.label :start_time %><br />
-    <%= f.datetime_select :start_time %>
+    <%= f.label :start_time %> (e.g. "Friday at 9am")<br />
+    <%= f.text_field :start_time,:class => "datetimefield"   %>
   </div>
   <div class="field">
-    <%= f.label :stop_time %><br />
-    <%= f.datetime_select :stop_time %>
+    <%= f.label :stop_time %> (e.g. "February 11th at 10am")<br />
+    <%= f.text_field :stop_time, :class => "datetimefield"  %>
   </div>
   <div class="field">
     <%= f.label :number_of_attendies %><br />

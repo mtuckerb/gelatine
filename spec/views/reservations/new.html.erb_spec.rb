@@ -3,9 +3,11 @@ require 'spec_helper'
 describe "reservations/new" do
   before(:each) do
     assign(:reservation, stub_model(Reservation,
-      :user_id => 1,
-      :room_id => 1,
-      :attendie_count => 1
+      :room => stub_model(Room, :id => 2, :name => "Window Bay 7", :ophoursstart => "0900", :ophoursstop => "1700", :operating_days => 'Monday, Tuesday, Wednesday, Thursday, Friday'),
+      :user => stub_model(User, :id => 1, :name => "Tucker"),
+      :attendie_count => 1,
+      :start_date => "Feb 11th at 9am",
+      :stop_date => "Feb 11th at 10am"
     ).as_new_record)
   end
 
