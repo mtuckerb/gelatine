@@ -15,9 +15,6 @@ describe Reservation do
     }.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: User can't be blank/)
   end
 
-  context "is not available that day" do
-    pending "…need test"
-  end
 
     it "reject end_time if it is before start_time" do
       stop = DateTime.now
@@ -28,8 +25,8 @@ describe Reservation do
     end
 
     it "rejects reservation if outside of operating hours" do
-      start_time = Chronic.parse("6pm on Saturday").to_datetime
-      stop_time = Chronic.parse("7pm on Saturday").to_datetime
+      start_time = "Feb 13th 2016 at 1800"
+      stop_time = "Feb 13th 2016 at 2000"
       expect {
         FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time, created_at: nil, updated_at: nil)
       }.to  raise_error
@@ -53,6 +50,13 @@ describe Reservation do
     expect(@reservation.user).not_to be_nil
   end
   
+  it "parses natural language date to TimeWithZone Object" do
+      @reservation.start_time = "Monday at 9am"
+      @reservation.stop_time = "Monday at 10am"
+      @reservation.save
+      expect(@reservation.start_time).to be_a_kind_of(ActiveSupport::TimeWithZone)
+      expect(@reservation.stop_time).to be_a_kind_of(ActiveSupport::TimeWithZone)
+  end
 end
 describe "GET /reservations" do
 
