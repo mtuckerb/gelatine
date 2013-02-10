@@ -6,11 +6,15 @@ describe "reservations/index" do
       stub_model(Reservation,
         :room => stub_model(Room, :id => 2, :name => "Window Bay 7"),
         :user => stub_model(User, :id => 1, :name => "Tucker"),
+        :start_time => "Feb 8th at 9am UTC+10",
+        :stop_time => "Feb 8th at 10am UTC+10",
         :attendie_count => 3
       ),
       stub_model(Reservation,
         :room  => stub_model(Room, :id => 2, :name => "Window Bay 7"),
         :user => stub_model(User, :id => 1, :name => "Tucker"),
+        :start_time => "Feb 8th at 9am UTC+10",
+        :stop_time => "Feb 8th at 10am UTC+10",
         :attendie_count => 3
       )
     ])
