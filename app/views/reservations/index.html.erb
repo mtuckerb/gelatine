@@ -1,11 +1,10 @@
 <h1>Listing reservations</h1>
 
-<table>
+<table width="100%">
   <tr>
     <th>User</th>
     <th>Room</th>
-    <th>Start time</th>
-    <th>Stop time</th>
+    <th>Time</th>
     <th>Attendie count</th>
     <th></th>
     <th></th>
@@ -16,8 +15,7 @@
   <tr>
     <td><%= reservation.user.name %></td>
     <td><%= reservation.room.name %></td>
-    <td><%= reservation.start_time %></td>
-    <td><%= reservation.stop_time %></td>
+    <td><%= format_date(reservation.stop_time) %> &nbsp <%= format_time(reservation.start_time, reservation.stop_time) %> 	 </td>
     <td><%= reservation.attendie_count %></td>
     <td><%= link_to 'Show', reservation %></td>
     <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>

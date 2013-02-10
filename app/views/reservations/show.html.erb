@@ -11,13 +11,8 @@
 </p>
 
 <p>
-  <b>Start time:</b>
-  <%= @reservation.start_time %>
-</p>
-
-<p>
-  <b>Stop time:</b>
-  <%= @reservation.stop_time %>
+	<b> Scheduled from/to </b>
+<%= format_date(@reservation.stop_time) %> &nbsp <%= format_time(@reservation.start_time, @reservation.stop_time) %>
 </p>
 
 <p>
