@@ -12,7 +12,7 @@ describe Reservation do
   it "is invlaid without a user id" do
     expect {
       @reservation = FactoryGirl.create(:reservation, user_id: nil) 
-    }.to raise_error(ActiveRecord::RecordInvalid, /Validation failed: User can't be blank/)
+    }.to raise_exception(ActiveRecord::RecordInvalid, / User can't be blank/)
   end
 
 
@@ -29,7 +29,7 @@ describe Reservation do
       stop_time = "Feb 13th 2016 at 2000"
       expect {
         FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time, created_at: nil, updated_at: nil)
-      }.to  raise_exception(ActiveRecord::RecordInvalid, /Alert Your reservation falls outside of booking hours/)
+      }.to  raise_exception(ActiveRecord::RecordInvalid, /Your reservation falls outside of booking hours/)
     end
 
   it "is not already booked" do
@@ -63,7 +63,7 @@ describe Reservation do
     stop_time = "feb 5th 2013 2013 at 13:00 UTC+10"
     expect {
       FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time)
-    }.to raise_exception(ActiveRecord::RecordInvalid, /Alert Your reservation seems to be in the past/)
+    }.to raise_exception(ActiveRecord::RecordInvalid, /Your reservation seems to be in the past/)
   end
 end
 describe "GET /reservations" do
