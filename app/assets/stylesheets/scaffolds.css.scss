@@ -1,69 +1,169 @@
+// if you run into trouble run rake assets:clean:all RAILS_ENV=development RAILS_GROUPS=assets
+@import "compass/css3";
+@import "compass/utilities";
+@import "sassy-buttons";
+
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+	background-color: white;
+	color: #333;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 1em;
 }
 
 p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 18px;
 }
 
 pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
+	background-color: #eee;
+	padding: 10px;
+	font-size: 11px;
 }
 
 a {
-  color: #000;
-  &:visited {
-    color: #666;
-  }
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
+	color: #000;
+	&:visited {
+		color: #666;
+	}
+	&:hover {
+	color: #fff;
+	background-color: #000;
+	}
 }
 
 div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
+	&.field, &.actions {
+		margin-bottom: 10px;
+	}
+}
+#container {
+	background: white;
+	margin-bottom:0em;
+}
+#top {
+	background-color: #F1F1E8;
+	padding-left:2em;
+	margin-top:0em;
+	padding-top:1em;
+	border-bottom:1px solid gray;	
+	#title {
+		text-align:center;
+		padding-top:.5em;
+		font-size: 40px;
+	}
+	#menu {
+		padding-top: 2em;
+	}
+	.menu_item {
+		padding-left: 4px;
+		padding-right: 4px;
+		background-color: white;;
+		border-top: 1px solid gray;
+		border-left:1px solid gray;
+		border-right:1px solid gray;
+		border-bottom: none	;
+		@include border-top-radius(5px); 
+		a {
+			color: #33332B;
+			background-color: white;;
+			text-decoration: none;
+			&:hover {
+				color: rgb(7,7,122);
+			}
+		}
+	}
+
+}
+
+#main {
+	margin-top: 2em;
+	margin-left: 1em;
+	margin-bottom: 1em;
+	background-color: #ccd9dd;
+	border: 1px solid #8A8A6C;
+	@include border-radius(15px);
+	width: 800px;
+	padding:2em;
+	table {
+		tr {
+			td {
+				padding-top:1em
+			}
+		}
+
+	}
+	.title {
+		font-size: 18px;
+		text-decoration: bold;
+		padding: .5em;
+		margin-bottom: 1em;
+		margin-left: 0em;
+		background-color: rgb(244,244,244);
+	}
 }
 
 #notice {
-  color: green;
+	color: green;
 }
-
+.sassy_submit {
+	@include sassy-button("simple", 8px, 12px, #50D611, #49B616);
+}
+.sassy_cancel {
+	@include sassy-button("simple", 8px, 12px, #A82707, #E43C12);
+}
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+	padding: 2px;
+	background-color: red;
+	display: table;
 }
 
 #error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
-  }
-  ul li {
-    font-size: 12px;
-    list-style: square;
-  }
+	width: 450px;
+	border: 2px solid red;
+	padding: 7px;
+	padding-bottom: 0;
+	margin-bottom: 20px;
+	background-color: #f0f0f0;
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		padding: 5px 5px 5px 15px;
+		font-size: 12px;
+		margin: -7px;
+		margin-bottom: 0px;
+		background-color: #c00;
+		color: #fff;
+		}
+	ul li {
+		font-size: 12px;
+		list-style: square;
+	}
+}
+
+#sessions {
+	h2 {
+		text-align: left;
+		font-weight: bold;
+		padding: 5px 5px 5px 15px;
+		font-size: 18px;
+		margin: -7px;
+		margin-bottom: 0px;
+		}
+	table {
+		tr {
+		}
+		td {
+			padding-left:10px;
+		}
+	}
+	background-color: #FAEED5;
+	border: 1px solid #D39206;
+	@include border-radius(15px);
+	width: 300px;
+	padding:2em;
+	text-align: center; 
+
 }
