@@ -11,14 +11,18 @@
 		<div id="top">
 			<div id="title"> Room Reservation Service</div>
 			<div id="menu">
+				<% if current_user %>
 				<span class="menu_item"><%= link_to "Create Reservation", new_reservation_path %></span>
 				<span class="menu_item"> <%= link_to "My Account", edit_registration_path(current_user) %></span>
+				
+				<span class="menu_item"> <a href="/auth/logout">logout</a></span>
+				<% end %>
 			</div>
 		</div>
-	<div id="main">
-	   <p class="notice"><%= notice %></p>
-	   <p class="alert"><%= alert %></p>
 
+	   <p class="alert"><%= alert %></p>
+	<div id="main">
+	   <p class="notice"><%= notice %></p><br/>
 		<%= yield %>
 	</div>
 </div>
