@@ -15,8 +15,19 @@
     <%= f.label :room_id %><br />
     <%= f.collection_select(:room_id, Room.all, :id, :name)%>
   </div>
+	<div id="date_help" style="display:none"> 
+		<br/>
+		For a date in the near future you can specify just the Day and Time (e.g. Friday at 9am)<br/>
+		For a date that is further than 6 days in the future use (e.g) Apr 18th at 9am <br/>
+		If the date is more than a year distant, include the year (e.g Apr 18th 2020 at 9am) <br/>
+		You may also use times such as 9:15am or 0915.
+		<br/>
+	</div>
   <div class="field">
-    <%= f.label :start_time %> (e.g. "Friday at 9am")<br />
+    <%= f.label :start_time %> (e.g. "Friday at 9am" <%= link_to :more_examples, "javascript:void(0)", :class => :more_examples %> ) 
+
+
+	<br />
     <%= f.text_field :start_time,:class => "datetimefield"   %>
   </div>
   <div class="field">
@@ -28,6 +39,6 @@
     <%= f.number_field :attendie_count %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "sassy_submit"%>
   </div>
 <% end %>

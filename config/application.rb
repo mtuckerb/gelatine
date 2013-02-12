@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'sassy-buttons'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -56,7 +57,7 @@ module BookARoom
 
     # Enable the asset pipeline
     config.assets.enabled = true
-
+    config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.generators do |g|
