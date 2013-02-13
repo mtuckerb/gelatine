@@ -8,6 +8,7 @@ FactoryGirl.define do
     end
     password "This15apassword"
     password_confirmation "This15apassword"
+    confirmed_at Time.now
   end
   
   factory :user_with_reservations do

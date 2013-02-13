@@ -1,25 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div id ="main" class="reservations">
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <b>User:</b>
-  <%= @reservation.user.name %>
-</p>
+	<p>
+	  <b>User:</b>
+	  <%= @reservation.user.name %>
+	</p>
 
-<p>
-  <b>Room:</b>
-  <%= @reservation.room.name %>
-</p>
+	<p>
+	  <b>Room:</b>
+	  <%= @reservation.room.name %>
+	</p>
 
-<p>
-	<b> Scheduled from/to </b>
-<%= format_date(@reservation.stop_time) %> &nbsp <%= format_time(@reservation.start_time, @reservation.stop_time) %>
-</p>
+	<p>
+		<b> Scheduled from/to </b>
+	<%= format_date(@reservation.stop_time) %> &nbsp <%= format_time(@reservation.start_time, @reservation.stop_time) %>
+	</p>
 
-<p>
-  <b>Attendie count:</b>
-  <%= @reservation.attendie_count %>
-</p>
+	<p>
+	  <b>Attendie count:</b>
+	  <%= @reservation.attendie_count %>
+	</p>
 
-
-<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
-<%= link_to 'Back', reservations_path %>
+	<p>
+		<%= link_to image_tag('icsGraphite.png'), reservation_path(@reservation, :format => 'ics') %>
+	<p>
+	<%= link_to 'Edit', edit_reservation_path(@reservation) %> |
+	<%= link_to 'Back', reservations_path %>
+</div>

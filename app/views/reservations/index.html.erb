@@ -1,29 +1,32 @@
-<div class="title">Your Reservations</div>
+<div class="reservations">
 
-<table width="100%">
-  <tr>
-    <th>User</th>
-    <th>Room</th>
-    <th>Time</th>
-    <th>Attendie count</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<div id="main" class="title">Your Reservations</div>
 
-<% @reservations.each do |reservation| %>
-  <tr>
-    <td><%= reservation.user.name %></td>
-    <td><%= reservation.room.name %></td>
-    <td><%= format_date(reservation.stop_time) %> &nbsp <%= format_time(reservation.start_time, reservation.stop_time) %> 	 </td>
-    <td><%= reservation.attendie_count %></td>
-    <td><%= link_to 'Show', reservation %></td>
-    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-    <td><%= link_to 'Delete', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+	<table width="100%">
+	  <tr>
+	     <% if current_user.name == "Admin" %><th>User</th><% end %>
+	    <th>Room</th>
+	    <th>Time</th>
+	    <th># of Attendees</th>
+	    <th></th>
+	    <th></th>
+	    <th></th>
+	  </tr>
 
-<br />
+	<% @reservations.each do |reservation| %>
+	  <tr>
+	    <% if current_user.name == "Admin" %><td><%= reservation.user.name %></td><% end %>
+	    <td><%= reservation.room.name %></td>
+	    <td><%= format_date(reservation.stop_time) %> &nbsp <%= format_time(reservation.start_time, reservation.stop_time) %> 	 </td>
+	    <td><%= reservation.attendie_count %></td>
+	    <td><%= link_to 'Show', reservation %></td>
+	    <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+	    <td><%= link_to 'Delete', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  </tr>
+	<% end %>
+	</table>
 
-<%= link_to 'New Reservation', new_reservation_path %>
+	<br />
+
+	<%= link_to 'New Reservation', new_reservation_path %>
+</div>
