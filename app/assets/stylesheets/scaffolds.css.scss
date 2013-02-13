@@ -2,6 +2,7 @@
 @import "compass/css3";
 @import "compass/utilities";
 @import "sassy-buttons";
+@import "basics/stitched";
 
 body {
 	background-color: white;
@@ -82,11 +83,6 @@ div {
 	margin-top: 2em;
 	margin-left: 1em;
 	margin-bottom: 1em;
-	background-color: #ccd9dd;
-	border: 1px solid #8A8A6C;
-	@include border-radius(15px);
-	width: 800px;
-	padding:2em;
 	table {
 		tr {
 			td {
@@ -97,16 +93,38 @@ div {
 	}
 	.title {
 		font-size: 18px;
+		border: 1px solid gray;
 		text-decoration: bold;
 		padding: .5em;
 		margin-bottom: 1em;
 		margin-left: 0em;
+		width:100%;
 		background-color: rgb(244,244,244);
+	}
+	.reservations {
+		background-color: #ccd9dd;
+		border: 1px solid #8A8A6C;
+		@include border-radius(15px);
+		margin-top: 2em;
+		margin-left: 1em;
+		margin-bottom: 1em;
+		width: 800px;
+		padding:2em;
 	}
 }
 
-#notice {
-	color: green;
+.flash-message {
+	
+	&.notice {
+		color: green;
+		@include stitched();
+		 z-index: 999;
+	}
+	&.error {
+		color: red;
+		@include stitched();
+		 z-index: 999;
+	}
 }
 .sassy_submit {
 	@include sassy-button("simple", 8px, 12px, #50D611, #49B616);

@@ -11,6 +11,6 @@
  *= require_self
  *= require_tree .
  */
-= require_self
-= require_screen
+@import "screen";
+@import "basics/stitched";
 

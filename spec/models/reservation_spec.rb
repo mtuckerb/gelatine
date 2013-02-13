@@ -65,6 +65,14 @@ describe Reservation do
       FactoryGirl.create(:reservation, start_time: start_time, stop_time: stop_time)
     }.to raise_exception(ActiveRecord::RecordInvalid, /Your reservation seems to be in the past/)
   end
+  it "returns an ics format" do
+    @reservation.to_ics.should be_a( RiCal::Calendar)
+  end
+  
+  it "sends an email confirmation" do
+    @reservation.send_confirmation
+    ActionMailer::Base.deliveries.last.to.should == [@reservation.user.email]
+  end
 end
 describe "GET /reservations" do
 

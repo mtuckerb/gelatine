@@ -17,6 +17,9 @@ class ReservationsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @reservation }
+      format.ics {
+        render :text => @reservation.to_ics.export
+      }
     end
   end
 
@@ -44,6 +47,7 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
     respond_to do |format|
       if @reservation.save
+        ReservationMailer.confirmation(@reservation).deliver
         format.html { redirect_to @reservation, notice: 'Reservation was successfully created.' }
         format.json { render json: @reservation, status: :created, location: @reservation }
       else

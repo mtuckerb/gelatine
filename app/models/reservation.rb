@@ -9,6 +9,22 @@ class Reservation < ActiveRecord::Base
   validate :booking_within_operating_hours
   validate :date_is_in_the_past
   
+  def to_ics
+    RiCal.Calendar  do |cal|
+      cal.event do |event|
+        event.dtstart = self.start_time.strftime("%Y%m%dT%H%M%S")
+        event.dtend = self.stop_time.strftime("%Y%m%dT%H%M%S")
+        event.summary = "Reservation at #{self.room.name}"
+        event.description = "Reservation at #{self.room.name}"
+        event.location = 'Here !'
+      end
+    end
+  end
+  
+  def send_confirmation
+    ReservationMailer.confirmation(self).deliver
+  end
+  
   private
 
   def room_in_use
