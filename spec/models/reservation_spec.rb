@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 require 'chronic'
+require 'ri_cal'
 
 
 describe Reservation do
@@ -66,7 +67,7 @@ describe Reservation do
     }.to raise_exception(ActiveRecord::RecordInvalid, /Your reservation seems to be in the past/)
   end
   it "returns an ics format" do
-    @reservation.to_ics.should be_a( RiCal::Calendar)
+    @reservation.to_ics.should be_a(RiCal::Component::Calendar)
   end
   
   it "sends an email confirmation" do
