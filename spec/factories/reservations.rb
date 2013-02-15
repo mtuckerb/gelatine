@@ -5,7 +5,7 @@ FactoryGirl.define do
     start_time ("Feb 8th 2016 at 9am UTC+10")
     stop_time  ("Feb 8th 2016 at 10am UTC+10")
     attendie_count 2
-    association(:user) 
+    association(:user, :role => "admin") 
     association(:room)
   end
   

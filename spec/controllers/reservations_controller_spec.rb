@@ -2,19 +2,19 @@ require 'spec_helper'
 require 'chronic'
 
 describe ReservationsController do
-  include Devise::TestHelpers
+
+  login_admin 
+  
+   let(:user){ FactoryGirl.create(:user, role: "admin")}
+   let(:ability){ Ability.new(user)}
+   let(:current_user) {FactoryGirl.create(:user, role: "admin")}
   before (:each) do
     controller.stub(:authenticate_user!).and_return true
     @request.env["devise.mapping"] = Devise.mappings[:user]
-    sign_in FactoryGirl.create(:user)
   end
 
   def valid_attributes
-    { "user_id" => "1", "start_time" => Chronic.parse("Thursday at 2pm"), "stop_time" => Chronic.parse("Thursday at 3pm"), "room_id" => 1 }
-  end
-
-  def valid_session
-    {}
+    { "user" => user, "start_time" => Chronic.parse("Thursday at 2pm"), "stop_time" => Chronic.parse("Thursday at 3pm"), "room_id" => 1 }
   end
 
   describe "GET index" do
@@ -31,8 +31,7 @@ describe ReservationsController do
     end
 
     it "will only show reservations for current_user" do
-      current_user = FactoryGirl.create(:user)
-      get :index,  {} , valid_session
+      get :index,  {} 
       assigns(:reservations).each do |res|
         expect(res.user).to eq current_user
       end
@@ -42,34 +41,35 @@ describe ReservationsController do
 
   describe "GET show" do
     it "assigns the requested reservation as @reservation" do
-      reservation = FactoryGirl.create(:reservation)
-      get :show, {:id => reservation.to_param}, valid_session
+      reservation = FactoryGirl.create(:reservation, user: user)
+      get :show, {:id => reservation.to_param}
       assigns(:reservation).should eq(reservation)
     end
   end
 
   describe "GET new" do
     it "assigns a new reservation as @reservation" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:reservation).should be_a_new(Reservation)
     end
+    
     it "assigns all rooms to @rooms" do
-      reservation = FactoryGirl.create(:reservation)
-      get :edit, {:id => reservation.to_param}, valid_session
+      reservation = FactoryGirl.create(:reservation, user: user)
+      get :edit, {:id => reservation.to_param}
       expect(assigns(:rooms)).not_to be_nil
     end
   end
 
   describe "GET edit" do
-    let(:reservation) { FactoryGirl.create(:reservation)}
-    
+    let(:reservation) { FactoryGirl.create(:reservation, user: user)}
+
     it "assigns the requested reservation as @reservation" do
-      get :edit, {:id => reservation.to_param}, valid_session
+      get :edit, {:id => reservation.to_param}
       expect(assigns(:reservation)).to eq(reservation)
     end
 
     it "assigns all rooms to @rooms" do
-      get :edit, {:id => reservation.to_param}, valid_session
+      get :edit, {:id => reservation.to_param}
       expect(assigns(:rooms)).not_to be_nil
     end
   end
@@ -198,13 +198,13 @@ describe ReservationsController do
     it "destroys the requested reservation" do
       reservation = FactoryGirl.create(:reservation)
       expect {
-        delete :destroy, {:id => reservation.to_param}, valid_session
+        delete :destroy, {:id => reservation.to_param}
       }.to change(Reservation, :count).by(-1)
     end
 
     it "redirects to the reservations list" do
       reservation = FactoryGirl.create(:reservation)
-      delete :destroy, {:id => reservation.to_param}, valid_session
+      delete :destroy, {:id => reservation.to_param}
       response.should redirect_to(reservations_url)
     end
   end

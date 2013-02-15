@@ -9,6 +9,18 @@ FactoryGirl.define do
     password "This15apassword"
     password_confirmation "This15apassword"
     confirmed_at Time.now
+    role 'user'
+  end
+  
+  factory :admin, :class => User do
+    name Faker::Name.name
+    sequence :email do |n|
+      email = "person#{n}@#{Faker::Internet.domain_name}"
+    end
+    password "This15apassword"
+    password_confirmation "This15apassword"
+    confirmed_at Time.now
+    role "admin"
   end
   
   factory :user_with_reservations do

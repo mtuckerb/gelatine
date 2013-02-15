@@ -24,13 +24,17 @@
 		  <tr><td><%= f.label :current_password %> <br/>
 			<i>(we need your current password to confirm your changes)</i></td>
 		  <td><%= f.password_field :current_password %></td></tr>
+		
+		  <tr><td><%= f.label :role %></td>
+		  <td><%= f.text_field :role %></td></tr>
+		
 			<tr><td><%= f.submit "Update", :class => "sassy_submit" %></td>
-			<td><%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "sassy_cancel"%>.</td> </tr>
+			
 		<tr><td>
 	</table>
 
 	<% end %>
-
+<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "sassy_cancel"%>
 
 	<%= link_to "Back", :back %>
 </div>

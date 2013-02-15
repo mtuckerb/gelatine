@@ -10,7 +10,9 @@ describe "reservations/show" do
       :attendie_count => 3
     ))
   end
-
+  let(:ability){ Ability.new(user) }
+  let(:user){ nil }
+  
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
