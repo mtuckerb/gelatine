@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
+  load_and_authorize_resource
+  
   def index
     @rooms = Room.all
 

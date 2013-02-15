@@ -1,6 +1,8 @@
 class ReservationsController < ApplicationController
   # GET /reservations
   # GET /reservations.json
+  load_and_authorize_resource
+  
   def index
     @reservations = Reservation.find_all_by_user_id(current_user)
     respond_to do |format|

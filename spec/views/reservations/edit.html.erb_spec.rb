@@ -8,8 +8,10 @@ describe "reservations/edit" do
       :attendie_count => 1
     ))
   end
-
+  let(:ability){ Ability.new(user) }
+  let(:user){ nil }
   it "renders the edit reservation form" do
+
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers

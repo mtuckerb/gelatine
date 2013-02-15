@@ -4,15 +4,22 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
-         
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at
-  # attr_accessible :title, :body
+  attr_accessible :role, :as => :admin
+  before_create :setup_default_role_for_new_users
+  ROLES = %w[admin default banned]
   
-  # 
-  # protected
-  # def confirmation_required?
-  #   false if self.name == "Admin"
-  # end
+  
+  def admin?
+    true if self.role == "admin"
+  end
+  
+  private
+  
+  def setup_default_role_for_new_users
+    if self.role.blank?
+      self.role = "default"
+    end
+  end
   
 end

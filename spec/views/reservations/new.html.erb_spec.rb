@@ -10,7 +10,9 @@ describe "reservations/new" do
       :stop_date => "Feb 11th at 10am"
     ).as_new_record)
   end
-
+  let(:ability){ Ability.new(user) }
+  let(:user){ nil }
+  
   it "renders new reservation form" do
     render
 
