@@ -5,7 +5,7 @@
 @import "basics/stitched";
 
 body {
-	background-color: white;
+	background-color: #fafafa;
 	color: #333;
 	font-family: verdana, arial, helvetica, sans-serif;
 	font-size: 13px;
@@ -45,7 +45,7 @@ div {
 	margin-bottom:0em;
 }
 #top {
-	background-color: #F1F1E8;
+	background-color: #fafafa;
 	padding-left:2em;
 	margin-top:0em;
 	padding-top:1em;
@@ -59,13 +59,16 @@ div {
 		padding-top: 2em;
 	}
 	.menu_item {
+		text-transform: uppercase;
+		font-family: verdana, arial, helvetica, sans-serif;
 		padding-left: 4px;
 		padding-right: 4px;
+		font-size: 14px;
 		background-color: white;;
 		border-top: 1px solid gray;
 		border-left:1px solid gray;
 		border-right:1px solid gray;
-		border-bottom: none	;
+		border-bottom: 1px solid #fff	;
 		@include border-top-radius(5px); 
 		a {
 			color: #33332B;
@@ -91,18 +94,8 @@ div {
 		}
 
 	}
-	.title {
-		font-size: 18px;
-		border: 1px solid gray;
-		text-decoration: bold;
-		padding: .5em;
-		margin-bottom: 1em;
-		margin-left: 0em;
-		width:100%;
-		background-color: rgb(244,244,244);
-	}
 	.reservations {
-		background-color: #ccd9dd;
+		background-color: white;
 		border: 1px solid #8A8A6C;
 		@include border-radius(15px);
 		margin-top: 2em;
@@ -110,6 +103,14 @@ div {
 		margin-bottom: 1em;
 		width: 800px;
 		padding:2em;
+		.title {
+			font-size: 24px;
+			text-decoration: bold;
+			padding: .5em;
+			margin-bottom: 1em;
+			margin-left: 0em;
+			width:100%;
+		}
 	}
 }
 
