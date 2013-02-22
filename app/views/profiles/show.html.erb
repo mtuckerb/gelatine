@@ -1,0 +1,69 @@
+<div id="sessions" style="width:500px">
+	<p id="notice"><%= notice %></p>
+	<p>
+		Name:
+		<%= @profile.user.name%>
+	</p>
+	<p>
+	  <b>About me:</b>
+	  <%= @profile.about_me %>
+	</p>
+
+	<p>
+	  <b>Availability:</b>
+	  <%= @profile.mood %>
+	</p>
+
+	<p>
+	  <b>Twitter:</b>
+	  <%= @profile.twitter %>
+	</p>
+
+	<p>
+	  <b>Goodreads:</b>
+	  <%= @profile.goodreads %>
+	</p>
+
+	<p>
+	  <b>Public email:</b>
+	  <%= @profile.public_email %>
+	</p>
+
+	<p>
+	  <b>Website:</b>
+	  <%= @profile.website %>
+	</p>
+
+	<p>
+	  <b>Toc accept:</b>
+	  <%= @profile.toc_accept %>
+	</p>
+
+	<p>
+	  <b>Send via email:</b>
+	  <%= @profile.send_via_email %>
+	</p>
+
+	<p>
+		<b> Interests: </b>
+		<% @profile.interests.each do |interest| %>
+			<%=  interest.name %>, 
+		<% end %>
+	</p>
+	<p>Skills: </b>
+		<% @profile.skills.each do |skill| %>
+			<%=  skill.name %>, 
+		<% end %>
+	</p>
+
+	<p>
+		<b> Needs: </b>
+		<% @profile.needs.each do |need| %>
+			<%=  need.name %>, 
+		<% end %>
+	</p>
+	<BR/>
+
+
+	<%= link_to 'Back', profiles_path %>
+</div>

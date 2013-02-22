@@ -1,22 +1,43 @@
 <div id="sessions">
-	<h2>Sign up</h2>
-	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-	  <%= devise_error_messages! %>
-	<table>
-	  <tr><td><%= f.label :name %></td>
-	  <td><%= f.text_field :name, :autofocus => true %></td></tr>
+<h2>Sign up</h2>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+  <table>
+  <tr><td><%= f.label :name %></td>
+  <td><%= f.text_field :name, :autofocus => true %></td></tr>
 
-	  <tr><td><%= f.label :email %></td>
-	  <td><%= f.email_field :email %></td></tr>
+  <tr><td><%= f.label :email %></td>
+  <td><%= f.email_field :email %></td></tr>
 
-	  <tr><td><%= f.label :password %></td>
-	  <td><%= f.password_field :password %></td></tr>
+  <tr><td><%= f.label :password %></td>
+  <td><%= f.password_field :password %></td></tr>
 
-	  <tr><td><%= f.label :password_confirmation %></td>
-	  <td><%= f.password_field :password_confirmation %></td></tr>
-	<table>
-	  <div ><%= f.submit "Sign up",	 :class => "sassy_submit"%></div>
-	<% end %>
+  <tr><td><%= f.label :password_confirmation %></td>
+  <td><%= f.password_field :password_confirmation %></td></tr>
+  <%= f.fields_for :profile do |form| %>
+    <%= form.hidden_field :retained_avatar_image %>
+    <tr><td><%= form.label :avatar%></td>
+    <td>   <%= image_tag resource.profile.avatar_image.thumb('100x100').url if resource.profile.avatar_image_uid %><BR/>
+    <%= form.file_field :avatar_image %>
+    <%= form.check_box :remove_avatar_image %> Remove Image
+    </td></tr>
 
-	<%= render "devise/shared/links" %>
-</div>
+    <tr><td><%= form.label :about_me %></td><td> <%= form.text_field :about_me %></td></tr>
+    <tr><td><%= form.label :mood %></td><td> <%= form.text_field :mood %></td></tr>
+    <tr><td><%= form.label :twitter %></td><td> <%= form.text_field :twitter %></td></tr>
+    <tr><td><%= form.label :goodreads %></td><td> <%= form.text_field :goodreads %></td></tr>
+    <tr><td><%= form.label :public_email %></td><td> <%= form.text_field :public_email %></td></tr>
+    <tr><td><%= form.label :website %></td><td> <%= form.text_field :website %></td></tr>
+    <tr><td><%= form.label :send_via_email %></td><td> <%= form.check_box :send_via_email %></td></tr>
+    <tr><td><%= form.label :interests %> </td><td> <%= form.text_field :interest_list%> (Sailing, Programming, etc.)</td></tr>
+    <tr><td><%= form.label :skills%> </td><td> <%= form.text_field :skill_list  %> </td></tr>
+    <tr><td><%= form.label :needs%> </td><td> <%= form.text_field :need_list %> </td></tr>
+    <tr><td><%= form.label "Terms and Conditions" %></td><td>
+    The aim of the checkin-system is to help you identify and connect, and ice-break conversations with interesting other folks in The Edge community. This user profile allows you to specify information about you, so interested users at The Edge can better identify and find you. By swiping your user card at a check-in point, you leave a digital footprint of your profile information at the check-in system including a timestamp and location where you checked-in. The system aggregates and visualises this information in graphical and textual form using different media in The Edge building, such as projections and LCD screens. Please only enter information in your user profile that you feel comfortable sharing as part of the content on these media. Your use and participation in the checkin system is voluntary and will not change your relationship to The Edge.<BR/><BR/> <%= form.check_box :toc_accept %> I accept these terms<BR/>
+    </td></tr>
+    <table>
+    <div ><%= f.submit "Sign up",	 :class => "sassy_submit"%></div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  </div>

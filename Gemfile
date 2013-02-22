@@ -10,6 +10,9 @@ gem 'devise'
 gem 'chronic'
 gem 'ri_cal'
 gem 'cancan'
+gem 'acts-as-taggable-on', '~> 2.3.1'
+gem 'rack-cache', :require => 'rack/cache'
+gem 'dragonfly', '~>0.9.14'
 
 # Gems used only for assets and not required
 # in production environments by default.

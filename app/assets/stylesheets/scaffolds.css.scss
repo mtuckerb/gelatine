@@ -186,3 +186,17 @@ div {
 	text-align: center; 
 
 }
+
+.index_table {
+	table {
+		width:100%;
+		tr {
+		}
+		td {
+			padding-left:10px;
+		}
+		th {
+			padding-left:10px;
+		}
+	}
+}
