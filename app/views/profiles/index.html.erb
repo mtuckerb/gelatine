@@ -1,0 +1,28 @@
+
+<div class="reservations" >
+<table class="index_table" style="width:100%;">
+  <tr>
+	<th></th>
+    <th>About me</th>
+    <th>Availability</th>
+    <th>Website</th>
+
+  </tr>
+
+<% @profiles.each do |profile| %>
+  <tr>
+	<td> <%= image_tag profile.avatar_image.thumb("100x50#").url if profile.avatar_image_uid%></td>
+    <td> <%= profile.about_me %></td>
+    <td> <%= profile.mood %></td>
+    <td> <%= profile.website %></td>
+    <td> <%= link_to 'Show', profile %></td>
+    <td> <%= link_to 'Edit', edit_profile_path(profile) %></td>
+    <td> <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Profile', new_profile_path %>
+</div>

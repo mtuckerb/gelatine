@@ -1,4 +1,7 @@
 BookARoom::Application.routes.draw do
+  resources :profiles
+
+
   devise_for :users, :path => "auth", :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',
@@ -10,6 +13,7 @@ BookARoom::Application.routes.draw do
 
   resources :reservations
   resources :rooms
+  resources :calendars
 
 
   # The priority is based upon order of creation:

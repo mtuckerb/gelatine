@@ -1,4 +1,0 @@
-TODO: 
-stub user in reservations so it doesn't try to verify etc..
-move javascript into coffee file
-make model/reservation_spec "already booked" test more robust (don't just duplicate the whole record"

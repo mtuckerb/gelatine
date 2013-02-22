@@ -2,10 +2,15 @@ require 'spec_helper'
 require 'chronic'
 
 describe RoomsController do
-  before { controller.stub(:authenticate_user!).and_return true }
-  # This should return the minimal set of attributes required to create a valid
-  # Room. As you add validations to Room, be sure to
-  # update the return value of this method accordingly.
+  login_admin  
+  
+  let(:user){ FactoryGirl.create(:user, role: "admin")}
+  let(:ability){ Ability.new(user)}
+  before (:each) do
+    controller.stub(:authenticate_user!).and_return true
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+  end
+  
   def valid_attributes
     { "name" => "Test Room", "ophoursstart" => "0900", "ophoursstop" => "1700", "capacity" => 1, "operating_days" => "Mon"} #
   end

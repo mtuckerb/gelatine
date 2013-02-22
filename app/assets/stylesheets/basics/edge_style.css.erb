@@ -49,7 +49,7 @@ audio:not([controls]) { display: none; }
 
 
 /* Primary Templating */
-#page { padding: 0 0 0 115px; background: transparent url(images/blog-nav-bg.png) top left repeat-y; overflow: auto; height: 100%; }
+#page { padding: 0 0 0 115px; background: transparent url(<%= asset_path 'image.png' %>) top left repeat-y; overflow: auto; height: 100%; }
 #access { border-bottom: 1px solid #dcdcdc; width: 100%; }
 #filters { border-bottom: 1px solid #dcdcdc; width: 100%; }
 #features { overflow: hidden; height: 110px; width: 100%; background: transparent url(images/feature-text-bg.png) left top repeat; margin: 20px 0; }
@@ -58,7 +58,14 @@ audio:not([controls]) { display: none; }
 /* Area Templating */
 #access hgroup { display: inline-block; zoom: 1; *display: inline; vertical-align: top; }
 #access #branding { width: 230px; height: 100px; }
-#access #branding #site-title { width: 230px; height: 100px; background: transparent url(<%= asset_path 'edge-logo.png' %>) left center no-repeat; padding: 0; margin: 0; }
+#access #branding #site-title { width: 230px; height: 100px; 
+	background-image: url(<%= asset_path 'edgelogo.png' %>) ;
+	background-color: transparent;
+	background-position: left center ;
+	background-repeat: no-repeat;
+	padding: 0; 
+	margin: 0; 
+	}
 #access #branding #site-title span { display: none; }
 #access #blog-title h1 { line-height: 100px; margin: 0; font-weight: 700; font-size: 18px; text-transform: none; color: #000; }
 

@@ -1,14 +1,19 @@
 class User < ActiveRecord::Base
   has_many :reservations
+  has_many :rooms, :through => :reservations
+  has_one :profile, :dependent => :destroy
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :profile_attributes, :current_password
   attr_accessible :role, :as => :admin
   before_create :setup_default_role_for_new_users
   ROLES = %w[admin default banned]
-  
+  after_create :create_child
+  accepts_nested_attributes_for :profile
+  validates_associated :profile
+
   
   def admin?
     true if self.role == "admin"
@@ -21,5 +26,8 @@ class User < ActiveRecord::Base
       self.role = "default"
     end
   end
-  
+
+  def create_child
+    Profile.create("user_id" => id)
+  end
 end

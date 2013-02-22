@@ -1,33 +1,48 @@
 <div id="sessions" style="width:500px;">
-	<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-	  <%= devise_error_messages! %>
-	<table>
-		<tr><td><%= f.label :name %></td>
-		  <td><%= f.text_field :name, :autofocus => true %></td></tr>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f| %>
+  <% resource.build_profile unless resource.profile %>
+  <%= devise_error_messages! %>
+  <table>
+  <tr><td><%= f.label :name %></td>
+  <td><%= f.text_field :name, :autofocus => true %></td></tr>
 
-		  <tr><td><%= f.label :email %></td>
-		  <td><%= f.email_field :email %></td></tr>
+  <tr><td><%= f.label :email %></td>
+  <td><%= f.email_field :email %></td></tr>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+  <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+<% end %>
 
-		  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-		    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-		  <% end %>
-
-		  <tr><td><%= f.label :password %> <br/>
-			<i>(leave blank if you don't want to change it)</i></td>
+<tr><td><%= f.label :new_password %> <br/>
+<i>(leave blank if you don't want to change it)</i></td>
 		  <td><%= f.password_field :password, :autocomplete => "off" %></td></tr>
 
-		  <tr><td><%= f.label :password_confirmation %></td>
-		  <td><%= f.password_field :password_confirmation %></td></tr>
+		  <tr><td><%= f.label :new_password_confirmation %></td>
+		  <td><%= f.password_field :password_confirmation, :value => "", :autofill => false %></td></tr>
 
 		  <tr><td><%= f.label :current_password %> <br/>
 			<i>(we need your current password to confirm your changes)</i></td>
 		  <td><%= f.password_field :current_password %></td></tr>
-		
-		  <tr><td><%= f.label :role %></td>
-		  <td><%= f.text_field :role %></td></tr>
-		
+		<%= f.fields_for :profile do |form| %>
+					  <%= form.hidden_field :retained_avatar_image %>
+					<tr><td><%= form.label :avatar%></td>
+					<td>   <%= image_tag resource.profile.avatar_image.thumb('100x100').url if resource.profile.avatar_image_uid %><BR/>
+					<%= form.file_field :avatar_image %>
+					<%= form.check_box :remove_avatar_image %> Remove Image
+				
+			</td></tr>
+		<tr><td><%= form.label :about_me %></td><td> <%= form.text_field :about_me %></td></tr>
+		 <tr><td><%= form.label :mood %></td><td> <%= form.text_field :mood %></td></tr>
+		  <tr><td><%= form.label :twitter %></td><td> <%= form.text_field :twitter %></td></tr>
+		  <tr><td><%= form.label :goodreads %></td><td> <%= form.text_field :goodreads %></td></tr>
+		  <tr><td><%= form.label :public_email %></td><td> <%= form.text_field :public_email %></td></tr>
+		  <tr><td><%= form.label :website %></td><td> <%= form.text_field :website %></td></tr>
+		  <tr><td><%= form.label :send_via_email %></td><td> <%= form.check_box :send_via_email %></td></tr>
+		  <tr><td><%= form.label :interests %> </td><td> <%= form.text_field :interest_list%> (Sailing, Programming, etc.)</td></tr>
+		  <tr><td><%= form.label :skills%> </td><td> <%= form.text_field :skill_list  %> </td></tr>
+		  <tr><td><%= form.label :needs%> </td><td> <%= form.text_field :need_list %> </td></tr>
+		<% end %>
 			<tr><td><%= f.submit "Update", :class => "sassy_submit" %></td>
 			
 		<tr><td>
