@@ -1,4 +1,7 @@
 BookARoom::Application.routes.draw do
+  resources :check_ins
+
+
   resources :profiles
 
 

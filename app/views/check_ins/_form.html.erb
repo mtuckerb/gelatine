@@ -1,0 +1,40 @@
+<%= form_for(@check_in) do |f| %>
+  <% if @check_in.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@check_in.errors.count, "error") %> prohibited this check_in from being saved:</h2>
+
+      <ul>
+      <% @check_in.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.collection_select(:room_id, Room.all, :id, :name)%>
+  </div>
+  <div class="field">
+    <%= f.label :check_in_time %><br />
+    <%= f.datetime_select :check_in_time %>
+  </div>
+  <div class="field">
+    <%= f.label :check_out_time %><br />
+    <%= f.datetime_select :check_out_time %>
+  </div>
+  <div class="field">
+    <%= f.label :third_party_id %><br />
+    <%= f.text_field :third_party_id %>
+  </div>
+  <div class="field">
+   <% if current_user.admin? %> 
+		<%= f.label :user_id %><br />
+    	<%= f.collection_select(:user_id, User.all, :id, :name)%>
+	<% end %>
+		
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

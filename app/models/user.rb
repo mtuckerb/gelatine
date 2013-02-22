@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_many :reservations
   has_many :rooms, :through => :reservations
   has_one :profile, :dependent => :destroy
+  has_many :check_ins, :dependent => :destroy
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -13,7 +15,7 @@ class User < ActiveRecord::Base
   after_create :create_child
   accepts_nested_attributes_for :profile
   validates_associated :profile
-
+  
   
   def admin?
     true if self.role == "admin"

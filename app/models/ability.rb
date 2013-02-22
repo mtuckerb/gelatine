@@ -12,6 +12,10 @@ class Ability
       can :read, :all
       can :update, Reservation, :user => user
       can :create, Reservation
+      can :create, CheckIn, :user => user
+      can :update, CheckIn, :user => user
+      can :create, Profile, :user => user
+      can :update, Profile, :user => user
       cannot :assign_roles
     end
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities

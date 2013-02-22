@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130222055924) do
+ActiveRecord::Schema.define(:version => 20130222064415) do
+
+  create_table "check_ins", :force => true do |t|
+    t.integer  "room_id"
+    t.datetime "check_in_time"
+    t.datetime "check_out_time"
+    t.string   "third_party_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "profiles", :force => true do |t|
     t.string   "about_me"

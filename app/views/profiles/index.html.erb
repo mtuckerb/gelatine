@@ -1,26 +1,29 @@
 
 <div class="reservations" >
-<table class="index_table" style="width:100%;">
-  <tr>
-	<th></th>
-    <th>About me</th>
-    <th>Availability</th>
-    <th>Website</th>
-
-  </tr>
-
 <% @profiles.each do |profile| %>
-  <tr>
-	<td> <%= image_tag profile.avatar_image.thumb("100x50#").url if profile.avatar_image_uid%></td>
-    <td> <%= profile.about_me %></td>
-    <td> <%= profile.mood %></td>
-    <td> <%= profile.website %></td>
-    <td> <%= link_to 'Show', profile %></td>
-    <td> <%= link_to 'Edit', edit_profile_path(profile) %></td>
-    <td> <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
+	<div id="profile">
+	<table class="index_table" style="width:100%;">
+		<tr>
+	 		<td><%= image_tag profile.avatar_image.thumb("100x100#").url if profile.avatar_image_uid%></td>
+			<td><span class="profile_user_name"><%= profile.user.name if profile.user %></span><BR/><%= profile.about_me %></td>
+		</tr>
+
+	</table>
+	   	 
+		<p id="blurb">
+		 <span class='label'>About: </span><%= profile.about_me %> <BR/>
+	     <span class='label'>Availability:</span> <%= profile.mood %> <BR/>
+	     <%= profile.website %> <BR/	>
+		<span class='label'>Skills:</span> <%= profile.skill_list %> <BR/>
+		<span class='label'>Needs Help With: </span><%= profile.need_list %><BR/>
+		</p>
+		<BR/>
+	     <%= link_to 'See More', profile %>
+	     <%= link_to 'Edit', edit_profile_path(profile) if current_user.admin? %>
+	     <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
+
+</div>
 <% end %>
-</table>
 
 <br />
 
