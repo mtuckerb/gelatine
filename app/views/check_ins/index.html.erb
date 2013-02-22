@@ -1,0 +1,29 @@
+<h1>Listing check_ins</h1>
+
+<table class="index_table" style="width:100%;">
+  <tr>
+    <th>Room</th>
+    <th>Check in time</th>
+    <th>Check out time</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @check_ins.each do |check_in| %>
+  <tr>
+    <td><%= check_in.room.name %></td>
+    <td><%= check_in.check_in_time %></td>
+    <td><%= check_in.check_out_time %></td>
+    <td><%= check_in.user.name %></td>
+    <td><%= link_to 'Show', check_in %></td>
+    <td><%= link_to 'Edit', edit_check_in_path(check_in) %></td>
+    <td><%= link_to 'Destroy', check_in, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Check in', new_check_in_path %>

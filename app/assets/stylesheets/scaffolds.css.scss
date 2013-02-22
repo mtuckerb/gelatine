@@ -200,3 +200,24 @@ div {
 		}
 	}
 }
+#profile {
+	background-color: #fdfdfd;
+	border: 1px solid #f1f1f1;
+	padding: 5px;
+	#blurb {
+		table {
+			td {
+				padding:5px;
+			}
+
+		}
+		.label {
+			font-weight: 900;
+			color: #1A1F58;
+		}
+		.profile_user_name {
+			font-size: 26px;
+			color: #424FD8;
+		}
+	}
+}
