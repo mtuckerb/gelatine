@@ -20,6 +20,7 @@ test:
 
 production:
   adapter: mysql2
+  encoding: utf8
   database: book_a_room_production
   username: booker
   password: b00kAr00m
