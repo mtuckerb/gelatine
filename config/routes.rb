@@ -1,8 +1,13 @@
 BookARoom::Application.routes.draw do
   resources :check_ins
+  
+  match 'tagged' => 'profiles#tagged', :as => 'tagged'
 
-
-  resources :profiles
+  resources :profiles do
+    get :autocomplete_skills_name, :on => :collection   
+    get :autocomplete_needs_name, :on => :collection   
+    get :autocomplete_interests_name, :on => :collection   
+  end
 
 
   devise_for :users, :path => "auth", :path_names => {
@@ -68,7 +73,7 @@ BookARoom::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'reservations#index'
+  root :to => 'profiles#index'
 
   # See how all your routes lay out with "rake routes"
 

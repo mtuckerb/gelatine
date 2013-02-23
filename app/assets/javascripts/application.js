@@ -15,3 +15,6 @@
 //= require_tree .
 //= require fullcalendar.js
 //= require fullcalendar.min.js
+//= require jquery-ui-1.10.1.custom.min.js
+//= require autocomplete-rails.js
+
