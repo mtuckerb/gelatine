@@ -43,14 +43,14 @@ BookARoom::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  # config.action_controller.asset_host = "http://ec2-54-234-254-197.compute-1.amazonaws.com/"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => "" } #must be set to host name
+  config.action_mailer.default_url_options = { :host => "ec2-54-234-254-197.compute-1.amazonaws.com" } #must be set to host name
  
   # Enable threaded mode
   # config.threadsafe!

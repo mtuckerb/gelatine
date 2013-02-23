@@ -2,7 +2,9 @@ BookARoom::Application.routes.draw do
   resources :check_ins
   
   match 'tagged' => 'profiles#tagged', :as => 'tagged'
-
+  
+  resources :needs_help_with
+  
   resources :profiles do
     get :autocomplete_skills_name, :on => :collection   
     get :autocomplete_needs_name, :on => :collection   
