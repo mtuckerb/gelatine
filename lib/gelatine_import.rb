@@ -3,7 +3,7 @@ require 'open-uri'
 
 gelatine =  JSON.parse( open("http://theedge.checkinsystem.net/API/view_list_distinctusercheckins_all.php" ).read)
 gelatine.each do |json_user| 
-  next if  User.exists?(email: json_user["email"]
+  next if  User.exists?(:email => json_user["email"]
   next unless json_user["email"].match(/@/)
   user = User.new(
     :name => "#{json_user['firstname']} #{json_user['lastname']}",
