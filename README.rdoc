@@ -1,4 +1,2 @@
-== Book A Room
-While working at the State Library of Queensland I repeatedly ran into trouble scheduling a private study room. This process should be easy and sexy, so I decided to write a rails app that could make that happen. 
-
-Because I am using my time in said study rooms to bone up my Rails skills, and the skill most needed is BDD, I will be using RSpec and Cucumber extensively.
+== Gelatine
+The goal of this project is to link physical resources, mentor-people, and people-with-mentoring-needs, so that they can find each other, set up a place to meet and collaborate, and release the resources when they are done.

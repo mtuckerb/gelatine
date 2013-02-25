@@ -28,6 +28,14 @@ set :deploy_to, "/rails/gelatine"
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "touch #{File.join(current_path,'tmp','restart.txt')}" #{try_sudo} 
    end
+   namespace :dragonfly do
+     desc "Symlink the Rack::Cache files"
+     task :symlink, :roles => [:app] do
+       run "mkdir -p #{shared_path}/tmp/dragonfly && ln -nfs #{shared_path}/tmp/dragonfly #{release_path}/tmp/dragonfly"
+     end
+   end
+   after 'deploy:update_code', 'dragonfly:symlink'
+   
    namespace :assets do
      task :precompile, :roles => :web, :except => { :no_release => true } do
        from = source.next_revision(current_revision)

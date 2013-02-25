@@ -8,3 +8,4 @@ Figure out where we want to go with Projects, implement that
 Make sure the recent changes to Profile were made universally (registrations/new,edit)
 write more unit tests
 add gravatar support for avis
+fix dragonfly storage location so it survives capistrano 

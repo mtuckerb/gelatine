@@ -1,1 +1,2 @@
 require 'dragonfly/rails/images'
+
