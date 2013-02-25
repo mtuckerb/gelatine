@@ -201,9 +201,15 @@ div {
 	}
 }
 #profile {
-	background-color: #fdfdfd;
+	background-color: #E7E7E7;
 	border: 1px solid #f1f1f1;
-	padding: 5px;
+	@include border-radius(15px);
+	
+	padding: 10px;
+	img {
+		border: 3px solid #583434;
+		@include border-radius(5px);
+	}
 	#blurb {
 		table {
 			td {

@@ -11,11 +11,11 @@
 	</table>
 	   	 
 		<p id="blurb">
-		 <span class='label'>About: </span><%= profile.about_me %> <BR/>
 	     <span class='label'>Availability:</span> <%= profile.mood %> <BR/>
-	     <%= profile.website %> <BR/	>
+	     <%= profile.website %> <BR/>
+		<span class='label'>Interests:</span><% profile.interests.each do |interest| %> <%= link_to interest.name, tagged_url(:interest => interest.name) %> <% end %>
 		<span class='label'>Skills:</span> <% profile.skills.each do |skill| %> <%= link_to skill.name, tagged_url(:skill => skill.name) %> <% end %> <BR/>
-		<span class='label'>Needs Help With: </span><%= profile.need_list %><BR/>
+		<span class='label'>Needs Help With: </span><% profile.needs.each do |need| %> <%= link_to need.name, tagged_url(:need => need.name) %> <% end %><BR/>
 		</p>
 		<BR/>
 	     <%= link_to 'See More', profile %>

@@ -1,5 +1,5 @@
 
-<div id="sessions" style="width:500px">
+<div id="profile" style="width:500px">
 	<div id="avatar"><%= image_tag @profile.avatar_image.thumb("100x100#").url if @profile.avatar_image_uid%></div>
 	<p> <% if @checkin %> Last Checked in: <%=time_ago_in_words(@checkin.check_in_time) %> ago <% else %> Hasn't checked in yet! <% end %>
 	<p>

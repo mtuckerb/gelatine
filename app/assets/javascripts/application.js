@@ -17,5 +17,4 @@
 //= require fullcalendar.min.js
 //= require jquery-ui-1.10.1.custom.min.js
 //= require autocomplete-rails.js
-//= require jquery.awesomeCloud-0.2.min.js
-
+//= d3.layout.cloud.js

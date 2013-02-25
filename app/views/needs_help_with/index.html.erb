@@ -1,87 +1,36 @@
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-		<script src="assets/jquery.awesomeCloud-0.2.min.js"></script>
-		<style type="text/css">
-			.wordcloud {
-				border: 1px solid #036;
-				height: 7in;
-				margin: 0.5in auto;
-				padding: 0;
-				page-break-after: always;
-				page-break-inside: avoid;
-				width: 7in;
-			}
-		</style>
+<script>
+  var fill = d3.scale.category20();
+	<% @tags.each do |tag| %>
+		<%= link_to(tag.name, tagged_url) %>
+	<% end %>
+  d3.layout.cloud().size([300, 300])
+      .words([
+        "Hello", "world", "normally", "you", "want", "more", "words",
+        "than", "this"].map(function(d) {
+        return {text: d, size: 10 + Math.random() * 90};
+      }))
+      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+      .font("Impact")
+      .fontSize(function(d) { return d.size; })
+      .on("end", draw)
+      .start();
 
-		<div role="main">
-			<p>Square, automatic scaling, print-ready, randomized word order</p>
-			<div id="wordcloud1" class="wordcloud">
-				<% @tags.each do |tag| %>
-					<%= link_to(tag.name, tagged_urlGemfile, "data-weight" => tag.count) %>
-				<% end %>
-			</div>
-			<p>Circle, manual scaling, normalized weighting</p>
-			<div id="wordcloud2" class="wordcloud">
-				<% @tags.each do |tag| %>
-					<span data-weight='<%=tag.count %>'><%= tag.name %></span>
-				<% end %>
-			</div>
-			<p>Star, densely packed, manual scaling, normalized weighting, print-ready</p>
-			<div id="wordcloud3" class="wordcloud">
-				<% @tags.each do |tag| %>
-					<span data-weight='<%=tag.count %>'><%= tag.name %></span>
-				<% end %>
-			</div>
-		</div>
-		<footer>
-			<p>Licensed under the <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a></p>
-		</footer>
-		<script>
-			$(document).ready(function(){
-				$("#wordcloud1").awesomeCloud({
-					"size" : {
-						"grid" : 16,
-						"normalize" : false
-					},
-					"options" : {
-						"color" : "random-dark",
-						"rotationRatio" : 0.35,
-						"printMultiplier" : 3,
-						"sort" : "random"
-					},
-					"font" : "'Times New Roman', Times, serif",
-					"shape" : "square"
-				});
-				$("#wordcloud2").awesomeCloud({
-					"size" : {
-						"grid" : 9,
-						"factor" : 1
-					},
-					"options" : {
-						"color" : "random-dark",
-						"rotationRatio" : 0.35
-					},
-					"font" : "'Times New Roman', Times, serif",
-					"shape" : "circle"
-				});
-				$("#wordcloud3").awesomeCloud({
-					"size" : {
-						"grid" : 1,
-						"factor" : 3
-					},
-					"color" : {
-						"background" : "#036"
-					},
-					"options" : {
-						"color" : "random-light",
-						"rotationRatio" : 0.5,
-						"printMultiplier" : 3
-					},
-					"font" : "'Times New Roman', Times, serif",
-					"shape" : "star"
-				});
-			});
-		</script>
-		<!--[if lt IE 7 ]>
-		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-		<![endif]-->
+  function draw(words) {
+    d3.select("body").append("svg")
+        .attr("width", 300)
+        .attr("height", 300)
+      .append("g")
+        .attr("transform", "translate(150,150)")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .style("font-size", function(d) { return d.size + "px"; })
+        .style("font-family", "Impact")
+        .style("fill", function(d, i) { return fill(i); })
+        .attr("text-anchor", "middle")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .text(function(d) { return d.text; });
+  }
+</script>
