@@ -5,7 +5,8 @@
 	<table class="index_table" style="width:100%;">
 		<tr>
 	 		<td><%= image_tag profile.avatar_image.thumb("100x100#").url if profile.avatar_image_uid%></td>
-			<td><span class="profile_user_name"><%= profile.user.name if profile.user %></span><BR/><%= profile.about_me %></td>
+			<td><span class="profile_user_name"><%= profile.user.name if profile.user %></span>
+			<BR/><%= profile.about_me %></td>
 		</tr>
 
 	</table>

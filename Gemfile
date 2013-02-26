@@ -42,6 +42,7 @@ group :development, :test do
   gem 'launchy'
   gem 'watchr'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'pry-nav'
   
 end
 
