@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ReservationsController do
 
-  login_admin 
+  login_admin;nil 
   
    let(:user){ FactoryGirl.create(:user, role: "admin")}
    let(:ability){ Ability.new(user)}
@@ -83,7 +83,6 @@ describe ReservationsController do
       it "creates a new Reservation" do
         Reservation.should_receive(:new).and_return(reservation)
         post :create, reservation: :reservation
-
       end
 
       it "saves the reservation" do
