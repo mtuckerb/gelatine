@@ -43,7 +43,7 @@ group :development, :test do
   gem 'watchr'
   gem 'spork', '~> 0.9.0.rc'
   gem 'pry-nav'
-  
+  gem 'capybara'
 end
 
 # To use ActiveModel has_secure_password

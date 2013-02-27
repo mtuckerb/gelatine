@@ -8,7 +8,8 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require "capybara/rspec"
-  
+  require 'capybara/rails'
+
   def logger
     Rails::logger
   end
