@@ -4,7 +4,7 @@ Gelatine
 The goal of this project is to link physical resources, mentor-people, and people-with-mentoring-needs, so that they can find each other, set up a place to meet and collaborate, and release the resources when they are done.book_a_room
 
 
-- Installation (on a Mac):
+## Installation (on a Mac):
 
 Install rails ([try this ](http://www.frederico-araujo.com/2011/07/30/installing-rails-on-os-x-lion-with-homebrew-rvm-and-mysql/)
 
@@ -32,7 +32,7 @@ You should now get an email, click the link to confirm your user and it's off to
 open your browser and go to http://localhost:3000
 
 
-- Deploy to server (incomplete)
+## Deploy to server (incomplete)
 * edit config/deploy.rb, set your server and login information
 * cap deploy
  on remote server
