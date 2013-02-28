@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
   has_many :check_ins, :dependent => :destroy
   
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
+  #  :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :token_authenticatable 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :confirmed_at, :profile_attributes, :current_password
   attr_accessible :role, :as => :admin
   before_create :setup_default_role_for_new_users

@@ -11,7 +11,6 @@ Gelatine::Application.routes.draw do
     get :autocomplete_interests_name, :on => :collection   
   end
 
-
   devise_for :users, :path => "auth", :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',

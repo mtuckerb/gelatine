@@ -6,7 +6,7 @@ The goal of this project is to link physical resources, mentor-people, and peopl
 
 ## Installation (on a Mac):
 
-Install rails ([try this ](http://www.frederico-araujo.com/2011/07/30/installing-rails-on-os-x-lion-with-homebrew-rvm-and-mysql/)
+Install rails ([try this ](http://www.frederico-araujo.com/2011/07/30/installing-rails-on-os-x-lion-with-homebrew-rvm-and-mysql/))
 
 clone this repository 
 ```
@@ -14,17 +14,18 @@ git clone https://github.com/mtuckerb/gelatine.git
 ```
 hop into the repository's root 
 
-```
-$ bundle install
-$ rake db migrate
-$ rails server &
-```
 now we need to add environment variables to allow your development box to send mail via gmail. You will use your own gmail username and password for this.
 
 create config/local_env.yml and add
 ``` 
 GMAIL_USERNAME: 'you@gmail.com'
 GMAIL_PASSWORD: 'your_gmail_password'
+```
+install the gems, setup your database, and start the server.like this…
+```
+$ bundle install
+$ rake db migrate
+$ rails server &
 ```
 
 to create your initial (admin) user do
