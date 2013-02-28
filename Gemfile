@@ -7,7 +7,6 @@ gem 'rails', '3.2.11'
 
 gem 'sqlite3'
 gem 'devise'
-gem 'chronic'
 gem 'ri_cal'
 gem 'cancan'
 gem 'acts-as-taggable-on', '~> 2.3.1'
@@ -16,6 +15,7 @@ gem 'dragonfly', '~>0.9.14'
 gem 'rails3-jquery-autocomplete'
 #gem 'activerecord-mysql2-adapter'
 gem 'mysql2'
+gem 'acts_as_api'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,6 +44,7 @@ group :development, :test do
   gem 'spork', '~> 0.9.0.rc'
   gem 'pry-nav'
   gem 'capybara'
+  gem 'chronic'
 end
 
 # To use ActiveModel has_secure_password

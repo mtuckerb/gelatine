@@ -7,7 +7,7 @@ class CheckInsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @check_ins }
+      format.json { render_for_api :distinct_user_checkins, json: @check_ins, :root => :check_ins }
     end
   end
 

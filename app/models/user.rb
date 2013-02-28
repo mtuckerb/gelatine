@@ -3,7 +3,18 @@ class User < ActiveRecord::Base
   has_many :rooms, :through => :reservations
   has_one :profile, :dependent => :destroy
   has_many :check_ins, :dependent => :destroy
+  acts_as_api
   
+  api_accessible :profiles_with_user  do |t| 
+    t.add :name
+    t.add :check_ins
+  end
+
+  api_accessible :distinct_user_checkins do |t| 
+    t.add :name
+    t.add :profile
+  end
+
   # Include default devise modules. Others available are:
   #  :confirmable,
   # :lockable, :timeoutable and :omniauthable

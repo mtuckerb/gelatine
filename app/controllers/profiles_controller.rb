@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @profiles }
+      format.json { render_for_api :profiles_with_user, json: @profiles, :root => :profiles }
     end
   end
 
