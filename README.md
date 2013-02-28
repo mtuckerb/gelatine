@@ -19,7 +19,16 @@ $ bundle install
 $ rake db migrate
 $ rails server &
 ```
+now we need to add environment variables to allow your development box to send mail via gmail. You will use your own gmail username and password for this.
+
+create config/local_env.yml and add
+``` 
+GMAIL_USERNAME: 'you@gmail.com'
+GMAIL_PASSWORD: 'your_gmail_password'
+```
+
 to create your initial (admin) user do
+
 ```
 $ rails console
 user = User.create(:username => "Your Name", :password => "Your password", :email => "your@email")
