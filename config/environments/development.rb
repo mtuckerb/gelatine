@@ -1,4 +1,4 @@
-BookARoom::Application.configure do
+Gelatine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   PUBLIC_URL = "http://localhost:3000"
   # In the development environment your application's code is reloaded on

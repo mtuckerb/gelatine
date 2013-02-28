@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-BookARoom::Application.load_tasks
+Gelatine::Application.load_tasks

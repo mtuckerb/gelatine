@@ -1,4 +1,4 @@
-BookARoom::Application.routes.draw do
+Gelatine::Application.routes.draw do
   resources :check_ins
   
   match 'tagged' => 'profiles#tagged', :as => 'tagged'

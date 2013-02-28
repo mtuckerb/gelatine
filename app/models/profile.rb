@@ -3,7 +3,8 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   acts_as_taggable_on :skills, :interests, :needs
   attr_accessible :user_id, :about_me, :goodreads, :mood, :public_email, :send_via_email
-  attr_accessible :terms_and_conditions, :twitter, :website, :need_list, :skill_list, :interest_list, :avatar_image, :remove_avatar_image, :retained_avatar_image
+  attr_accessible :terms_and_conditions, :twitter, :website, :need_list, :skill_list, 
+  	:interest_list, :avatar_image, :remove_avatar_image, :retained_avatar_image
   validates :terms_and_conditions, :acceptance => true, :on => :create
   image_accessor :avatar_image 
   private

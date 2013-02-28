@@ -1,4 +1,4 @@
-BookARoom::Application.configure do
+Gelatine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   PUBLIC_URL = "localhost:3000"
   # The test environment is used exclusively to run your application's
