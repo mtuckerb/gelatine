@@ -24,6 +24,13 @@ Gelatine::Application.routes.draw do
   resources :rooms
   resources :calendars
 
+  namespace :api do
+    namespace :v0 do
+        resources :legacy_support
+        match 'view_list_distinct_user_checkins_all' => "legacy_support#view_list_distinct_user_checkins_all"
+        match 'view_list_distinctusercheckins_aggregated' => "legacy_support#view_list_distinctusercheckins_aggregated"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

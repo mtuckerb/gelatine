@@ -32,4 +32,6 @@ FactoryGirl.define do
       FactoryGirl.create_list(:reservation, evaluator.reservations_count, user: user)
     end
   end
+
+
 end

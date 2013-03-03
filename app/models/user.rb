@@ -10,10 +10,6 @@ class User < ActiveRecord::Base
     t.add :check_ins
   end
 
-  api_accessible :distinct_user_checkins do |t| 
-    t.add :name
-    t.add :profile
-  end
 
   # Include default devise modules. Others available are:
   #  :confirmable,
@@ -38,6 +34,10 @@ class User < ActiveRecord::Base
     if self.role.blank?
       self.role = "default"
     end
+  end
+
+  def last_checkin
+    self.check_ins.last
   end
 
   def create_child

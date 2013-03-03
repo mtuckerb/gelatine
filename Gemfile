@@ -16,6 +16,7 @@ gem 'rails3-jquery-autocomplete'
 #gem 'activerecord-mysql2-adapter'
 gem 'mysql2'
 gem 'acts_as_api'
+gem "squeel"
 
 # Gems used only for assets and not required
 # in production environments by default.

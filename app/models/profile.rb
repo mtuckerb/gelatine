@@ -10,17 +10,7 @@ class Profile < ActiveRecord::Base
     t.add :user
   end
 
-  api_accessible :distinct_user_checkins do |t| 
-    t.add :skills
-    t.add :interests
-    t.add :needs
-    t.add :about_me
-    t.add :goodreads
-    t.add :mood
-    t.add :public_email
-    t.add :twitter
-    t.add :website
-  end
+
 
   acts_as_taggable_on :skills, :interests, :needs
   attr_accessible :user_id, :about_me, :goodreads, :mood, :public_email, :send_via_email

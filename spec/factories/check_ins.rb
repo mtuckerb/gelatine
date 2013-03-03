@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :check_in do |f|
-    room_id 1
+    association :room
+    association :user
     check_in_time "2013-02-22 16:44:15"
     check_out_time "2013-02-22 16:44:15"
     third_party_id "MyString"

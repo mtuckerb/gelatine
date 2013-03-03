@@ -10,5 +10,8 @@ FactoryGirl.define do
     website "MyString"
     toc_accept false
     send_via_email false
+    interest_list "this, that, the other"
+    skill_list "thi, that, the other"
+    need_list "the, thother, thees"
   end
 end
