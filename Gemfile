@@ -43,7 +43,7 @@ group :development, :test do
   gem 'launchy'
   gem 'watchr'
   gem 'spork', '~> 0.9.0.rc'
-  gem 'pry-nav'
+  gem 'pry' 
   gem 'capybara'
   gem 'chronic'
 end

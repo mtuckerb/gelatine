@@ -29,6 +29,7 @@ Gelatine::Application.routes.draw do
         resources :legacy_support
         match 'view_list_distinct_user_checkins_all' => "legacy_support#view_list_distinct_user_checkins_all"
         match 'view_list_distinctusercheckins_aggregated' => "legacy_support#view_list_distinctusercheckins_aggregated"
+        match 'checkin_submit_manual' => "legacy_support#checkin_submit_manual"
     end
   end
 

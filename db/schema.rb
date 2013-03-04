@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130228060012) do
+ActiveRecord::Schema.define(:version => 20130304083816) do
 
   create_table "check_ins", :force => true do |t|
     t.integer  "room_id"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(:version => 20130228060012) do
     t.datetime "confirmation_sent_at"
     t.string   "role"
     t.string   "authentication_token"
+    t.string   "rfid"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

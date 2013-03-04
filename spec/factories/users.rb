@@ -10,6 +10,7 @@ FactoryGirl.define do
     password_confirmation "This15apassword"
     confirmed_at Time.now
     role 'user'
+    rfid "4500B8DF290B"
   end
   
   factory :admin, :class => User do

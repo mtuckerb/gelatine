@@ -2,7 +2,7 @@ class CheckIn < ActiveRecord::Base
   belongs_to :user
   belongs_to :room
   acts_as_api
-  
+  default_scope order("check_in_time")
   api_accessible :profiles_with_user do |t|
     t.add :check_in_time
     t.add :check_out_time
