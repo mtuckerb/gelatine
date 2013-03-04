@@ -1,4 +1,9 @@
-set :application, "book_a_room"
+require "bundler/capistrano"
+set :default_environment, {
+  'LANG' => 'en_US.UTF-8',
+  'PATH' => '/usr/kerberos/sbin:/usr/sbin:/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin'
+}
+set :application, "gelatine"
 set :repository,  "git@github.com:mtuckerb/gelatine.git"
 set :scm, :git
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
@@ -28,13 +33,6 @@ set :deploy_to, "/rails/gelatine"
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "touch #{File.join(current_path,'tmp','restart.txt')}" #{try_sudo} 
    end
-   namespace :dragonfly do
-     desc "Symlink the Rack::Cache files"
-     task :symlink, :roles => [:app] do
-       run "mkdir -p #{shared_path}/tmp/dragonfly && ln -nfs #{shared_path}/tmp/dragonfly #{release_path}/tmp/dragonfly"
-     end
-   end
-   after 'deploy:update_code', 'dragonfly:symlink'
    
    namespace :assets do
      task :precompile, :roles => :web, :except => { :no_release => true } do
@@ -47,3 +45,12 @@ set :deploy_to, "/rails/gelatine"
       end
    end
  end
+namespace :dragonfly do
+   desc "Symlink the Rack::Cache files"
+   task :symlink, :roles => [:app] do
+     run "mkdir -p #{shared_path}/public/system/dragonfly && ln -nfs #{shared_path}/public/system/dragonfly #{release_path}/public/system/dragonfly"
+   end
+end
+after 'deploy:update_code', 'dragonfly:symlink'
+load  'deploy/assets'
+after "deploy:update_code", "deploy:restart"

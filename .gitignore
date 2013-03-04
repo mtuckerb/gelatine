@@ -13,14 +13,5 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-public/system/dragonfly/development/2013/02/25/09_39_57_810_userID_35_originalAvatar_avatar256_150x150.png
-public/system/dragonfly/development/2013/02/25/09_39_57_810_userID_35_originalAvatar_avatar256_150x150.png.meta
-public/system/dragonfly/development/2013/02/25/13_57_55_59_userID_27_originalAvatar_head006_150x150.jpg
-public/system/dragonfly/development/2013/02/25/13_57_55_59_userID_27_originalAvatar_head006_150x150.jpg.meta
-public/system/dragonfly/development/2013/02/25/13_59_03_740_userID_29_originalAvatar_miner_lemming_150x150.jpg
-public/system/dragonfly/development/2013/02/25/13_59_03_740_userID_29_originalAvatar_miner_lemming_150x150.jpg.meta
-public/system/dragonfly/development/2013/02/25/13_59_05_925_userID_20_originalAvatar_Profile_Pic_150x150.jpg
-public/system/dragonfly/development/2013/02/25/13_59_05_925_userID_20_originalAvatar_Profile_Pic_150x150.jpg.meta
-true
-"Sublime Text 2/Packages/Color Scheme - Default\n/"
+public/system/dragonfly/*
 config/local_env.yml
