@@ -30,7 +30,7 @@ class Api::V0::LegacySupportController < ApplicationController
 
 			@checkin = CheckIn.new(params[:checkin])
 		    @checkin.room = Room.find(params[:sublocation])
-		    @checkin.user = User.find_by_rfid(params[:rfid])
+		    @checkin.user = User.find_by_rfid(params[:rfid]) || flash[:notice ] = "***FAIL*** +++RFID card is not assigend to a user yet. Please visit a staff member at the counter...+++"
 		    @checkin.check_in_time = DateTime.now
 		    respond_to do |format|
 		      if @checkin.save

@@ -157,8 +157,9 @@ div {
 		color: #fff;
 		}
 	ul li {
+		position: relative;
 		font-size: 12px;
-		list-style: square;
+		//list-style: square;
 	}
 }
 
@@ -199,6 +200,10 @@ div {
 			padding-left:10px;
 		}
 	}
+		.profile_user_name {
+		font-size: 26px;
+		color: #424FD8;
+	}
 }
 #profile {
 	background-color: #E7E7E7;
@@ -209,6 +214,10 @@ div {
 	img {
 		border: 3px solid #583434;
 		@include border-radius(5px);
+	}
+	.label {
+		font-size: 16px ;
+		font-weight: bold;
 	}
 	#blurb {
 		table {
@@ -221,9 +230,6 @@ div {
 			font-weight: 900;
 			color: #1A1F58;
 		}
-		.profile_user_name {
-			font-size: 26px;
-			color: #424FD8;
-		}
+
 	}
 }

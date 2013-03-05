@@ -39,9 +39,9 @@
 		  <tr><td><%= form.label :public_email %></td><td> <%= form.text_field :public_email %></td></tr>
 		  <tr><td><%= form.label :website %></td><td> <%= form.text_field :website %></td></tr>
 		  <tr><td><%= form.label :send_via_email %></td><td> <%= form.check_box :send_via_email %></td></tr>
-		  <tr><td><%= f.label :interests %> </td><td> <%= f.autocomplete_field :interest_list, autocomplete_interests_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> (Sailing, Programming, etc.)</td></tr>
-		  <tr><td><%= f.label :skills%> </td><td> <%= f.autocomplete_field :skill_list, autocomplete_skills_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> </td></tr>
-		  <tr><td><%= f.label :needs%> </td><td> <%= f.autocomplete_field :need_list, autocomplete_needs_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> </td></tr>
+		  <tr><td><%= form.label :interests %> </td><td> <%= form.autocomplete_field :interest_list, autocomplete_interests_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> (Sailing, Programming, etc.)</td></tr>
+		  <tr><td><%= form.label :skills%> </td><td> <%= form.autocomplete_field :skill_list, autocomplete_skills_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> </td></tr>
+		  <tr><td><%= form.label :needs%> </td><td> <%= form.autocomplete_field :need_list, autocomplete_needs_name_profiles_path, :"data-delimiter" => ', ', :multiple => true %> </td></tr>
 		<% end %>
 			<tr><td><%= f.submit "Update", :class => "sassy_submit" %></td>
 			

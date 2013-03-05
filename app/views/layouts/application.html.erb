@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BookARoom</title>
+  <title>Gelatine</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -64,26 +64,24 @@
 				</header></div>
 			<div id="menu">
 				<% if current_user %>
-				<span class="menu_item"><%= link_to "Create Reservation", new_reservation_path %></span>
-				<span class="menu_item"> <%= link_to "My Account", edit_registration_path(current_user) %></span>
-				
+				<span class="menu_item"><%= link_to "User Community", profiles_path %></span>
+				<span class="menu_item"> <%= link_to "My Profile", edit_registration_path(current_user) %></span>
+				<span class="menu_item"> <%= link_to "Check In", new_check_in_path %> </span>
 				<span class="menu_item"> <a href="/auth/logout">logout</a></span>
 				<% end %>
 			</div>
 		</div>
 		
 		<% if notice || alert %>
-		  <div class="flash-message <%= notice ? "notice" : ""%><%= alert ? "error" : ""%>">
-		    <div class="container container_12 clearfix">
-		      <div class="grid_12">
+		  <div class="flash-message">
+		
 		        <% if notice %>
 		          <p><%= notice %></p>
 		        <% elsif alert %>
 		          <p><%= alert %></p>
 		        <% end %>
-		      </div>
+		 
 		    </div>
-		  </div>
 		<% end %>
 	<div id="main">
 

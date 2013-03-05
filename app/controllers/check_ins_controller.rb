@@ -43,6 +43,8 @@ class CheckInsController < ApplicationController
   def create
     @check_in = CheckIn.new(params[:check_in])
     @check_in.user_id = set_user_id(@check_in.user_id)
+    @check_in.check_in_time = Time.now unless params[:check_in_time].present? 
+    @check_in.check_out_time = nil unless params[:check_out_time].present?
     respond_to do |format|
       if @check_in.save
         format.html { redirect_to @check_in, notice: 'Check in was successfully created.' }

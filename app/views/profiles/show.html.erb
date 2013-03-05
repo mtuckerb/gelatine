@@ -1,67 +1,72 @@
 
 <div id="profile" style="width:500px">
-	<div id="avatar"><%= image_tag @profile.avatar_image.thumb("100x100#").url if @profile.avatar_image_uid%></div>
-	<p> <% if @checkin %> Last Checked in: <%=time_ago_in_words(@checkin.check_in_time) %> ago <% else %> Hasn't checked in yet! <% end %>
+		<table class="index_table" style="width:100%;">
+		<tr>
+	 		<td><%= image_tag @profile.avatar_image.thumb("100x100#").url if @profile.avatar_image_uid%></td>
+			<td><span class="profile_user_name"><%=  @profile.user.name if @profile.user %></span>
+			<BR/><%= @profile.about_me %></td>
+		</tr>
+
+	</table>
+	<BR/>
+	<p> <span class="label"><% if @checkin %> Last Checked in:</span> <%=time_ago_in_words(@checkin.check_in_time) %> ago <% else %> Hasn't checked in yet! <% end %>
+
 	<p>
-		Name:
-		<%= @profile.user.name%>
-	</p>
-	<p>
-	  <b>About me:</b>
+	  <span class="label">About me:</span>
 	  <%= @profile.about_me %>
 	</p>
 
 	<p>
-	  <b>Availability:</b>
+	  <span class="label">Availability:</span>
 	  <%= @profile.mood %>
 	</p>
 
 	<p>
-	  <b>Twitter:</b>
+	  <span class="label">Twitter:</span>
 	  <%= @profile.twitter %>
 	</p>
 
 	<p>
-	  <b>Goodreads:</b>
+	  <span class="label">Goodreads:</span>
 	  <%= @profile.goodreads %>
 	</p>
 
 	<p>
-	  <b>Public email:</b>
+	  <span class="label">Public email:</span>
 	  <%= @profile.public_email %>
 	</p>
 
 	<p>
-	  <b>Website:</b>
+	  <span class="label">Website:</span>
 	  <%= @profile.website %>
 	</p>
 
 	<p>
-	  <b>Toc accept:</b>
+	  <span class="label">Toc accept:</span>
 	  <%= @profile.toc_accept %>
 	</p>
 
 	<p>
-	  <b>Send via email:</b>
+	  <span class="label">Send via email:</span>
 	  <%= @profile.send_via_email %>
 	</p>
 
 	<p>
-		<b> Interests: </b>
+		<span class="label"> Interests: </span>
 		<% @profile.interests.each do |interest| %>
-			<%=  interest.name %>, 
+			<%= link_to interest.name, tagged_url(:interest => interest.name) %> , 
 		<% end %>
 	</p>
-	<p>Skills: </b>
+	<span class="label">Skills: </span>
 		<% @profile.skills.each do |skill| %>
-			<%=  skill.name %>, 
+			<%=  link_to skill.name, tagged_url(:skill => skill.name) %>, 
 		<% end %>
 	</p>
 
 	<p>
-		<b> Needs: </b>
+		<h4> Needs: </h4>
 		<% @profile.needs.each do |need| %>
-			<%=  need.name %>, 
+			<%=  link_to need.name, tagged_url(:need => need.name) %>, 
 		<% end %>
 	</p>
 	<BR/>

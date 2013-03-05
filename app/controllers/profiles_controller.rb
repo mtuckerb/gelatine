@@ -7,8 +7,15 @@ class ProfilesController < ApplicationController
   autocomplete :interests, :name, :class_name => 'ActsAsTaggableOn::Tag'
   
   def tagged
-        if params[:term].present? 
-        @profiles = Profile.tagged_with(params[:term])
+      if params[:skill].present? 
+        @profiles = Profile.tagged_with(params[:skill], :on => :skills)
+      elsif params[:interests].present?
+        @profiles = Profile.tagged_with(params[:interests], :on => :interests)
+      elsif params = params[:need].present? 
+        @profile = Profile.tagged_with(params[:need], :on => :needs)
+      end
+      respond_to do |format|
+          format.html {render :index}
       end  
   end
   

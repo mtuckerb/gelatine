@@ -15,7 +15,7 @@
     <%= f.label :room_id %><br />
     <%= f.collection_select(:room_id, Room.all, :id, :name)%>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :check_in_time %><br />
     <%= f.datetime_select :check_in_time %>
   </div>
@@ -27,7 +27,7 @@
     <%= f.label :third_party_id %><br />
     <%= f.text_field :third_party_id %>
   </div>
-  <div class="field">
+  <div class="field"> -->
    <% if current_user.admin? %> 
 		<%= f.label :user_id %><br />
     	<%= f.collection_select(:user_id, User.all, :id, :name)%>
