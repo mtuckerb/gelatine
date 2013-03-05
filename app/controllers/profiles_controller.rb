@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
       if params[:skill].present? 
         @profiles = Profile.tagged_with(params[:skill], :on => :skills)
       elsif params[:interests].present?
-        @profiles = Profile.tagged_with(params[:interests], :on => :interests)
+        @profiles = Profile.tagged_with(params[:interest], :on => :interests)
       elsif params = params[:need].present? 
         @profile = Profile.tagged_with(params[:need], :on => :needs)
       end
