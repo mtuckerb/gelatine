@@ -13,8 +13,8 @@
 	   	 
 		<p id="blurb">
 	     <span class='label'>Availability:</span> <%= profile.mood %> <BR/>
-	     <%= profile.website %> <BR/>
-		<span class='label'>Interests:</span><% profile.interests.each do |interest| %> <%= link_to interest.name, tagged_url(:interest => interest.name) %> <% end %>
+	     <%= link_to profile.website, profile.website %> <BR/>
+		<span class='label'>Interests:</span><% profile.interests.each do |interest| %> <%= link_to interest.name, tagged_url(:interest => interest.name) %> <% end %><BR/>
 		<span class='label'>Skills:</span> <% profile.skills.each do |skill| %> <%= link_to skill.name, tagged_url(:skill => skill.name) %> <% end %> <BR/>
 		<span class='label'>Needs Help With: </span><% profile.needs.each do |need| %> <%= link_to need.name, tagged_url(:need => need.name) %> <% end %><BR/>
 		</p>
