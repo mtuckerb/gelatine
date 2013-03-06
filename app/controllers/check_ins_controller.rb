@@ -3,7 +3,7 @@ class CheckInsController < ApplicationController
   # GET /check_ins.json
   load_and_authorize_resource
   def index
-    @check_ins = CheckIn.all
+    @check_ins = CheckIn.page
 
     respond_to do |format|
       format.html # index.html.erb

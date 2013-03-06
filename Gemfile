@@ -17,6 +17,8 @@ gem 'rails3-jquery-autocomplete'
 gem 'mysql2'
 gem 'acts_as_api'
 gem "squeel"
+gem 'kaminari'
+gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,7 +35,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+
 
 group :development, :test do
   gem 'rspec-rails'
@@ -56,9 +58,6 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'

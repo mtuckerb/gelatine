@@ -5,14 +5,15 @@ class ProfilesController < ApplicationController
   autocomplete :skills, :name, :class_name => 'ActsAsTaggableOn::Tag'
   autocomplete :needs, :name, :class_name => 'ActsAsTaggableOn::Tag'
   autocomplete :interests, :name, :class_name => 'ActsAsTaggableOn::Tag'
-  
+
+
   def tagged
       if params[:skill].present? 
-        @profiles = Profile.tagged_with(params[:skill], :on => :skills)
-      elsif params[:interests].present?
-        @profiles = Profile.tagged_with(params[:interest], :on => :interests)
+        @profiles = Profile.tagged_with(params[:skill], :on => :skills).page params[:page]
+      elsif params[:interest].present?
+        @profiles = Profile.tagged_with(params[:interest], :on => :interests).page params[:page].page params[:page]
       elsif params = params[:need].present? 
-        @profile = Profile.tagged_with(params[:need], :on => :needs)
+        @profile = Profile.tagged_with(params[:need], :on => :needs).page params[:page]
       end
       respond_to do |format|
           format.html {render :index}
@@ -20,7 +21,7 @@ class ProfilesController < ApplicationController
   end
   
   def index
-    @profiles = Profile.all(:include => :user)
+    @profiles = Profile.includes(:user).page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
