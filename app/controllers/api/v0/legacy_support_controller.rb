@@ -27,16 +27,21 @@ class Api::V0::LegacySupportController < ApplicationController
 	
 	def checkin_submit_manual
 		if params[:rfid] && params[:sublocation] && params[:mainlocation]
-
-			@checkin = CheckIn.new(params[:checkin])
-		    @checkin.room = Room.find(params[:sublocation])
-		    @checkin.user = User.find_by_rfid(params[:rfid]) || flash[:notice ] = "***FAIL*** +++RFID card is not assigend to a user yet. Please visit a staff member at the counter...+++"
+			begin
+				@checkin = CheckIn.new(params[:checkin])
+			    @checkin.room = Room.find(params[:sublocation])
+		    	@checkin.user = User.find_by_rfid(params[:rfid]) || raise {"invalid rfid #"}
+		    rescue Exception
+		    	render :text => "***FAIL*** +++RFID card is not assigend to a user yet. Please visit a staff member at the counter...+++", :status => 404
+		    	return
+		    end
 		    @checkin.check_in_time = DateTime.now
 		    respond_to do |format|
 		      if @checkin.save
 		        format.json { render json: @checkin, status: :created, location: @checkin }
 		      else
-		        format.json { render json: @checkin.errors, status: "***FAIL*** +++RFID card is not assigend to a user yet. Please visit a staff member at the counter...+++" }
+		        format.json { render json: @checkin.errors, status: "***FAIL*** +++RFID card is not assigend to a
+		         user yet. Please visit a staff member at the counter...+++" }
 		      end
 		    end	
 		end

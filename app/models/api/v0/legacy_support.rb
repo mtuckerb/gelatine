@@ -33,15 +33,15 @@ class Api::V0::LegacySupport
         case params[:filter]
         when 'skills'
             @tags = @checkins.collect do |user|
-                    user.profile.skill_list
+                    user.profile.skill_list.flatten
             end
         when 'categories'
             @tags = @checkins.collect do |user|
-                user.profile.interest_list
+                user.profile.interest_list.flatten
             end
         when 'help'
             @tags = @checkins.collect do |user|
-                user.profile.need_list
+                user.profile.need_list.flatten
             end
         end
             
@@ -59,16 +59,17 @@ class Api::V0::LegacySupport
                 "user_id" => user.id,
                 "firstname" => user.name,
                 "lastname" => nil,
-                "check_in_time" => user.check_ins.last.check_in_time,
+                "check_in_time" => user.check_ins.last.check_in_time.strftime("%Y-%m-%d %H:%M:%S"),
     			"months_since_checkin" => user.check_ins.last.months_since,
     			"hours_since_checkin" => nil,
     			"minutes_since_checkin" => nil,
     			"mainlocation" => "The Edge",
     			"sublocation" => user.check_ins.last.room.name,
-    			"categories" => user.profile.interests,
-    			"skills" => user.profile.skills,
-    			"help" => user.profile.needs,
+    			"categories" => user.profile.interests.collect {|categories| categories.name },
+    			"skills" => user.profile.skills.collect {|skills| skills.name },
+    			"help" => user.profile.needs.collect {|needs| needs.name},
     			"status" => user.profile.mood,
+                "aboutme" => user.profile.about_me,
     			"email" => user.profile.public_email,
     			"twitter" => user.profile.twitter,
     			"goodreadsurl" => user.profile.goodreads,
