@@ -8,69 +8,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div id="container">
-		<div id="top">
-			<div id="title">
-				<header id="access">
-					<hgroup id="branding">
-						<a href="http://edgeqld.org.au/" title="The Edge | Digital Culture Centre" rel="home">
-						<h1 id="site-title"><span>The Edge | Digital Culture Centre</span></h1></a>
-					</hgroup>
-
-					<nav id="parent-navigation" role="navigation">
-						<h1 class="assistive-text section-heading">Main menu</h1>
-
-						<div class="menu-parent-container"><ul id="menu-parent" class="menu"><li id="menu-item-6810" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6810"><a href="http://edgeqld.org.au/about/">ABOUT</a>
-			<ul class="sub-menu">
-				<li id="menu-item-6811" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6811"><a href="http://edgeqld.org.au/about/the-edge/">The Edge</a></li>
-				<li id="menu-item-9512" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9512"><a href="http://edgeqld.org.au/contact-us/">CONTACT</a></li>
-				<li id="menu-item-9467" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9467"><a href="http://edgeqld.org.au/about/our-team/">People</a>
-				<ul class="sub-menu">
-					<li id="menu-item-9469" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9469"><a href="http://edgeqld.org.au/about/our-team/">Our team</a></li>
-				</ul>
-			</li>
-				<li id="menu-item-6813" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6813"><a href="http://edgeqld.org.au/about/our-venue/">Our venue</a>
-				<ul class="sub-menu">
-					<li id="menu-item-6814" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6814"><a href="http://edgeqld.org.au/about/our-venue/lab-1/">Lab 1: Screen and sound</a></li>
-					<li id="menu-item-6815" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6815"><a href="http://edgeqld.org.au/about/our-venue/lab-2/">Lab 2: Mobile and physical</a></li>
-					<li id="menu-item-6816" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6816"><a href="http://edgeqld.org.au/about/our-venue/lab-3/">Lab 3: Record and mix</a></li>
-				</ul>
-			</li>
-				<li id="menu-item-6617" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6617"><a href="http://edgeqld.org.au/about/faqs/">FAQs</a></li>
-			</ul>
-			</li>
-			<li id="menu-item-6802" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6802"><a href="http://edgeqld.org.au/programs/">PROGRAMS</a>
-			<ul class="sub-menu">
-				<li id="menu-item-8766" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8766"><a href="http://edgeqld.org.au/cosmology/">Cosmology</a></li>
-				<li id="menu-item-9591" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-9591"><a href="http://edgeqld.org.au/citizenj/">CitizenJ</a></li>
-			</ul>
-			</li>
-			<li id="menu-item-6618" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6618"><a href="http://edgeqld.org.au/calendar/">CALENDAR</a></li>
-			<li id="menu-item-6797" class="menu-item menu-item-type-post_type menu-item-object-page current-page-ancestor menu-item-6797"><a href="http://edgeqld.org.au/book/">BOOK</a>
-			<ul class="sub-menu">
-				<li id="menu-item-6801" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6801"><a href="http://edgeqld.org.au/book/ebms-sign-up/">Sign up</a></li>
-				<li id="menu-item-6798" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6798"><a href="http://edgeqld.org.au/book/book-a-mac/">Book a Mac</a></li>
-				<li id="menu-item-6799" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6799"><a href="http://edgeqld.org.au/book/book-a-window-bay/">Book a window bay</a></li>
-				<li id="menu-item-7342" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7342"><a href="http://edgeqld.org.au/book/book-the-recording-studio/">Book the recording studio</a></li>
-			</ul>
-			</li>
-			<li id="menu-item-9637" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9637"><a href="http://edgeqld.org.au/jobs/">Jobs</a></li>
-			</ul></div>		</nav>
-
-					<hgroup id="blog-title">
-						<h1>Exploring creativity</h1>
-					</hgroup>
-
-				</header></div>
-			<div id="menu">
-				<% if current_user %>
-				<span class="menu_item"><%= link_to "User Community", profiles_path %></span>
-				<span class="menu_item"> <%= link_to "My Profile", edit_registration_path(current_user) %></span>
-				<span class="menu_item"> <%= link_to "Check In", new_check_in_path %> </span>
-				<span class="menu_item"> <a href="/auth/logout">logout</a></span>
-				<% end %>
+	<div class="container">
+		<div class="headline">
+				<h1>Gelatine</h1>	
+		</div>
+		<div class="panel-title">
+			<div class="row-fluid span12">
+				<div class="navbar">
+					<div class="navbar-inner">
+						<% if current_user %>
+						<div class="span3"><%= link_to "User Community", profiles_path, :class => "btn btn-large btn-block"%>
+						</div>
+						<div class="span3"><%= link_to "My Profile", edit_registration_path(current_user), :class => "btn btn-large btn-block"%>
+						</div>
+						<div class="span3"><%= link_to "Check In", new_check_in_path,:class => "btn btn-large btn-block" %> 
+					 	</div>
+						<div class="span3">
+						 	<a href="/auth/logout" class="btn btn-large btn-block">logout</a>
+					 	</div>
+						<% end %>
+					</div>
+				</div>
+			
 			</div>
 		</div>
+	</div>
 		
 		<% if notice || alert %>
 		  <div class="flash-message">
