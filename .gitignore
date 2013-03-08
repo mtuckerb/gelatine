@@ -15,3 +15,5 @@
 /tmp
 public/system/dragonfly/*
 config/local_env.yml
+db/development.sqlite3.old
+true
