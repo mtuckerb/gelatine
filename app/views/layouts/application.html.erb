@@ -1,55 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Gelatine</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-	<div class="container">
-		<div class="headline">
-				<h1>Gelatine</h1>	
-		</div>
-		<div class="panel-title">
-			<div class="row-fluid span12">
-				<div class="navbar">
-					<div class="navbar-inner">
-						<% if current_user %>
-						<div class="span3"><%= link_to "User Community", profiles_path, :class => "btn btn-large btn-block"%>
-						</div>
-						<div class="span3"><%= link_to "My Profile", edit_registration_path(current_user), :class => "btn btn-large btn-block"%>
-						</div>
-						<div class="span3"><%= link_to "Check In", new_check_in_path,:class => "btn btn-large btn-block" %> 
-					 	</div>
-						<div class="span3">
-						 	<a href="/auth/logout" class="btn btn-large btn-block">logout</a>
-					 	</div>
-						<% end %>
-					</div>
-				</div>
-			
+	<head>
+	  <title>Gelatine</title>
+	  <%= stylesheet_link_tag    "application", :media => "all" %>
+	  <%= javascript_include_tag "application" %>
+	  <script src="http://d3js.org/d3.v3.min.js"></script>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div class="container">
+			<div class="headline">
+					<div class="hero-unit"><h1>Gelatine</h1></div>	
 			</div>
-		</div>
-	</div>
-		
-		<% if notice || alert %>
-		  <div class="flash-message">
-		
-		        <% if notice %>
-		          <p><%= notice %></p>
-		        <% elsif alert %>
-		          <p><%= alert %></p>
-		        <% end %>
-		 
-		    </div>
-		<% end %>
-	<div id="main">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<ul class="nav nav-tabs">
+						<% if current_user %>
+						<li <%= active?(:profiles, :index) %> > <%= link_to "User Community", profiles_path%>
+						</li>
+						<li <%= active?("devise/registrations", :edit ) %> > <%= link_to "My Profile", edit_registration_path(current_user)%>
+						</li>
+						<li <%= active?(:check_ins, :new) %>  ><%= link_to "Check In", new_check_in_path%> 
+					 	</li>
+						<li>
+						 	<%= link_to "Log Out", destroy_user_session_path %>
+					 	</li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+			<% if notice || alert %>
+			<div class="flash-message">
+			
+			        <% if notice %>
+			          <p><%= notice %></p>
+			        <% elsif alert %>
+			          <p><%= alert %></p>
+			        <% end %>
+			 
+			</div>
+			<% end %>
+			<div id="main">
+				<%= yield %>
+			</div>
 
-		<%= yield %>
-	</div>
-	<footer role="contentinfo"> </footer>
-</div>
-</body>
+			<footer role="contentinfo"> </footer>
+		</div>
+	</body>
 </html>

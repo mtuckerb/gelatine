@@ -1,32 +1,44 @@
 
 <div class="reservations" >
 <% @profiles.each do |profile| %>
-	<div id="profile">
-	<table class="index_table" style="width:100%;">
-		<tr>
-	 		<td><%= image_tag profile.avatar_image.thumb("100x100#").url if profile.avatar_image_uid%></td>
-			<td><span class="profile_user_name"><%= link_to profile.user.name, profile if profile.user %></span>
-			<BR/><%= profile.about_me %></td>
-		</tr>
+	<div class="user-profile">
+		<div class="row">
+			<div class="row span3">
+				<%= image_tag profile.avatar_image.thumb("100x100#").url :class => "thumbnail" if profile.avatar_image_uid%>
+			</div>
+			<div class="span4" >
+				<h2><%= link_to profile.user.name, profile if profile.user %></h2>
+				
+				<div class="span2">
+					<div> <%= profile.about_me %></div>
+				</div>
+		     </div>
+		   
+			<div class=" row span12">
+				<div> <span class='label'>Availability: </span> <%= profile.mood %> </div>
+			    <div><%= link_to profile.website, profile.website %></div>
+				<div> <span class='label'>Interests:</span><% profile.interests.each do |interest| %> <%= link_to interest.name, tagged_url(:interest => interest.name), :class => "tag" %> <% end %></div>
+		
+				<div><span class='label'>Skills:</span> <% profile.skills.each do |skill| %> <%= link_to skill.name, tagged_url(:skill => skill.name), :class => "tag" %> <% end %> </div>
+		
+				<div><span class='label'>Needs Help With: </span><% profile.needs.each do |need| %> <%= link_to need.name, tagged_url(:need => need.name), :class => "tag" %> <% end %></div>
 
-	</table>
-	   	 
-		<p id="blurb">
-	     <span class='label'>Availability:</span> <%= profile.mood %> <BR/>
-	     <%= link_to profile.website, profile.website %> <BR/>
-		<span class='label'>Interests:</span><% profile.interests.each do |interest| %> <%= link_to interest.name, tagged_url(:interest => interest.name) %> <% end %><BR/>
-		<span class='label'>Skills:</span> <% profile.skills.each do |skill| %> <%= link_to skill.name, tagged_url(:skill => skill.name) %> <% end %> <BR/>
-		<span class='label'>Needs Help With: </span><% profile.needs.each do |need| %> <%= link_to need.name, tagged_url(:need => need.name) %> <% end %><BR/>
-		</p>
+				<ul class="nav">
+			     <li><%= link_to 'See More', profile %></li>
+			     <li><%= link_to 'Edit', edit_profile_path(profile) if current_user.admin? %></li>
+			     <li><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %></li>
+			 
+			</div>
+
+		</div>
+	</div>
+	<% end %>
+
+	<br />
+	<div class="row">
 		<BR/>
-	     <%= link_to 'See More', profile %>
-	     <%= link_to 'Edit', edit_profile_path(profile) if current_user.admin? %>
-	     <%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
-
-</div>
-<% end %>
-
-<br />
-
-<%= link_to 'New Profile', new_profile_path %>
+		<div class="span3">
+			<%= link_to 'New Profile', new_profile_path, :class => "btn btn-large btn-block" %>
+		</div>
+	</div>
 </div>

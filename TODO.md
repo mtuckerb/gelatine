@@ -1,5 +1,8 @@
 TODO: 
 
+=Application
+* rewrite buttom bar helper with content_tag()
+
 =Projects:
 * What are we interested in here (tracking, collaborating, public outreach, propping users?)
 

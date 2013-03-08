@@ -1,4 +1,6 @@
- @import "flatui-sass/_config.sass";
+ @import "bootstrap.css";
+ @import "flatui-sass/flat-ui.sass"	;
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -16,13 +18,3 @@
  *= require_tree .
  
  */
-@import "screen";
-@import "basics/edge_style.css";
-@import "basics/stitched";
-@import "basics/tucked_corners";
-@import "basics/fullcalendar.css";
-@import "basics/fullcalendar.print.css";
-@import "smoothness/jquery-ui-1.10.1.custom.min.css";
-@import "flatui-sass/flat-ui.sass"	;
-@import "bootstrap.css";
-@import "flat-ui.css"
