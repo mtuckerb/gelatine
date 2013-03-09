@@ -40,9 +40,9 @@
 				</div>
 				<% end %>
 				<div class="btn-group" style="padding-top:10px;">
-			     <%= link_to raw("<i class='icon-eye-open icon-white'></i> See More"), profile, :class => "btn" %>
+			     <%= link_to raw("<i class='icon-eye-open icon-white'></i> See More"), profile, :class => "btn btn-mini" %>
 			     <%= link_to raw('<i class="icon-pencil icon-white"></i>  Edit'), edit_profile_path(profile), :class => "btn btn-mini"  if current_user.admin? %>
-			     <%= link_to raw('<i class="icon-trash icon-white"> </i> Destroy'), profile, :class => "btn" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
+			     <%= link_to raw('<i class="icon-trash icon-white"> </i> Destroy'), profile, :class => "btn btn-mini" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
 			 
 			</div>
 			
