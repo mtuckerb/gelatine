@@ -24,11 +24,17 @@ describe CheckIn do
    pending
  end
 
- it "retrieves the latest checkins for each user" do
- 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 1)
- 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 2)
- 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 3)
- 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 4)
- 	CheckIn.distinct_checkins.should have(4).CheckIns # including the let(:checkin) this would create a total of 5 CheckIns, 4 of them are unique
+ # it "retrieves the latest checkins for each user" do
+ # 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 1)
+ # 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 2)
+ # 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 3)
+ # 	CheckIn.create(:check_in_time => Chronic.parse("two months ago") , :room_id => 1, :user_id => 4)
+ # 	CheckIn.distinct_checkins.should have(4).CheckIns # including the let(:checkin) this would create a total of 5 CheckIns, 4 of them are unique
+ # end
+
+ it "returns true if user is checked_in" do
+ 	binding.pry
+   checkin.is_checked_in.should be_true
+
  end
 end

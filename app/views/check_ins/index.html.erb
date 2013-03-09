@@ -1,4 +1,4 @@
-<h1>Listing check_ins</h1>
+<h1>All Check Ins</h1>
 
 <table class="index_table" style="width:100%;">
   <tr>
@@ -18,14 +18,20 @@
     <td><%= check_in.check_in_time %></td>
     <td><%= check_in.check_out_time %></td>
     <td><%= check_in.user.name %></td>
-    <td><%= link_to 'Show', check_in %></td>
-    <td><%= link_to 'Edit', edit_check_in_path(check_in) %></td>
-    <td><%= link_to 'Destroy', check_in, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <div class="btn-group">
+        <%= link_to 'Show', check_in, :class => "btn btn-small" %>
+        <%= link_to 'Edit', edit_check_in_path(check_in), :class => "btn btn-small" %>
+        <%= link_to 'Destroy', check_in, :class => "btn btn-small", method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Check in', new_check_in_path %>
-<%= paginate @check_ins %>
+<%= link_to 'New Check in', new_check_in_path, :class => "btn" %>
+<div class="span12">
+  <%= paginate @check_ins %>
+</div>

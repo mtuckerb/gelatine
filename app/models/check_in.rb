@@ -26,6 +26,9 @@ class CheckIn < ActiveRecord::Base
 
   end
 
+  def is_checked_in
+    true if self.check_in_time && self.check_out_time == nil    
+  end
   private
 
 end

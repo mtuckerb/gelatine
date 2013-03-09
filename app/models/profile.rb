@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
   acts_as_taggable
   belongs_to :user
   acts_as_api
-  paginates_per 10
+  paginates_per 5
 
   alias_attribute :category, :interests
   alias_attribute :help, :needs

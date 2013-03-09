@@ -9,9 +9,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="headline">
-					<div class="hero-unit"><h1>Gelatine</h1></div>	
-			</div>
+			<div class="hero-unit", style="padding:40px;"><h1>Gelatine</h1></div>	
 			<div class="navbar">
 				<div class="navbar-inner">
 					<ul class="nav nav-tabs">
@@ -20,7 +18,8 @@
 						</li>
 						<li <%= active?("devise/registrations", :edit ) %> > <%= link_to "My Profile", edit_registration_path(current_user)%>
 						</li>
-						<li <%= active?(:check_ins, :new) %>  ><%= link_to "Check In", new_check_in_path%> 
+						<li <%= active?(:check_ins, :new) %>  >
+							<%= check_in_check_out %>
 					 	</li>
 						<li>
 						 	<%= link_to "Log Out", destroy_user_session_path %>
@@ -30,15 +29,11 @@
 				</div>
 			</div>
 			<% if notice || alert %>
-			<div class="flash-message">
-			
-			        <% if notice %>
-			          <p><%= notice %></p>
-			        <% elsif alert %>
-			          <p><%= alert %></p>
-			        <% end %>
-			 
-			</div>
+		        <% if notice %>
+		          <div class="alert alert-success"><%= notice %></div>
+		        <% elsif alert %>
+		          <div class="alert alert-error"><%= alert %></div>
+		        <% end %>
 			<% end %>
 			<div id="main">
 				<%= yield %>

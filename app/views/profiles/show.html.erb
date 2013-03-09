@@ -64,13 +64,14 @@
 	</p>
 
 	<p>
-		<h4> Needs: </h4>
+		<span class="label"> Needs: </span>
 		<% @profile.needs.each do |need| %>
 			<%=  link_to need.name, tagged_url(:need => need.name) %>, 
 		<% end %>
 	</p>
 	<BR/>
 
-
-	<%= link_to 'Back', profiles_path %>
+<div style="padding-bottom:5px;">
+	<%= link_to 'Back', profiles_path, :class => "btn" %>
+</div>
 </div>

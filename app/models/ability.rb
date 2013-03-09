@@ -13,7 +13,7 @@ class Ability
       can :update, Reservation, :user => user
       can :create, Reservation
       can :create, CheckIn
-      can :update, CheckIn, :user => user
+      can [:update, :check_out], CheckIn, :user => user
       can [:create, :update], Profile, :user => user
       can :tagged, Profile
       cannot :assign_roles

@@ -2,6 +2,19 @@ class CheckInsController < ApplicationController
   # GET /check_ins
   # GET /check_ins.json
   load_and_authorize_resource
+  
+  def check_out
+    check_in = current_user.check_ins.last
+    check_in.check_out_time = Time.now
+    respond_to do |format|
+      if check_in.save 
+        format.html { (redirect_to profiles_path, notice: "#{check_in.user.name} has been checked out of #{check_in.room.name}") }
+      else
+        format.html { redirect_to profiles_path, alert: "Something went wrong with the checkout"}
+      end
+    end
+  end
+
   def index
     @check_ins = CheckIn.page
 
@@ -28,7 +41,7 @@ class CheckInsController < ApplicationController
     @check_in = CheckIn.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.json { render json: @check_in }
     end
   end
@@ -47,7 +60,7 @@ class CheckInsController < ApplicationController
     @check_in.check_out_time = nil unless params[:check_out_time].present?
     respond_to do |format|
       if @check_in.save
-        format.html { redirect_to @check_in, notice: 'Check in was successfully created.' }
+        format.html { redirect_to profiles_path, notice: 'Check in was successfully created.' }
         format.json { render json: @check_in, status: :created, location: @check_in }
       else
         format.html { render action: "new" }
