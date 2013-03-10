@@ -20,6 +20,33 @@ class ProfilesController < ApplicationController
       end  
   end
   
+  def make_admin
+    @user = User.find(params[:user_id])    
+    @user.role = :admin
+    respond_to do |format|
+    if @user.save!
+        format.html { redirect_to profiles_path, notice: "#{@user.name} is now an admin" }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { redirect_to profiles_path, notice: "Something went wrong promoting #{params[:user_id]}"}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def revoke_admin
+    @user = User.find(params[:user_id])    
+    @user.role = nil
+    respond_to do |format|
+    if @user.save!
+        format.html { redirect_to profiles_path, notice: "#{@user.name} is now a normal user" }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { redirect_to profiles_path, notice: "Something went wrong demoting #{params[:user_id]}"}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def index
     @profiles = Profile.includes(:user).page params[:page]
     respond_to do |format|

@@ -6,7 +6,8 @@ Gelatine::Application.routes.draw do
   match 'check_out' => "check_ins#check_out"
   
   match 'tagged' => 'profiles#tagged', :as => 'tagged'
-  
+  match 'make_admin' => 'profiles#make_admin', :as => 'make_admin'
+  match 'revoke_admin' => 'profiles#revoke_admin', :as => 'revoke_admin'
   resources :needs_help_with
   
   resources :profiles do

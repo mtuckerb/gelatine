@@ -24,6 +24,18 @@
 						<li>
 						 	<%= link_to "Log Out", destroy_user_session_path %>
 					 	</li>
+					 	<% if current_user.admin? %>
+					 	<li class="dropdown"> 
+					 		<a class="dropdown-toggle" data-toggle="dropdown" href="#"> Adminitrative <b class="caret"></b></a> 
+						
+						    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						      <li> <%= link_to "Rooms", rooms_path %> </li>
+						      <li> <%= link_to "Venues", venues_path %> </li>
+						      <li> <%= link_to "Check Ins", check_ins_path %> </li>
+						    </ul>
+					    </li>
+					    
+					      <% end %>
 						<% end %>
 					</ul>
 				</div>

@@ -8,6 +8,7 @@ class Ability
     if user.admin?
       can :manage, :all
       can :assign_roles
+      can :make_admin
     else
       can :read, :all
       can :update, Reservation, :user => user

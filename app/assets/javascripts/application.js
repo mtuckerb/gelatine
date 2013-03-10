@@ -13,10 +13,9 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require fullcalendar.js
-//= require fullcalendar.min.js
 //= require jquery-ui-1.10.1.custom.min.js
 //= require autocomplete-rails.js
+//= require d3.v3.js
 //= require d3.layout.cloud.js
-
+//= require bootstrap.js
 //= require_tree .
