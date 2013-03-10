@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @rooms = Room.all
+    @rooms = Room.page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +26,7 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   # GET /rooms/new.json
   def new
-    @room = Room.new
+    @room = Room.joins(:venue)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,6 +37,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit
     @room = Room.find(params[:id])
+    @venues =  Venue.all   
   end
 
   # POST /rooms

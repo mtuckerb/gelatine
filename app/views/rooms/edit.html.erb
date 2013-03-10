@@ -2,5 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @room %> |
-<%= link_to 'Back', rooms_path %>
+<div class="btn-group">
+	<%= link_to 'Show', @room, :class => "btn btn-small" %> 
+	<a href="#" class="btn btn-small">|</a>
+	<%= link_to 'Back', rooms_path, :class => "btn btn-small"  %>
+</div>

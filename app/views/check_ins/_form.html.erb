@@ -1,6 +1,6 @@
 <%= form_for(@check_in) do |f| %>
   <% if @check_in.errors.any? %>
-    <div id="error_explanation">
+    <div id="alert alert-danger">
       <h2><%= pluralize(@check_in.errors.count, "error") %> prohibited this check_in from being saved:</h2>
 
       <ul>
@@ -11,10 +11,18 @@
     </div>
   <% end %>
 
-  <div class="dropdown-group">
+  <div class="row border-box span5">
+    <div class="span2">
     <%= f.label :room_id %><br />
     <%= f.collection_select(:room_id, Room.all, :id, :name,  :class => "dropdown-menu", :label => "Rooms")%>
   </div>
+  <div class="span2">
+     <% if current_user.admin? %> 
+      <%= f.label :user_id %><br />
+        <%= f.collection_select(:user_id, User.all, :id, :name)%>
+    <% end %>
+  </div>
+</div> 
   <!-- <div class="dropdown-menu">
     <%= f.label :check_in_time %><br />
     <%= f.datetime_select :check_in_time, :class => "dropdown-menu" %>
@@ -26,14 +34,11 @@
   <div class="field">
     <%= f.label :third_party_id %><br />
     <%= f.text_field :third_party_id %>
-  </div>
-  <div class="field"> -->
-   <% if current_user.admin? %> 
-		<%= f.label :user_id %><br />
-    	<%= f.collection_select(:user_id, User.all, :id, :name)%>
-	<% end %>
+  </div>-->
+
 		
   </div>
+  <div style="height:5em;"></div>
   <div class="actions">
     <%= f.submit :class => "btn btn-success" %>
   </div>

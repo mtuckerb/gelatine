@@ -1,4 +1,7 @@
 Gelatine::Application.routes.draw do
+  resources :venues
+
+
   resources :check_ins 
   match 'check_out' => "check_ins#check_out"
   

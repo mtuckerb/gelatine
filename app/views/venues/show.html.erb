@@ -1,0 +1,38 @@
+<div class="row">
+  <div>
+    <b>Name:</b>
+    <%= @venue.name %>
+  </div>
+
+  <div>
+    <b>Open from:</b>
+    <%= @venue.open_from %>
+  </div>
+
+  <div>
+    <b>Open to:</b>
+    <%= @venue.open_to %>
+  </div>
+
+  <div>
+    <b>Open days:</b>
+    <%= @venue.open_days %>
+  </div>
+
+  <div class="row" style="padding-top:1em; padding-bottom:1em;">
+    <div class="span6">
+    	<h3> Rooms </h3>
+        <% @venue.rooms.each do |room| %>
+          <%= link_to room.name, :class => "btn" %>
+        <% end %> 
+    </div>
+  </div>
+
+
+
+  <div class="btn-group">
+    <%= link_to 'Edit', edit_venue_path(@venue), :class => "btn btn-mini" %> 
+    <a href="#" class="btn btn-mini">|</a>
+    <%= link_to 'Back', venues_path, :class => "btn btn-mini" %>
+  </div>
+</div>

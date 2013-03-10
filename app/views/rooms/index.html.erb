@@ -1,33 +1,27 @@
 <h1>Listing rooms</h1>
+<div class="row">
+    <%= link_to 'New Room', new_room_path, :class => "btn btn-mini" %>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Operating hours start</th>
-    <th>Operating hours stop</th>
-    <th>Days of Operation</th>
-    <th>Capacity</th>
-    <th>Notes</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
 <% @rooms.each do |room| %>
-  <tr>
-    <td><%= room.name %></td>
-    <td><%= room.ophoursstart %></td>
-    <td><%= room.ophoursstop %></td>
-    <td><%= room.operating_days %></td>
-    <td><%= room.capacity %></td>
-    <td><%= room.notes %></td>
-    <td><%= link_to 'Show', room %></td>
-    <td><%= link_to 'Edit', edit_room_path(room) %></td>
-    <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <div class="row border-box" style="padding-top:5px;padding-bottom:5px;">
+    <div> <h3><%= room.name %></h3></div>
+    <div><span class="label">Open  from </span><%= room.ophoursstart %> <span class="label"> to </span> <%= room.ophoursstop %> <span class="label">on</span> <%= room.operating_days %></div>
+    <div><span class="label">Capacity</span>&nbsp <%= room.capacity %></div>
+    <div><span class="label">Notes</span>&nbsp <%= room.notes %></div> 
+    <div class="btn-group" style="padding-top:10px;"> 
+        <%= link_to 'Show', room, :class => "btn btn-small" %> 
+        <a href="#" class="btn btn-small">|</a>
+        <%= link_to 'Edit', edit_room_path(room), :class => "btn btn-small" %> 
+        <a href="#" class="btn btn-small">|</a>
+        <%= link_to 'Destroy', room, :class => "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
 
-<br />
-<%= paginate @rooms %>
-<%= link_to 'New Room', new_room_path %>
+  </div>
+  <br/>
+<% end %>
+
+<div class="row">
+    <%= paginate @rooms %>
+</div>

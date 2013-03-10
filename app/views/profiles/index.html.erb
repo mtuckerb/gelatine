@@ -7,7 +7,7 @@
 		<BR/>	
 	</div>
 	<% @profiles.each do |profile| %>
-	<div class="user-profile">
+	<div class="border-box">
 		<div class="row">
 			<div class="row span3">
 				<%= image_tag profile.avatar_image.thumb("100x100#").url :class => "thumbnail media border-img" if profile.avatar_image_uid %>
@@ -40,9 +40,11 @@
 				</div>
 				<% end %>
 				<div class="btn-group" style="padding-top:10px;">
-			     <%= link_to raw("<i class='icon-eye-open icon-white'></i> See More"), profile, :class => "btn btn-mini" %>
-			     <%= link_to raw('<i class="icon-pencil icon-white"></i>  Edit'), edit_profile_path(profile), :class => "btn btn-mini"  if current_user.admin? %>
-			     <%= link_to raw('<i class="icon-trash icon-white"> </i> Destroy'), profile, :class => "btn btn-mini" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
+			     <%= link_to raw("<i class='icon-eye-open icon-white'></i> &nbsp See More"), profile, :class => "btn btn-small" %>
+			     <% if current_user.admin? %><a href="#" class="btn btn-small">|</a> <% end %>
+			     <%= link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit'), edit_profile_path(profile), :class => "btn btn-small"  if current_user.admin? %>
+			     <% if current_user.admin? %><a href="#" class="btn btn-small">|</a> <% end %>
+			     <%= link_to raw('<i class="icon-trash icon-white"> </i> &nbsp  Destroy'), profile, :class => "btn btn-small btn-danger" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
 			 
 			</div>
 			

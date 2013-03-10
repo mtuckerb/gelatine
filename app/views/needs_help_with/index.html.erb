@@ -1,8 +1,10 @@
-<script>
-  var fill = d3.scale.category20();
-	<% @tags.each do |tag| %>
+
+	<% words = @tags.each do |tag| %>
 		<%= link_to(tag.name, tagged_url) %>
 	<% end %>
+<script>
+  var fill = d3.scale.category20();
+
   d3.layout.cloud().size([300, 300])
       .words([
         "Hello", "world", "normally", "you", "want", "more", "words",
