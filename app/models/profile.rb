@@ -19,6 +19,9 @@ class Profile < ActiveRecord::Base
   	:interest_list, :avatar_image, :remove_avatar_image, :retained_avatar_image
   validates :terms_and_conditions, :acceptance => true, :on => :create
   image_accessor :avatar_image 
+
+
+
   private
   
 end

@@ -19,6 +19,7 @@ gem 'acts_as_api'
 gem "squeel"
 gem 'kaminari'
 gem 'jquery-rails'
+gem 'gravatar_image_tag'
 #gem 'bootstrap-kaminari-views'
 
 # Gems used only for assets and not required

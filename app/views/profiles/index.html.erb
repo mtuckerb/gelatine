@@ -10,7 +10,7 @@
 	<div class="border-box">
 		<div class="row">
 			<div class="row span3">
-				<%= image_tag profile.avatar_image.thumb("100x100#").url :class => "thumbnail media border-img" if profile.avatar_image_uid %>
+				<%=  profile_image(profile) %>
 			</div>
 			<div class="span4" >
 				<%= link_to profile.user.name, profile, :class => "btn btn-large" if profile.user %>
