@@ -9,17 +9,19 @@
 	<% @profiles.each do |profile| %>
 	<div class="border-box">
 		<div class="row">
-			<div class="row span3">
+			<div class="span3" >
 				<%=  profile_image(profile) %>
 			</div>
-			<div class="span4" >
-				<%= link_to profile.user.name, profile, :class => "btn btn-large" if profile.user %>
-				
-				<div class="span2">
-					<div> <%= profile.about_me %></div>
-				</div>
-		     </div>
-		   
+			<div class="span6 offset1">
+				<div class="span4" >
+					<%= link_to profile.user.name, profile, :class => "btn btn-large" if profile.user %>
+					</div>
+					<div class="span2">
+						<div> <%= profile.about_me %></div>
+					</div>
+			    
+			</div>
+		
 			<div class=" row span12" >
 				<% if profile.mood.present? %>
 				<div style="padding-top:5px;"> <span class='label'>Availability: </span> <%= profile.mood %> </div>

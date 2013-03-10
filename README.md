@@ -45,12 +45,12 @@ open your browser and go to http://localhost:3000
 ## Deploy to server (incomplete)
 * edit config/deploy.rb, set your server and login information
 * cap deploy
- on remote server
+
+…on remote server
 ```
-$ RAILS_ENV=production bundle exec rake assets:precompile
 $ RAILS_ENV=production rake db:setup 
 ```
-* restart your webserver
+* restart your webserver (if capistrano didn't do that for you)
 * create an initial user
 ```
 $ RAILS_ENV=production rails console
