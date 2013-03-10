@@ -12,10 +12,14 @@
 //
 
 //= require jquery
-//= require jquery_ujs
 //= require jquery-ui-1.10.1.custom.min.js
-//= require autocomplete-rails.js
 //= require d3.v3.js
-//= require d3.layout.cloud.js
-//= require bootstrap.js
+//= require autocomplete-rails.js
+//= require twitter/bootstrap
+//= require twitter/bootstrap/bootstrap-transition
+//= require twitter/bootstrap/bootstrap-alert
+//= require twitter/bootstrap/bootstrap-modal
+//= require twitter/bootstrap/bootstrap-button
+//= require twitter/bootstrap/bootstrap-collapse
+//= require twitter/bootstrap/bootstrap-dropdown
 //= require_tree .
