@@ -1,6 +1,6 @@
- @import "bootstrap.css";
- @import "flatui-sass/flat-ui.sass"	;
-
+@import "bootstrap.css";
+@import "flatui-sass/flat-ui.sass"	;
+@import "scaffolds.css.scss";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -18,4 +18,3 @@
  *= require_tree .
  
  */
-@import "scaffold.css.scss"
