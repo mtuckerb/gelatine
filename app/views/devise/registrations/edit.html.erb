@@ -49,8 +49,9 @@
 	</table>
 
 	<% end %>
-<div class="btn-group" style="padding-bottom:10px;">
-	<%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"%>
-	<%= link_to "Back", :back, :class => "btn btn-block" %>
-</div>
+
+	<%= link_to raw('<i class="icon-circle-arrow-left icon-white"></i> &nbsp   Back'), :back, :class => "btn " %>
+	<%= link_to raw('<i class="icon-trash icon-white"></i> &nbsp   Cancel my account'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"%>
+	
+
 </div>

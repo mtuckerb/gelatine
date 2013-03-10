@@ -11,11 +11,11 @@
     <div><span class="label">Capacity</span>&nbsp <%= room.capacity %></div>
     <div><span class="label">Notes</span>&nbsp <%= room.notes %></div> 
     <div class="btn-group" style="padding-top:10px;"> 
-        <%= link_to 'Show', room, :class => "btn btn-small" %> 
+        <%= link_to raw('<i class="icon-eye-open icon-white"></i> &nbsp   Show'), room, :class => "btn btn-small" %> 
         <a href="#" class="btn btn-small">|</a>
-        <%= link_to 'Edit', edit_room_path(room), :class => "btn btn-small" %> 
+        <%= link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit'), edit_room_path(room), :class => "btn btn-small" %> 
         <a href="#" class="btn btn-small">|</a>
-        <%= link_to 'Destroy', room, :class => "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to raw('<i class="icon-trash icon-white"></i> &nbsp   Destroy'), room, :class => "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
     </div>
 
   </div>
