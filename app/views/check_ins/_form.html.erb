@@ -11,10 +11,10 @@
     </div>
   <% end %>
 
-  <div class="row border-box span5">
+  <div class="row border-box span4  ">
     <div class="">
     <%= f.label :room_id %><br />
-    <%= f.collection_select(:room_id, Room.all, :id, :name,  :class => "dropdown-menu", :label => "Rooms")%>
+    <%= f.collection_select(:room_id, Room.all, :id, :name)%>
   </div>
   <div class="">
      <% if current_user.admin? %> 

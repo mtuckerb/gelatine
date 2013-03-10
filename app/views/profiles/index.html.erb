@@ -39,12 +39,12 @@
 				<% end %>
 				<div class="btn-group" style="padding-top:10px;">
 			     <%= link_to raw("<i class='icon-eye-open icon-white'></i> &nbsp See More"), profile, :class => "btn btn-small" %>
-			     <% if current_user.admin? %><a href="#" class="btn btn-small">|</a> <% end %>
+			     <% if current_user.admin? %>checkin <% end %>
 			     <%= link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit'), edit_profile_path(profile), :class => "btn btn-small"  if current_user.admin? %>
-			     <% if current_user.admin? %><a href="#" class="btn btn-small">|</a> <% end %>
+			     <% if current_user.admin? %>checkin <% end %>
 			     <%= link_to raw('<i class="icon-star icon-white"></i> &nbsp   Make Admin '), make_admin_path(:user_id => profile.user_id), :class => "btn btn-small btn-warning"  if current_user.admin? && profile.user.admin? == nil %>
 			      <%= link_to raw('<i class="icon-star icon-white"></i> &nbsp   Revoke Admin '), revoke_admin_path(:user_id => profile.user_id), :class => "btn btn-small btn-danger"  if current_user.admin? && profile.user.admin? %>
-			      <% if current_user.admin? and profile.user.admin? %><a href="#" class="btn btn-small btn-danger">|</a> <% end %>
+
 			     <%= link_to raw('<i class="icon-trash icon-white"> </i> &nbsp  Destroy'), profile, :class => "btn btn-small btn-danger" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?  %>
 			 
 			</div>
