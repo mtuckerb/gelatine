@@ -26,8 +26,8 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   # GET /rooms/new.json
   def new
-    @room = Room.joins(:venue)
-
+    @room = Room.new
+    @venues = Venue.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @room }
