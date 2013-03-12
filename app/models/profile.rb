@@ -21,6 +21,9 @@ class Profile < ActiveRecord::Base
   image_accessor :avatar_image 
 
 
+  def skills_string
+    return self.skill_list.to_s
+  end
 
   private
   
