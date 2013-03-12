@@ -14,4 +14,11 @@ module ApplicationHelper
   	"class=active" if params[:controller] == ctrlr.to_s && params[:action] == action.to_s
   end
 
+  def search_block
+    case params[:controller]
+    when "profiles"
+        render "profiles_search"
+    end
+    
+  end
 end
