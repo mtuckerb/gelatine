@@ -7,48 +7,11 @@ class ProfilesController < ApplicationController
   autocomplete :interests, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
 
-  def tagged
-      if params[:skill].present? 
-        @profiles = Profile.tagged_with(params[:skill], :on => :skills).page params[:page]
-      elsif params[:interest].present?
-        @profiles = Profile.tagged_with(params[:interest], :on => :interests).page params[:page]
-      elsif params = params[:need].present? 
-        @profile = Profile.tagged_with(params[:need], :on => :needs).page params[:page]
-      end
-      respond_to do |format|
-          format.html {render :index}
-      end  
-  end
-  
-  def make_admin
-    @user = User.find(params[:user_id])    
-    @user.role = :admin
-    respond_to do |format|
-    if @user.save!
-        format.html { redirect_to profiles_path, notice: "#{@user.name} is now an admin" }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { redirect_to profiles_path, notice: "Something went wrong promoting #{params[:user_id]}"}
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-  def revoke_admin
-    @user = User.find(params[:user_id])    
-    @user.role = nil
-    respond_to do |format|
-    if @user.save!
-        format.html { redirect_to profiles_path, notice: "#{@user.name} is now a normal user" }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { redirect_to profiles_path, notice: "Something went wrong demoting #{params[:user_id]}"}
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def index
-    @profiles = Profile.includes(:user).page params[:page]
+    #@profiles = Profile.includes(:user).page params[:page]
+    @q = Profile.search(params[:q])
+    @profiles = @q.result(:distinct => true).page params[:page]
     respond_to do |format|
       format.html # index.html.erb
       format.json { render_for_api :profiles_with_user, json: @profiles, :root => :profiles }
@@ -126,4 +89,45 @@ class ProfilesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def tagged
+      if params[:skill].present? 
+        @profiles = Profile.tagged_with(params[:skill], :on => :skills).page params[:page]
+      elsif params[:interest].present?
+        @profiles = Profile.tagged_with(params[:interest], :on => :interests).page params[:page]
+      elsif params = params[:need].present? 
+        @profile = Profile.tagged_with(params[:need], :on => :needs).page params[:page]
+      end
+      respond_to do |format|
+          format.html {render :index}
+      end  
+  end
+  
+  def make_admin
+    @user = User.find(params[:user_id])    
+    @user.role = :admin
+    respond_to do |format|
+    if @user.save!
+        format.html { redirect_to profiles_path, notice: "#{@user.name} is now an admin" }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { redirect_to profiles_path, notice: "Something went wrong promoting #{params[:user_id]}"}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def revoke_admin
+    @user = User.find(params[:user_id])    
+    @user.role = nil
+    respond_to do |format|
+    if @user.save!
+        format.html { redirect_to profiles_path, notice: "#{@user.name} is now a normal user" }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { redirect_to profiles_path, notice: "Something went wrong demoting #{params[:user_id]}"}
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end
