@@ -1,4 +1,9 @@
 Gelatine::Application.routes.draw do
+  resources :projects do
+    get :autocomplete_user_name, :on => :collection
+  end
+
+
   resources :venues
 
 

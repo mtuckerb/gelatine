@@ -1,0 +1,13 @@
+<%= javascript_tag "var autocomplete_items = #{ @autocomplete_items.to_json };" %>
+
+
+  <%= simple_form_for(@project, :html => {:class => 'form-vertical' }) do |f| %>
+      <%= f.input :title %>
+      <%= f.input :category %>
+      <%= f.input :description %>
+      <%= f.association :users, as: :select, collection: User.all(order: 'name'), prompt: "Select all collaborators (use shift+click)"%>
+
+      <%= f.button :submit %>
+
+
+  <% end %>

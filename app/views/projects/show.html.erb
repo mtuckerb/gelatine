@@ -1,0 +1,31 @@
+<div class="notice"><%= notice %></div>
+
+<div class='row'>
+  <b>Title:</b>
+  <%= @project.title %>
+</div>
+
+<div class='row'>
+  <b>Category:</b>
+  <%= @project.category %>
+</div>
+
+<div class='row'>
+  <b>Description:</b>
+  <%= @project.description %>
+</div>
+
+<div class="row">
+	<b> Collaborators: </b>
+		<% @project.collaborators.each do |collaborator| %>
+		<div class="offset1">	
+			<%= link_to collaborator.user.name, profile_path(collaborator.user.profile.id) unless collaborator.user == nil %> <BR/>
+		</div> 
+	<% end %>
+</div>
+<Div class='row', style="min-height: 10px;"/> 
+
+<div class="btn-group">
+	<%= link_to raw('<i class="icon-pencil icon-white"></i> &nbsp Edit '), edit_project_path(@project), :class => "btn " %> |
+	<%= link_to raw('<i class="icon-arrow-left icon-white"></i> &nbsp   Back '), projects_path, :class => 'btn' %>
+</div>

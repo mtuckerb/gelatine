@@ -15,10 +15,8 @@ module ApplicationHelper
   end
 
   def search_block
-    case params[:controller]
-    when "profiles"
-        render "profiles_search"
+    if  params[:controller] == "profiles" && params[:action] == "index"
+      render "profiles_search"
     end
-    
   end
 end
