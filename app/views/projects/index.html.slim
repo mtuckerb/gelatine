@@ -11,7 +11,7 @@ table
     tr
       td= project.title
       td= project.category
-      td= project.description
+      td= sanitize(textilize(project.description.truncate(50, :separator => '\n')))
       td.btn-group
         = link_to raw('<i class="icon-eye-open icon-white"></i> &nbsp Show '), project, :class => "btn btn-mini"
         = link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit '), edit_project_path(project), :class => "btn btn-mini"

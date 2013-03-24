@@ -12,7 +12,7 @@
 
 <div class='row'>
   <b>Description:</b>
-  <%= @project.description %>
+  <%= sanitize(textilize(@project.description)) %>
 </div>
 
 <div class="row">
