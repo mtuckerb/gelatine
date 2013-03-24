@@ -11,7 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20130313044420) do
+
 
   create_table "check_ins", :force => true do |t|
     t.integer  "room_id"
@@ -45,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130313044420) do
     t.integer  "user_id"
     t.string   "avatar_image_uid"
     t.string   "avatar_image_name"
+    t.string   "github_url"
   end
 
   create_table "projects", :force => true do |t|
@@ -76,6 +79,16 @@ ActiveRecord::Schema.define(:version => 20130313044420) do
     t.string   "operating_days"
     t.integer  "venue_id"
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"

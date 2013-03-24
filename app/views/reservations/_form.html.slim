@@ -1,0 +1,39 @@
+= form_for(@reservation) do |f|
+  - if @reservation.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@reservation.errors.count, "error")
+        | prohibited this reservation from being saved:
+      ul
+        - @reservation.errors.full_messages.each do |msg|
+          li= msg
+  .field
+    = f.label :room_id
+    br
+    = f.collection_select(:room_id, Room.all, :id, :name)
+  #date_help style="display:none"
+    br
+    | For a date in the near future you can specify just the Day and Time (e.g. Friday at 9am)
+    br
+    | For a date that is further than 6 days in the future use (e.g) Apr 18th at 9am
+    br
+    | If the date is more than a year distant, include the year (e.g Apr 18th 2020 at 9am)
+    br
+    | You may also use times such as 9:15am or 0915.
+    br
+  .field
+    = f.label :start_time
+    | (e.g. "Friday at 9am" #{link_to :more_examples, "javascript:void(0)", :class => :more_examples} )
+    br
+    = f.text_field :start_time,:class => "datetimefield"
+  .field
+    = f.label :stop_time
+    | (e.g. "February 11th at 10am")
+    br
+    = f.text_field :stop_time, :class => "datetimefield"
+  .field
+    = f.label :number_of_attendies
+    br
+    = f.number_field :attendie_count
+  .actions
+    = f.submit :class => "sassy_submit"

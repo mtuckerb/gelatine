@@ -1,0 +1,82 @@
+#sessions style="width:500px;"
+  = form_for(@profile, :html => {:multipart => true }) do |f|
+    - if @profile.errors.any?
+      #error_explanation
+        h2
+          = pluralize(@profile.errors.count, "error")
+          | prohibited this profile from being saved:
+        ul
+          - @profile.errors.full_messages.each do |msg|
+            li= msg
+    table
+      - if current_user.admin?
+        tr
+          td= f.label :user_id
+          td
+            = f.collection_select(:user_id, User.all, :id, :name)
+      = f.hidden_field :retained_avatar_image
+      tr
+        td= f.label :avatar
+        td
+          = image_tag @profile.avatar_image.thumb('100x100').url if @profile.avatar_image_uid
+          br
+          = f.file_field :avatar_image
+          = f.check_box :remove_avatar_image
+          | Remove Image
+      tr
+        td= f.label :about_me
+        td
+          = f.text_field :about_me
+      tr
+        td= f.label :mood
+        td
+          = f.text_field :mood
+      tr
+        td= f.label :twitter
+        td
+          = f.text_field :twitter
+      tr
+        td= f.label :goodreads
+        td
+          = f.text_field :goodreads
+      tr
+        td= f.label :public_email
+        td
+          = f.text_field :public_email
+      tr
+        td= f.label :website
+        td
+          = f.text_field :website
+      tr
+        td= f.label :send_via_email
+        td
+          = f.check_box :send_via_email
+      tr
+        td
+          = f.label :interests
+        td
+          = f.autocomplete_field :interest_list, autocomplete_interests_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+          | (Sailing, Programming, etc.)
+      tr
+        td
+          = f.label :skills
+        td
+          = f.autocomplete_field :skill_list, autocomplete_skills_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+      tr
+        td
+          = f.label :needs
+        td
+          = f.autocomplete_field :need_list, autocomplete_needs_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+      tr
+        td= f.label "Terms and Conditions"
+        td
+          | The aim of the checkin-system is to help you identify and connect, and ice-break conversations with interesting other folks in The Edge community. This user profile allows you to specify information about you, so interested users at The Edge can better identify and find you. By swiping your user card at a check-in point, you leave a digital footprint of your profile information at the check-in system including a timestamp and location where you checked-in. The system aggregates and visualises this information in graphical and textual form using different media in The Edge building, such as projections and LCD screens. Please only enter information in your user profile that you feel comfortable sharing as part of the content on these media. Your use and participation in the checkin system is voluntary and will not change your relationship to The Edge.
+          br
+          br
+          = f.check_box :terms_and_conditions
+          | I accept these terms
+          br
+    br
+    .actions
+      = f.submit :class => "btn btn-success"
+br

@@ -1,0 +1,29 @@
+h1 Listing rooms
+.row
+  = link_to 'New Room', new_room_path, :class => "btn btn-mini"
+- @rooms.each do |room|
+  .row.border-box style="padding-top:5px;padding-bottom:5px;"
+    div
+      h3= room.name
+    div
+      span.label Open  from
+      = room.ophoursstart
+      span.label to
+      = room.ophoursstop
+      span.label on
+      = room.operating_days
+    div
+      span.label> Capacity
+      | \&nbsp #{room.capacity}
+    div
+      span.label> Notes
+      | \&nbsp #{room.notes}
+    .btn-group style="padding-top:10px;"
+      = link_to raw('<i class="icon-eye-open icon-white"></i> &nbsp   Show'), room, :class => "btn btn-small"
+      | checkin
+      | \#{link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit'), edit_room_path(room), :class => "btn btn-small"}
+      | checkin
+      | \#{link_to raw('<i class="icon-trash icon-white"></i> &nbsp   Destroy'), room, :class => "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' }}
+  br
+.row
+  = paginate @rooms

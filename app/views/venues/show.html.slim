@@ -1,0 +1,21 @@
+.row
+  div
+    b Name:
+    = @venue.name
+  div
+    b Open from:
+    = @venue.open_from
+  div
+    b Open to:
+    = @venue.open_to
+  div
+    b Open days:
+    = @venue.open_days
+  .row style="padding-top:1em; padding-bottom:1em;"
+    .span6
+      h3 Rooms
+      - @venue.rooms.each do |room|
+        = link_to room.name, :class => "btn"
+  .btn-group
+    = link_to 'Edit', edit_venue_path(@venue), :class => "btn btn-mini"
+    = link_to 'Back', venues_path, :class => "btn btn-mini"

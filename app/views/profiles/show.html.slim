@@ -1,0 +1,73 @@
+.row
+  .border-box
+    table.index_table style="width:100%;"
+      tr
+        td = profile_image(@profile)
+        td
+          span.profile_user_name= @profile.user.name if @profile.user
+          br
+          = @profile.about_me
+    br
+    p
+      span.label Last Checked in
+      '   
+      - if @checkin
+      
+        = time_ago_in_words(@checkin.check_in_time)
+        | ago
+      - else
+        | Hasn't checked in yet!
+    p
+      span.label About me
+      '   
+      = @profile.about_me
+    p
+      span.label Availability
+      '   
+      = @profile.mood
+
+  .border-box
+    span.label Interests
+    '   
+    - @profile.interests.each do |interest|
+      = link_to interest.name, tagged_url(:interest => interest.name)
+      | ,
+  .border-box
+    span.label Skills
+    '   
+    - @profile.skills.each do |skill|
+      = link_to skill.name, tagged_url(:skill => skill.name)
+      | ,
+  .border-box
+    span.label Needs
+    '   
+    - @profile.needs.each do |need|
+      = link_to need.name, tagged_url(:need => need.name)
+    | ,
+
+  .row.offset1
+    .offset3
+      b Social
+    
+    - if @profile.twitter.present?
+      a  href="http://twitter.com/#{@profile.twitter}"
+        i class="twitter"
+      '   
+      
+    - if @profile.goodreads.present?
+      a  href="#{@profile.goodreads}"
+        = image_tag "icons/goodreads/goodreads-64.png", :class => "social_icon"
+      '   
+    - if @profile.github_url.present? 
+      a  href="#{@profile.github_url}"
+        i "icons/github/github-64.png", :class => "github"
+      '  
+    - if @profile.public_email.present?
+      a  href="mailto: #{@profile.public_email}"
+        = image_tag "icons/email/email-64.png", :class => "social_icon"
+    
+    = link_to @profile.website 
+    
+  br
+  div style="padding-bottom:5px;"
+    = link_to 'Back', profiles_path, :class => "btn btn-small"

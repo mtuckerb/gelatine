@@ -1,0 +1,43 @@
+.row
+  = form_for(@room) do |f|
+    - if @room.errors.any?
+      div id="alert alert-danger"
+        h2
+          = pluralize(@room.errors.count, "error")
+          | prohibited this room from being saved:
+        ul
+          - @room.errors.full_messages.each do |msg|
+            li= msg
+    .dropdown-group
+      = f.label :venue
+      br
+      = f.collection_select(:venue_id, @venues, :id, :name, :class => "editable")
+    .field
+      = f.label :name
+      br
+      = f.text_field :name
+    .field
+      = f.label "Hours of Operation (begin)"
+      br
+      = f.text_field :ophoursstart
+      | (Please use 24h time)
+    .field
+      = f.label "Hours of Operation (end)"
+      br
+      = f.text_field :ophoursstop
+      | (Please use 24h time)
+    .field
+      = f.label "Days of Operation"
+      br
+      = f.text_field :operating_days
+      | (Please use Sun - Sat)
+      .field
+        = f.label :capacity
+        br
+        = f.number_field :capacity
+      .field
+        = f.label :notes
+        br
+        = f.text_field :notes
+      .actions
+        = f.submit :class => "btn btn-success"

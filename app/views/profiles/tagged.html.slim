@@ -1,0 +1,32 @@
+.reservations
+  - @profiles.each do |profile|
+    #profile
+      table.index_table style="width:100%;"
+        tr
+          td= image_tag profile.avatar_image.thumb("100x100#").url if profile.avatar_image_uid
+          td
+            span.profile_user_name= profile.user.name if profile.user
+            br
+            = profile.about_me
+      p#blurb
+        span.label About:
+        = profile.about_me
+        br
+        span.label Availability:
+        = profile.mood
+        br
+        = profile.website
+        | <BR/	>
+        span.label Skills:
+        - profile.skills.each do |skill|
+          = link_to skill.name, tagged_url(:skill => skill.name)
+        br
+        span.label Needs Help With:
+        = profile.need_list
+        br
+      br
+      = link_to 'See More', profile
+      = link_to 'Edit', edit_profile_path(profile) if current_user.admin?
+      = link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?
+  br
+  = link_to 'New Profile', new_profile_path
