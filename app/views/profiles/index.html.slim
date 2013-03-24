@@ -10,7 +10,7 @@
           = profile_image(profile)
         .span6.offset1
           .span4
-            = link_to profile.user.name, profile, :class => "btn btn-large" if profile.user
+            = link_to profile.user.name, profile, :class => "btn btn-large btn-primary" if profile.user
           .span2
             div
               = profile.about_me
@@ -18,21 +18,25 @@
           - if profile.mood.present?
             div style="padding-top:5px;"
               span.label Availability:
+              '   
               = profile.mood
           div style="padding-top:5px;"
           - if profile.interests.present?
             div style="padding-top:5px;"
               span.label Interests:
+              '   
               - profile.interests.each do |interest|
                 = link_to interest.name, tagged_url(:interest => interest.name), :class => "tag"
           - if profile.skills.present?
             div style="padding-top:5px;"
               span.label Skills:
+              '   
               - profile.skills.each do |skill|
                 = link_to skill.name, tagged_url(:skill => skill.name), :class => "tag"
           - if profile.needs.present?
             div style="padding-top:5px;"
               span.label Needs Help With:
+              '   
               - profile.needs.each do |need|
                 = link_to need.name, tagged_url(:need => need.name), :class => "tag"
           .btn-group style="padding-top:10px;"

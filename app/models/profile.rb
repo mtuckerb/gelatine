@@ -16,7 +16,7 @@ class Profile < ActiveRecord::Base
   acts_as_taggable_on :skills, :interests, :needs
   attr_accessible :user_id, :about_me, :goodreads, :mood, :public_email, :send_via_email
   attr_accessible :terms_and_conditions, :twitter, :website, :need_list, :skill_list, 
-  	:interest_list, :avatar_image, :remove_avatar_image, :retained_avatar_image
+  	:interest_list, :avatar_image, :remove_avatar_image, :retained_avatar_image, :github_url
   validates :terms_and_conditions, :acceptance => true, :on => :create
   image_accessor :avatar_image 
 
