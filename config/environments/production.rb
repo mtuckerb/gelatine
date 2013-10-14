@@ -50,7 +50,7 @@ Gelatine::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => "ec2-54-234-254-197.compute-1.amazonaws.com" } #must be set to host name
+  config.action_mailer.default_url_options = { :host => "69.25.136.108" } #must be set to host name
  
   # Enable threaded mode
   # config.threadsafe!

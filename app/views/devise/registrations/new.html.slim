@@ -1,0 +1,83 @@
+#sessions
+  h2 Sign up
+  = form_for(resource, :as => resource_name, :url => registration_path(resource_name),:html => {:multipart => true }) do |f|
+    - resource.build_profile unless resource.profile
+    = devise_error_messages!
+    table
+      tr
+        td= f.label :name
+        td= f.text_field :name, :autofocus => true
+      tr
+        td= f.label :email
+        td= f.email_field :email
+      tr
+        td= f.label :password
+        td= f.password_field :password
+      tr
+        td= f.label :password_confirmation
+        td= f.password_field :password_confirmation
+      = f.fields_for :profile do |form|
+        = form.hidden_field :retained_avatar_image
+        tr
+          td= form.label :avatar
+          td
+            = image_tag resource.profile.avatar_image.thumb('100x100').url if resource.profile.avatar_image_uid
+            br
+            = form.file_field :avatar_image
+            = form.check_box :remove_avatar_image
+            | Remove Image
+        tr
+          td= form.label :about_me
+          td
+            = form.text_field :about_me
+        tr
+          td= form.label :mood
+          td
+            = form.text_field :mood
+        tr
+          td= form.label :twitter
+          td
+            = form.text_field :twitter
+        tr
+          td= form.label :goodreads
+          td
+            = form.text_field :goodreads
+        tr
+          td= form.label :public_email
+          td
+            = form.text_field :public_email
+        tr
+          td= form.label :website
+          td
+            = form.text_field :website
+        tr
+          td= form.label :send_via_email
+          td
+            = form.check_box :send_via_email
+        tr
+          td
+            = form.label :interests
+          td
+            = form.autocomplete_field :interest_list, autocomplete_interests_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+            | (Sailing, Programming, etc.)
+        tr
+          td
+            = form.label :skills
+          td
+            = form.autocomplete_field :skill_list, autocomplete_skills_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+        tr
+          td
+            = form.label :needs
+          td
+            = form.autocomplete_field :need_list, autocomplete_needs_name_profiles_path, :"data-delimiter" => ', ', :multiple => true
+        tr
+          td= form.label "Terms and Conditions"
+          td
+            | The aim of the checkin-system is to help you identify and connect, and ice-break conversations with interesting other folks in The Edge community. This user profile allows you to specify information about you, so interested users at The Edge can better identify and find you. By swiping your user card at a check-in point, you leave a digital footprint of your profile information at the check-in system including a timestamp and location where you checked-in. The system aggregates and visualises this information in graphical and textual form using different media in The Edge building, such as projections and LCD screens. Please only enter information in your user profile that you feel comfortable sharing as part of the content on these media. Your use and participation in the checkin system is voluntary and will not change your relationship to The Edge.
+            br
+            br
+            = form.check_box :terms_and_conditions
+            | I accept these terms
+            br
+    = f.submit "Sign up",   :class => "btn btn-success"
+  = render "devise/shared/links"

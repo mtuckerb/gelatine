@@ -29,6 +29,7 @@ gem "ransack"
 gem "slim"
 gem 'simple_form'
 gem 'RedCloth'
+gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -58,6 +59,7 @@ group :development, :test do
   gem 'pry' 
   gem 'capybara'
   gem 'chronic'
+
 end
 
 # To use ActiveModel has_secure_password
