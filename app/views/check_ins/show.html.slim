@@ -1,0 +1,15 @@
+p
+  b Room:
+  = @check_in.room_id
+p
+  b Check in time:
+  = @check_in.check_in_time
+p
+  b Check out time:
+  = @check_in.check_out_time
+p
+  b User:
+  = @check_in.user.name
+.btn-group style="padding-top:10px;"
+  = link_to 'Edit', edit_check_in_path(@check_in), :class => "btn btn-small"
+  = link_to 'Back', check_ins_path, :class => "btn btn-small"

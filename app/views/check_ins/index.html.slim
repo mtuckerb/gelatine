@@ -1,0 +1,26 @@
+.row
+  h1 All Check Ins
+  table.index_table style="width:100%;"
+    tr
+      th Room
+      th Check in time
+      th Check out time
+      th User
+      th
+      th
+      th
+    - @check_ins.each do |check_in|
+      tr
+        td= check_in.room.name  if check_in.room
+        td= check_in.check_in_time
+        td= check_in.check_out_time
+        td= check_in.user.name
+        td
+          .btn-group
+            = link_to 'Show', check_in, :class => "btn btn-small"
+            = link_to 'Edit', edit_check_in_path(check_in), :class => "btn btn-small"
+            = link_to 'Destroy', check_in, :class => "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  br
+  = link_to 'New Check in', new_check_in_path, :class => "btn btn-primary"
+  .span12
+    = paginate @check_ins

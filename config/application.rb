@@ -15,6 +15,10 @@ module Gelatine
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.less.paths << File.join(Rails.root,'app','assets','stylesheets')
+    # Should be set to true in production.
+    config.less.compress = false 
+
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
@@ -60,6 +64,8 @@ module Gelatine
     config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # This reads in local variables (like GMAIL user/password) so we don't have to check them into git
     config.before_configuration do
     env_file = File.join(Rails.root, 'config', 'local_env.yml')
         YAML.load(File.open(env_file)).each do |key, value|

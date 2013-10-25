@@ -20,3 +20,4 @@ true
 *./.DS_Store
 app/assets/images/.DS_Store
 public/assets
+.idea

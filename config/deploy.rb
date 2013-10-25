@@ -1,4 +1,15 @@
 require "bundler/capistrano"
+require "rvm/capistrano"
+
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+set :rvm_ruby_string, '1.9.2'
+set :rvm_type, :user 
+default_run_options[:pty] = true
+
+before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
+before 'deploy:setup', 'rvm:install_ruby'
+
 set :default_environment, {
   'LANG' => 'en_US.UTF-8',
   'PATH' => '/usr/kerberos/sbin:/usr/sbin:/sbin:/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin'
@@ -9,16 +20,18 @@ set :scm, :git
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "ec2-54-234-254-197.compute-1.amazonaws.com"                          # Your HTTP server, Apache/etc
-role :app, "ec2-54-234-254-197.compute-1.amazonaws.com"                        # This may be the same as your `Web` server
-role :db,  "ec2-54-234-254-197.compute-1.amazonaws.com", :primary => true # This is where Rails migrations will run
+role :web, "69.25.136.108"                          # Your HTTP server, Apache/etc
+role :app, "69.25.136.108"                        # This may be the same as your `Web` server
+role :db,  "69.25.136.108", :primary => true # This is where Rails migrations will run
 
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
+set :stages, ["staging", "production"]
+set :default_stage, "staging"
 
-set :user,   "nobody"
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "awskey.pem")]
+set :user,   "apache"
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_dsa")]
 set :scm_username, "mtuckerb"
 set :deploy_to, "/rails/gelatine"
 
@@ -31,7 +44,7 @@ set :deploy_to, "/rails/gelatine"
    task :start do ; end
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
-     run "touch #{File.join(current_path,'tmp','restart.txt')}" #{try_sudo} 
+     #run "touch #{File.join(current_path,'tmp','restart.txt')}" #{try_sudo} 
    end
    
    namespace :assets do

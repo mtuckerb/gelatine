@@ -1,0 +1,6 @@
+h1 Editing room
+= render 'form'
+.btn-group
+  = link_to 'Show', @room, :class => "btn btn-small"
+  | checkin
+  | \#{link_to 'Back', rooms_path, :class => "btn btn-small"}

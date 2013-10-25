@@ -26,7 +26,10 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem "twitter-bootstrap-rails"
 #gem "flat-ui-rails"
 gem "ransack"
+gem "slim"
 gem 'simple_form'
+gem 'RedCloth'
+gem 'rvm-capistrano'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -56,6 +59,7 @@ group :development, :test do
   gem 'pry' 
   gem 'capybara'
   gem 'chronic'
+
 end
 
 # To use ActiveModel has_secure_password

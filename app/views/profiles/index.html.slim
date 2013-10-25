@@ -1,0 +1,57 @@
+.row
+  ul
+    = link_to new_profile_path, :class => "btn" do
+      i class="icon-star icon-white"
+      | New Profile
+  - @profiles.each do |profile|
+    .border-box
+      .row
+        .span3
+          = profile_image(profile)
+        .span6.offset1
+          .span4
+            = link_to profile.user.name, profile, :class => "btn btn-large btn-primary" if profile.user
+          .span2
+            div
+              = profile.about_me
+        .row.span12
+          - if profile.mood.present?
+            div style="padding-top:5px;"
+              span.label Availability:
+              '   
+              = profile.mood
+          div style="padding-top:5px;"
+          - if profile.interests.present?
+            div style="padding-top:5px;"
+              span.label Interests:
+              '   
+              - profile.interests.each do |interest|
+                = link_to interest.name, tagged_url(:interest => interest.name), :class => "tag"
+          - if profile.skills.present?
+            div style="padding-top:5px;"
+              span.label Skills:
+              '   
+              - profile.skills.each do |skill|
+                = link_to skill.name, tagged_url(:skill => skill.name), :class => "tag"
+          - if profile.needs.present?
+            div style="padding-top:5px;"
+              span.label Needs Help With:
+              '   
+              - profile.needs.each do |need|
+                = link_to need.name, tagged_url(:need => need.name), :class => "tag"
+          .btn-group style="padding-top:10px;"
+            = link_to profile, :class => "btn btn-small" do 
+              i class='icon-eye-open icon-white'
+              '  See More
+              
+            - if current_user.admin?
+              | checkin
+            = link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit'), edit_profile_path(profile), :class => "btn btn-small"  if current_user.admin?
+            - if current_user.admin?
+              | checkin
+            = link_to raw('<i class="icon-star icon-white"></i> &nbsp   Make Admin '), make_admin_path(:user_id => profile.user_id), :class => "btn btn-small btn-warning"  if current_user.admin? && profile.user.admin? == nil
+            = link_to raw('<i class="icon-star icon-white"></i> &nbsp   Revoke Admin '), revoke_admin_path(:user_id => profile.user_id), :class => "btn btn-small btn-danger"  if current_user.admin? && profile.user.admin?
+            = link_to raw('<i class="icon-trash icon-white"> </i> &nbsp  Destroy'), profile, :class => "btn btn-small btn-danger" , method: :delete, data: { confirm: 'Are you sure?' }  if current_user.admin?
+  br
+.row
+  = paginate @profiles

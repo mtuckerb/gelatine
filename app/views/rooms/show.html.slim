@@ -1,0 +1,22 @@
+p#notice= notice
+p
+  b Room Name:
+  = @room.name
+p
+  b Operating hours start:
+  = @room.ophoursstart
+p
+  b Operating hours stop:
+  = @room.ophoursstop
+p
+  b Days of Operation:
+  = @room.operating_days
+p
+  b Capacity:
+  = @room.capacity
+p
+  b Notes:
+  = @room.notes
+.btn-group
+  = link_to 'Edit', edit_room_path(@room), :class => "btn btn-small"
+  = link_to 'Back', rooms_path, :class => "btn btn-small"

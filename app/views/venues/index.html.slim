@@ -1,0 +1,19 @@
+.row
+  h1 Listing venues
+  - @venues.each do |venue|
+    .row
+      div
+        h3
+          = venue.name
+      div
+        | Open From  #{venue.open_from} to #{venue.open_to}
+      div
+        = venue.open_days
+        div class="btn-group" style="padding-top:5px;"
+          = link_to raw('<i class="icon-eye-open icon-white"></i> &nbsp Show'), venue, :class=> "btn btn-small"
+          
+          = link_to raw('<i class="icon-pencil icon-white"></i> &nbsp Edit'), edit_venue_path(venue), :class=> "btn btn-small"
+          = link_to raw('<i class="icon-trash icon-white"></i> &nbsp Delete'), venue, :class=> "btn btn-small btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  br
+.row style="padding-top:10px;"
+  = link_to 'New Venue', new_venue_path, :class => "btn btn-small"

@@ -1,0 +1,20 @@
+h1 Listing projects
+table
+  tr
+    th Title
+    th Category
+    th Description
+    th
+    th
+    th
+  - @projects.each do |project|
+    tr
+      td= project.title
+      td= project.category
+      td= sanitize(textilize(project.description.truncate(50, :separator => '\n')))
+      td.btn-group
+        = link_to raw('<i class="icon-eye-open icon-white"></i> &nbsp Show '), project, :class => "btn btn-mini"
+        = link_to raw('<i class="icon-pencil icon-white"></i> &nbsp   Edit '), edit_project_path(project), :class => "btn btn-mini"
+        = link_to raw('<i class="icon-trash icon-white"></i> &nbsp Destroy '), project, :class => "btn btn-mini btn-danger ", method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to raw('<i class="icon-plus-sign icon-white"></i> &nbsp   Create a New Project '), new_project_path, :class => "btn btn-primary"

@@ -36,7 +36,7 @@ describe "GET index" do
     it "assigns the requested profile as @profile" do
       profile = Profile.create! valid_attributes
       get :show, {:id => profile.to_param}
-      assigns(:profile).should eq(profile)
+      assigns(:profile).should eq()
     end
   end
 

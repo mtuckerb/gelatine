@@ -1,0 +1,36 @@
+.row
+  = form_for(@check_in) do |f|
+    - if @check_in.errors.any?
+      div id="alert alert-danger"
+        h2
+          = pluralize(@check_in.errors.count, "error")
+          | prohibited this check_in from being saved:
+        ul
+          - @check_in.errors.full_messages.each do |msg|
+            li= msg
+    .row.border-box.span4
+      div
+        = f.label :room_id
+        br
+        = f.collection_select(:room_id, Room.all, :id, :name)
+      div
+        - if current_user.admin?
+          = f.label :user_id
+          br
+          = f.collection_select(:user_id, User.all, :id, :name)
+    /!
+      | <div class="dropdown-menu">
+      | <haml:loud> f.label :check_in_time </haml:loud><br />
+      | <haml:loud> f.datetime_select :check_in_time, :class =&amp;gt; &amp;quot;dropdown-menu&amp;quot; </haml:loud>
+      | </div>
+      | <div class="field">
+      | <haml:loud> f.label :check_out_time </haml:loud><br />
+      | <haml:loud> f.datetime_select :check_out_time </haml:loud>
+      | </div>
+      | <div class="field">
+      | <haml:loud> f.label :third_party_id </haml:loud><br />
+      | <haml:loud> f.text_field :third_party_id </haml:loud>
+      | </div>
+    div style="height:5em;"
+    .actions
+      = f.submit :class => "btn btn-success"

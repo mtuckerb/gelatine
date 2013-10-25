@@ -1,0 +1,51 @@
+doctype
+html
+  head
+    title Gelatine
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    script src="http://d3js.org/d3.v3.min.js"
+    = csrf_meta_tags
+  body
+    .container
+      .hero-unit style="padding:40px;"
+        h1 Gelatine
+      .navbar
+        .navbar-inner
+          ul.nav.nav-tabs
+            - if current_user
+              li class=class_active?(:profiles, :index)
+                = link_to "User Community", profiles_path
+              li class=class_active?("devise/registrations", :edit ) 
+                = link_to "My Profile", edit_registration_path(current_user)
+              li class=class_active?(:check_ins, :new) = check_in_check_out
+              li
+                = link_to "Log Out", destroy_user_session_path
+              - if current_user.admin?
+                li.dropdown
+                  a.dropdown-toggle data-toggle="dropdown" href="#"
+                    | Adminitrative
+                    b.caret
+                  ul.dropdown-menu aria-labelledby="dLabel" role="menu"
+                    li
+                      = link_to "Rooms", rooms_path
+                    li
+                      = link_to "Venues", venues_path
+                    li
+                      = link_to "Check Ins", check_ins_path
+                    li
+                      = link_to "Projects", projects_path
+            li
+      .row
+        .push-right
+          = search_block
+        - if notice || alert
+          - if notice
+            button.close data-dismiss="alert" type="button"
+            .alert.alert-success= notice
+          - elsif alert
+            button.close data-dismiss="alert" type="button"
+            .alert.alert-error= alert
+      .main.row.span12 style="padding:1em;"
+        = yield
+      footer role="contentinfo"
