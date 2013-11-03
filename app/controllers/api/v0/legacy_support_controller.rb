@@ -1,5 +1,5 @@
 class Api::V0::LegacySupportController < ApplicationController
-
+	skip_before_filter :authenticate_user!
 	#load_and_authorize_resource
 	def view_list_distinct_user_checkins_all
 

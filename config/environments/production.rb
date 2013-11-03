@@ -1,8 +1,8 @@
 Gelatine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-  PUBLIC_URL = "http://"
+  PUBLIC_URL = "http://http://69.25.136.108/"
   # Code is not reloaded between requests
-  config.cache_classes = true
+  configureig.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false

@@ -4,7 +4,7 @@ class Room < ActiveRecord::Base
   has_many :checkins
   belongs_to :venue
   attr_accessible :capacity, :name, :notes, :ophoursstart, :ophoursstop, :operating_days, :venue_id
-  validates_presence_of :name, :capacity, :operating_days, :ophoursstart, :ophoursstop
+  validates_presence_of :name, :capacity, :operating_days, :ophoursstart, :ophoursstop, :capacity
   validates_uniqueness_of :name
   paginates_per 10
   

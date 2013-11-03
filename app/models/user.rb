@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
     true if self.role == "admin"
   end
   
+  def is_checked_in
+    if self.check_ins
+      if self.check_ins.last
+        true if self.check_ins.last.is_checked_in == true
+      end
+    end
+  end
+
   private
   
   def setup_default_role_for_new_users
@@ -47,4 +55,6 @@ class User < ActiveRecord::Base
   def create_child
     Profile.create("user_id" => id)
   end
+
+
 end

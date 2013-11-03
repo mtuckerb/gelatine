@@ -82,8 +82,10 @@
           td
             = form.autocomplete_field :need_list, autocomplete_needs_name_profiles_path, :placeholder => "Ruby on Rails, Arduino, etc", :"data-delimiter" => ', ', :multiple => true
       tr
-        td= f.submit "Update", :class => "btn btn-success"
-      tr
         td
-  = link_to raw('<i class="icon-circle-arrow-left icon-white"></i> &nbsp   Back'), :back, :class => "btn "
-  = link_to raw('<i class="icon-trash icon-white"></i> &nbsp   Cancel my account'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger"
+          .btn-group
+            = link_to raw('<i class="icon-circle-arrow-left icon-white"></i> &nbsp   Back'), :back, :class => "btn "
+            = f.submit "Update", :class => "btn btn-success"
+            
+    br
+    = link_to raw('<i class="icon-trash icon-white"></i> &nbsp   Cancel my account'), registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "btn btn-danger btn-mini"
